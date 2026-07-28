@@ -1,11 +1,9 @@
-import Hero from "./hero";
-import Header from "./header/header";
-import About from "./about";
+import Hero from "./components/hero";
+import About from "../../components/about";
 
 function MainPage() {
     return (
         <main className="w-screen">
-            <Header/>
             <Hero/>
             <About/>
         </main>
