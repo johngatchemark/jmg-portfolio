@@ -4,12 +4,12 @@ import "./hero.css"
 
 function Hero() {
     const { headerHeight } = useHeader();
-    const paddingTop = headerHeight ? `${headerHeight}px` : "71.77px";
+    const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "71.77px";
 
     return (
         <main 
-            className="h-screen flex flex-row w-screen justify-center"
-            style={{ paddingTop }}
+            className="flex flex-row w-screen justify-center relative"
+            style={{ height: `calc(100vh - ${currentHeaderHeight})` }}
         >
             <div className="flex flex-col justify-center min-w-[1152px] z-10">
                 <p className="text-2xl text-left font-mono text-indigo-500">Greetings!</p>
@@ -17,13 +17,7 @@ function Hero() {
                 <h2 className="!text-white text-left">Aspiring Software Engineer · Data Analyst</h2>
             </div>
         
-            <div 
-                className="w-screen absolute left-0"
-                style={{ 
-                    top: paddingTop,
-                    height: `calc(100vh - ${paddingTop})`
-                }}
-            >
+            <div className="w-screen h-full absolute left-0 top-0">
                 <div className="w-full h-full absolute z-1 bg-black opacity-50"></div>
                 <EffectScene enableZoom={false} className="h-full"/>
             </div>

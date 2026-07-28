@@ -1,34 +1,39 @@
-import { createContext, useContext, useState, useEffect, useRef, type ReactNode, type RefObject } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 
 interface HeaderContextType {
   headerHeight: number;
-  setHeaderHeight: (height: number) => void;
-  headerRef: RefObject<HTMLElement | null>;
+  setHeaderRef: (node: HTMLElement | null) => void;
+  headerRef: (node: HTMLElement | null) => void;
 }
 
 const HeaderContext = createContext<HeaderContextType>({
   headerHeight: 0,
-  setHeaderHeight: () => {},
-  headerRef: { current: null },
+  setHeaderRef: () => {},
+  headerRef: () => {},
 });
 
 export function HeaderProvider({ children }: { children: ReactNode }) {
   const [headerHeight, setHeaderHeight] = useState<number>(0);
-  const headerRef = useRef<HTMLElement | null>(null);
+  const [headerEl, setHeaderEl] = useState<HTMLElement | null>(null);
+
+  const setHeaderRef = useCallback((node: HTMLElement | null) => {
+    setHeaderEl(node);
+  }, []);
 
   useEffect(() => {
+    if (!headerEl) return;
+
     const updateHeight = () => {
-      if (headerRef.current) {
-        setHeaderHeight(headerRef.current.getBoundingClientRect().height);
+      const rect = headerEl.getBoundingClientRect();
+      if (rect.height > 0) {
+        setHeaderHeight(rect.height);
       }
     };
 
     updateHeight();
 
     const resizeObserver = new ResizeObserver(updateHeight);
-    if (headerRef.current) {
-      resizeObserver.observe(headerRef.current);
-    }
+    resizeObserver.observe(headerEl);
 
     window.addEventListener("resize", updateHeight);
 
@@ -36,10 +41,10 @@ export function HeaderProvider({ children }: { children: ReactNode }) {
       resizeObserver.disconnect();
       window.removeEventListener("resize", updateHeight);
     };
-  }, []);
+  }, [headerEl]);
 
   return (
-    <HeaderContext.Provider value={{ headerHeight, setHeaderHeight, headerRef }}>
+    <HeaderContext.Provider value={{ headerHeight, setHeaderRef, headerRef: setHeaderRef }}>
       {children}
     </HeaderContext.Provider>
   );

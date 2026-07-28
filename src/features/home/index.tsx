@@ -1,5 +1,5 @@
 import Hero from "./components/hero";
-import About from "../../components/about";
+import About from "./components/about";
 
 function MainPage() {
     return (

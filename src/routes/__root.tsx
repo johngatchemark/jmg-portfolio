@@ -1,16 +1,21 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import Header from '../components/header/header'
-import { HeaderProvider } from '../context/header-context'
+import { useHeader } from '../context/header-context'
 
 export const Route = createRootRoute({
   component: RootComponent,
 })
 
 function RootComponent() {
+  const { headerHeight } = useHeader();
+  const paddingTop = headerHeight ? `${headerHeight}px` : "72px";
+
   return (
-    <HeaderProvider>
+    <>
       <Header />
-      <Outlet />
-    </HeaderProvider>
+      <div style={{ paddingTop }}>
+        <Outlet />
+      </div>
+    </>
   )
 }
