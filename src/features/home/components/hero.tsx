@@ -24,7 +24,7 @@ const socials = [
 
 function Hero() {
   const { headerHeight } = useHeader();
-  const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "71.77px";
+  const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
 
   return (
     <main
@@ -37,16 +37,16 @@ function Hero() {
         <EffectScene enableZoom={false} className="h-full" />
       </div>
 
-      <div className="relative z-20 flex flex-col justify-center px-8 max-w-[1152px] w-full gap-2">
+      <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-2">
         <p className="text-left text-base font-mono text-indigo-400 tracking-widest uppercase mb-1">
           &gt; sys.whoami()
         </p>
 
-        <h1 id="hero" className="!text-white text-left !my-0 leading-none">
+        <h1 id="hero" className="text-white! text-left my-0! leading-none">
           I'm John Mark
         </h1>
 
-        <h2 className="!text-white/80 text-left !mb-0 !mt-1 font-light tracking-wide">
+        <h2 className="text-white/80! text-left mb-0! mt-1! font-light tracking-wide">
           Software Engineer&nbsp;
           <span className="text-indigo-400 font-mono">&amp;</span>
           &nbsp;AI/ML Researcher

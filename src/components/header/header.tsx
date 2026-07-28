@@ -1,8 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import { useHeader } from "../../context/header-context";
+import { useEffect, useState } from "react";
 
 function Header() {
-  const { headerRef } = useHeader();
+  const { headerRef, headerHeight } = useHeader();
+  const [open, setOpen] = useState(false);
+  const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
+  const [mounted, setMounted] = useState(open);
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+    }
+  }, [open]);
+
+  const handleTransitionEnd = () => {
+    if (!open) {
+      setMounted(false);
+    }
+  };
 
   const navLinks = [
     { href: "/projects", name: "Projects" },
@@ -13,35 +29,107 @@ function Header() {
   ];
 
   return (
-    <header
-      ref={headerRef}
-      id="header-main"
-      className="fixed top-0 left-0 z-50 w-full border-b-2 border-gray-900 bg-black grid grid-cols-3 items-center px-6"
-    >
-      <Link to={"/"} className="flex justify-start items-center">
-        <h1 className="!text-white !m-0">JMG</h1>
-      </Link>
+    <>
+      <header
+        ref={headerRef}
+        id="header-main"
+        className="fixed top-0 left-0 z-50 w-full border-b-2 border-gray-900 bg-black items-center px-6 flex justify-between jm-mobile:grid jm-mobile:grid-cols-3"
+      >
+        <Link
+          to={"/"}
+          onClick={() => setOpen(false)}
+          className="flex justify-start items-center"
+        >
+          <h1 className="text-white! m-0! py-5">JMG</h1>
+        </Link>
 
-      <nav className="flex justify-center p-5">
-        <ul className="flex gap-5 text-white">
-          {navLinks.map((item) => (
-            <li key={item.href}>
-              <Link
-                to={item.href}
-                className="rounded-full p-3 hover:bg-white hover:text-black transition-all duration-200"
-                activeProps={{
-                  className: "text-indigo-500",
-                }}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <nav className="hidden jm-mobile:flex justify-center p-5">
+          <ul className="flex gap-5 text-white">
+            {navLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  to={item.href}
+                  className="rounded-full p-3 hover:bg-white hover:text-black transition-all duration-200"
+                  activeProps={{
+                    className: "text-indigo-500",
+                  }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <div />
-    </header>
+        <button
+          className="jm-mobile:hidden relative flex h-7 w-7"
+          aria-label="Toggle menu"
+          onClick={() => setOpen(!open)}
+        >
+          <span
+            className={`
+            absolute top-1/2 transition-transform duration-200 right-0
+            ${open ? "-translate-y-1/2" : "translate-y-[-250%] delay-100"}
+          `}
+          >
+            <span
+              className={`
+              block w-7 h-0.5 bg-white transition-transform duration-200
+              ${open ? "-rotate-45 delay-100" : "rotate-0"}
+            `}
+            />
+          </span>
+
+          <span
+            className={`
+            absolute top-1/2 transition-transform duration-200 right-0
+            ${open ? "-translate-y-1/2" : "translate-y-[250%] delay-100"}
+          `}
+          >
+            <span
+              className={`
+              block w-7 h-0.5 bg-white transition-transform duration-200
+              ${open ? "rotate-45 delay-100" : "rotate-0"}
+            `}
+            />
+          </span>
+        </button>
+      </header>
+      {mounted && (
+        <header
+          className={`
+          bg-black fixed flex flex-col jm-mobile:hidden w-screen z-50
+          transition-[height,opacity,visibility] duration-300 ease-in-out
+          ${
+            open
+              ? "opacity-100 visible pointer-events-auto"
+              : "opacity-0 invisible pointer-events-none"
+          }
+        `}
+          style={{
+            height: open ? `calc(100vh - ${currentHeaderHeight})` : "0px",
+            top: currentHeaderHeight,
+          }}
+        >
+          <ul className="flex flex-col gap-5 text-white font-bold mt-9">
+            {navLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  to={item.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-full p-3 text-3xl hover:bg-white hover:text-black transition-all duration-200"
+                  activeProps={{
+                    className: "text-indigo-500",
+                  }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </header>
+      )}
+    </>
   );
 }
 
