@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { forwardRef, useMemo, useEffect } from "react"
-import { Effect, BlendFunction } from "postprocessing"
+import { forwardRef, useMemo, useEffect } from "react";
+import { Effect, BlendFunction } from "postprocessing";
 import {
   CanvasTexture,
   ClampToEdgeWrapping,
@@ -13,35 +13,56 @@ import {
   WebGLRenderer,
   WebGLRenderTarget,
   Texture,
-} from "three"
+} from "three";
 
 // ASCII-only, sparse to dense (like classic ASCII art)
-const TERMINAL_SYMBOLS = [".", ":", "-", "=", "+", "*", "#", "%", "@", "0", "O", "N", "M", "W", "B", "X"]
+const TERMINAL_SYMBOLS = [
+  ".",
+  ":",
+  "-",
+  "=",
+  "+",
+  "*",
+  "#",
+  "%",
+  "@",
+  "0",
+  "O",
+  "N",
+  "M",
+  "W",
+  "B",
+  "X",
+];
 
-function createGlyphTexture(characters: string[], size = 64, font = "62px monospace"): CanvasTexture | null {
-  if (characters.length === 0) return null
-  const count = characters.length
-  const canvas = document.createElement("canvas")
-  canvas.width = size * count
-  canvas.height = size
-  const ctx = canvas.getContext("2d")
-  if (!ctx) return null
-  ctx.fillStyle = "#000"
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-  ctx.fillStyle = "#fff"
-  ctx.font = font
-  ctx.textAlign = "center"
-  ctx.textBaseline = "middle"
+function createGlyphTexture(
+  characters: string[],
+  size = 64,
+  font = "62px monospace",
+): CanvasTexture | null {
+  if (characters.length === 0) return null;
+  const count = characters.length;
+  const canvas = document.createElement("canvas");
+  canvas.width = size * count;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#fff";
+  ctx.font = font;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
   for (let i = 0; i < count; i++) {
-    ctx.fillText(characters[i], i * size + size / 2, size / 2)
+    ctx.fillText(characters[i], i * size + size / 2, size / 2);
   }
-  const texture = new CanvasTexture(canvas)
-  texture.needsUpdate = true
-  texture.minFilter = LinearFilter
-  texture.magFilter = LinearFilter
-  texture.wrapS = ClampToEdgeWrapping
-  texture.wrapT = ClampToEdgeWrapping
-  return texture
+  const texture = new CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  texture.minFilter = LinearFilter;
+  texture.magFilter = LinearFilter;
+  texture.wrapS = ClampToEdgeWrapping;
+  texture.wrapT = ClampToEdgeWrapping;
+  return texture;
 }
 
 const fragmentShader = `
@@ -84,6 +105,9 @@ uniform bool useGlyphAtlas;
 uniform bool volumeShading;
 uniform bool useTintColor;
 uniform vec3 tintColor;
+// Background color (exposed to JS)
+uniform vec3 bgColor;
+uniform float bgAlpha;
 
 // Helper functions
 float random(vec2 st) {
@@ -182,7 +206,8 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     centered *= 1.0 + curvature * dot(centered, centered);
     workUV = centered * 0.5 + 0.5;
     if (workUV.x < 0.0 || workUV.x > 1.0 || workUV.y < 0.0 || workUV.y > 1.0) {
-      outputColor = vec4(0.0);
+      // Return configured background color for areas outside the curved screen
+      outputColor = vec4(bgColor, bgAlpha);
       return;
     }
   }
@@ -308,32 +333,42 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     finalColor *= mix(1.0, vignette, vignetteIntensity);
   }
 
-  outputColor = vec4(finalColor, cellColor.a);
+  // If there's no glyph, render configured background color, otherwise glyph color
+  if (charValue <= 0.0) {
+    outputColor = vec4(bgColor, bgAlpha);
+  } else {
+    outputColor = vec4(finalColor, 1.0);
+  }
 }
-`
+`;
 
 // Module-level variables for state management
-let _time = 0
-let _deltaAccumulator = 0
-let _cellSize = 9
-let _invert = true
-let _colorMode = true
-let _asciiStyle = 0
-let _resolution = new Vector2(1920, 1080)
-let _mousePos = new Vector2(0, 0)
+let _time = 0;
+let _deltaAccumulator = 0;
+let _cellSize = 9;
+let _invert = true;
+let _colorMode = true;
+let _asciiStyle = 0;
+let _resolution = new Vector2(1920, 1080);
+let _mousePos = new Vector2(0, 0);
+// Background defaults: white (1,1,1) and alpha 1
+let _bgColor = new Vector3(1, 1, 1);
+let _bgAlpha = 1;
 
 interface AsciiEffectImplOptions {
-  cellSize?: number
-  invert?: boolean
-  color?: boolean
-  style?: number
-  resolution?: Vector2
-  mousePos?: Vector2
-  postfx?: Record<string, any>
-  glyphAtlas?: Texture | null
-  glyphTiles?: number
-  volumeShading?: boolean
-  tintColor?: Vector3 | null
+  cellSize?: number;
+  invert?: boolean;
+  color?: boolean;
+  style?: number;
+  resolution?: Vector2;
+  mousePos?: Vector2;
+  postfx?: Record<string, any>;
+  glyphAtlas?: Texture | null;
+  glyphTiles?: number;
+  volumeShading?: boolean;
+  tintColor?: Vector3 | null;
+  bgColor?: Vector3 | null;
+  bgAlpha?: number;
 }
 
 class AsciiEffectImpl extends Effect {
@@ -350,7 +385,9 @@ class AsciiEffectImpl extends Effect {
       glyphTiles = 0,
       volumeShading = false,
       tintColor = null,
-    } = options
+      bgColor = null,
+      bgAlpha = 1,
+    } = options;
 
     super("AsciiEffect", fragmentShader, {
       blendFunction: BlendFunction.NORMAL,
@@ -368,6 +405,9 @@ class AsciiEffectImpl extends Effect {
         ["volumeShading", new Uniform(volumeShading)],
         ["useTintColor", new Uniform(!!tintColor)],
         ["tintColor", new Uniform(tintColor || new Vector3(1, 1, 1))],
+        // Background uniforms
+        ["bgColor", new Uniform(bgColor || new Vector3(1, 1, 1))],
+        ["bgAlpha", new Uniform(bgAlpha || 1)],
         ["scanlineIntensity", new Uniform(postfx.scanlineIntensity || 0)],
         ["scanlineCount", new Uniform(postfx.scanlineCount || 200)],
         ["targetFPS", new Uniform(postfx.targetFPS || 0)],
@@ -392,147 +432,184 @@ class AsciiEffectImpl extends Effect {
         ["brightnessAdjust", new Uniform(postfx.brightnessAdjust || 0)],
         ["contrastAdjust", new Uniform(postfx.contrastAdjust || 1)],
       ]) as Map<string, Uniform>,
-    })
+    });
 
-    _cellSize = cellSize
-    _invert = invert
-    _colorMode = color
-    _asciiStyle = style
-    _resolution = resolution
-    _mousePos = mousePos
+    _cellSize = cellSize;
+    _invert = invert;
+    _colorMode = color;
+    _asciiStyle = style;
+    _resolution = resolution;
+    _mousePos = mousePos;
+    if (bgColor) _bgColor = bgColor;
+    _bgAlpha = bgAlpha;
   }
 
-  // @ts-ignore
-  update(renderer: WebGLRenderer, inputBuffer: WebGLRenderTarget, deltaTime?: number) {
+  update(
+    renderer: WebGLRenderer,
+    inputBuffer: WebGLRenderTarget,
+    deltaTime?: number,
+  ) {
     // Check if context is lost
-    const context = renderer.getContext()
+    const context = renderer.getContext();
     if (!context || (context as WebGLRenderingContext).isContextLost?.()) {
-      return
+      return;
     }
 
-    const targetFPS = this.uniforms.get("targetFPS")!.value
-    const dt = deltaTime ?? 0
+    const targetFPS = this.uniforms.get("targetFPS")!.value;
+    const dt = deltaTime ?? 0;
 
     if (targetFPS > 0) {
-      const frameDuration = 1 / targetFPS
-      _deltaAccumulator += dt
+      const frameDuration = 1 / targetFPS;
+      _deltaAccumulator += dt;
       if (_deltaAccumulator >= frameDuration) {
-        _time += frameDuration
-        _deltaAccumulator = _deltaAccumulator % frameDuration
+        _time += frameDuration;
+        _deltaAccumulator = _deltaAccumulator % frameDuration;
       }
     } else {
-      _time += dt
+      _time += dt;
     }
 
-    this.uniforms.get("time")!.value = _time
-    this.uniforms.get("cellSize")!.value = _cellSize
-    this.uniforms.get("invert")!.value = _invert
-    this.uniforms.get("colorMode")!.value = _colorMode
-    this.uniforms.get("asciiStyle")!.value = _asciiStyle
-    this.uniforms.get("resolution")!.value = _resolution
-    this.uniforms.get("mousePos")!.value = _mousePos
+    this.uniforms.get("time")!.value = _time;
+    this.uniforms.get("cellSize")!.value = _cellSize;
+    this.uniforms.get("invert")!.value = _invert;
+    this.uniforms.get("colorMode")!.value = _colorMode;
+    this.uniforms.get("asciiStyle")!.value = _asciiStyle;
+    this.uniforms.get("resolution")!.value = _resolution;
+    this.uniforms.get("mousePos")!.value = _mousePos;
+    // update background uniform values
+    this.uniforms.get("bgColor")!.value = _bgColor;
+    this.uniforms.get("bgAlpha")!.value = _bgAlpha;
   }
 }
 
 export interface AsciiEffectProps {
-  style?: "standard" | "dense" | "minimal" | "blocks"
-  cellSize?: number
-  invert?: boolean
-  color?: boolean
-  postfx?: Record<string, any>
-  resolution?: Vector2
-  mousePos?: Vector2
+  style?: "standard" | "dense" | "minimal" | "blocks";
+  cellSize?: number;
+  invert?: boolean;
+  color?: boolean;
+  postfx?: Record<string, any>;
+  resolution?: Vector2;
+  mousePos?: Vector2;
   /** "terminal" = ASCII + blocks + katakana (like ref); omit for procedural boxes */
-  characterSet?: "terminal" | string[]
+  characterSet?: "terminal" | string[];
   /** Map brightness to character density for 3D volume: shadows = dense chars, highlights = sparse */
-  volumeShading?: boolean
+  volumeShading?: boolean;
   /** Single color for all characters (e.g. "#917AFF"); removes scene lighting gradient */
-  tintColor?: string
+  tintColor?: string;
+  /** Background color for empty pixels (e.g. "#f5f5f7") */
+  backgroundColor?: string;
 }
 
-export const AsciiEffect = forwardRef<unknown, AsciiEffectProps>((props, ref) => {
-  const {
-    style = "standard",
-    cellSize = 9,
-    invert = true,
-    color = true,
-    postfx = {},
-    resolution = new Vector2(1920, 1080),
-    mousePos = new Vector2(0, 0),
-    characterSet = "terminal",
-    volumeShading = false,
-    tintColor: tintColorProp = undefined,
-  } = props
+export const AsciiEffect = forwardRef<unknown, AsciiEffectProps>(
+  (props, ref) => {
+    const {
+      style = "standard",
+      cellSize = 9,
+      invert = true,
+      color = true,
+      postfx = {},
+      resolution = new Vector2(1920, 1080),
+      mousePos = new Vector2(0, 0),
+      characterSet = "terminal",
+      volumeShading = false,
+      tintColor: tintColorProp = undefined,
+      backgroundColor: backgroundColorProp = undefined,
+    } = props;
 
-  const styleMap = { standard: 0, dense: 1, minimal: 2, blocks: 3 }
-  const styleNum = styleMap[style] || 0
+    const styleMap = { standard: 0, dense: 1, minimal: 2, blocks: 3 };
+    const styleNum = styleMap[style] || 0;
 
-  const tintColorVec = useMemo(() => {
-    if (!tintColorProp) return null
-    const c = new Color(tintColorProp)
-    return new Vector3(c.r, c.g, c.b)
-  }, [tintColorProp])
+    const tintColorVec = useMemo(() => {
+      if (!tintColorProp) return null;
+      const c = new Color(tintColorProp);
+      return new Vector3(c.r, c.g, c.b);
+    }, [tintColorProp]);
 
-  const glyphTexture = useMemo(() => {
-    if (characterSet == null) return null
-    const chars =
-      characterSet === "terminal" ? TERMINAL_SYMBOLS : Array.isArray(characterSet) ? characterSet : null
-    return chars ? createGlyphTexture(chars) : null
-  }, [characterSet])
+    const bgColorVec = useMemo(() => {
+      if (!backgroundColorProp) return null;
+      const c = new Color(backgroundColorProp);
+      return new Vector3(c.r, c.g, c.b);
+    }, [backgroundColorProp]);
 
-  _cellSize = cellSize
-  _invert = invert
-  _colorMode = color
-  _asciiStyle = styleNum
-  _resolution = resolution
-  _mousePos = mousePos
+    const glyphTexture = useMemo(() => {
+      if (characterSet == null) return null;
+      const chars =
+        characterSet === "terminal"
+          ? TERMINAL_SYMBOLS
+          : Array.isArray(characterSet)
+            ? characterSet
+            : null;
+      return chars ? createGlyphTexture(chars) : null;
+    }, [characterSet]);
 
-  const effect = useMemo(
-    () =>
-      new AsciiEffectImpl({
+    _cellSize = cellSize;
+    _invert = invert;
+    _colorMode = color;
+    _asciiStyle = styleNum;
+    _resolution = resolution;
+    _mousePos = mousePos;
+    // this sets module-level bg defaults so update() will push them through
+    if (bgColorVec) _bgColor = bgColorVec;
+    // alpha is implicit 1.0 for now — you can extend to parse rgba if needed
+    // keep tint in module state as well for backward compatibility
+    // (AsciiEffectImpl constructor also receives tint/bg on creation)
+    // Note: these module-level vars are used to keep update() sync'd with props
+    // as the effect is used as a primitive.
+    // You may switch to per-effect uniform management if you prefer.
+    // For now we mirror the previous pattern.
+    // no-op for _bgAlpha here unless we add parsing for alpha
+    // _bgAlpha remains 1
+
+    const effect = useMemo(
+      () =>
+        new AsciiEffectImpl({
+          cellSize,
+          invert,
+          color,
+          style: styleNum,
+          postfx,
+          resolution,
+          mousePos,
+          glyphAtlas: glyphTexture,
+          glyphTiles: glyphTexture
+            ? characterSet === "terminal"
+              ? TERMINAL_SYMBOLS.length
+              : Array.isArray(characterSet)
+                ? characterSet.length
+                : 0
+            : 0,
+          volumeShading,
+          tintColor: tintColorVec,
+          bgColor: bgColorVec,
+          bgAlpha: 1,
+        }),
+      [
         cellSize,
         invert,
         color,
-        style: styleNum,
+        styleNum,
         postfx,
         resolution,
         mousePos,
-        glyphAtlas: glyphTexture,
-        glyphTiles: glyphTexture
-          ? characterSet === "terminal"
-            ? TERMINAL_SYMBOLS.length
-            : Array.isArray(characterSet)
-              ? characterSet.length
-              : 0
-          : 0,
+        glyphTexture,
+        characterSet,
         volumeShading,
-        tintColor: tintColorVec,
-      }),
-    [
-      cellSize,
-      invert,
-      color,
-      styleNum,
-      postfx,
-      resolution,
-      mousePos,
-      glyphTexture,
-      characterSet,
-      volumeShading,
-      tintColorVec,
-    ]
-  )
+        tintColorVec,
+        bgColorVec,
+      ],
+    );
 
-  // Cleanup texture on unmount
-  useEffect(() => {
-    return () => {
-      if (glyphTexture) {
-        glyphTexture.dispose()
-      }
-    }
-  }, [glyphTexture])
+    // Cleanup texture on unmount
+    useEffect(() => {
+      return () => {
+        if (glyphTexture) {
+          glyphTexture.dispose();
+        }
+      };
+    }, [glyphTexture]);
 
-  return <primitive ref={ref} object={effect} dispose={null} />
-})
+    return <primitive ref={ref} object={effect} dispose={null} />;
+  },
+);
 
-AsciiEffect.displayName = "AsciiEffect"
+AsciiEffect.displayName = "AsciiEffect";

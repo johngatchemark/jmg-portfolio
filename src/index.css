@@ -34,6 +34,8 @@
 
 @theme {
   --breakpoint-jm-mobile: 56rem;
+  --color-off-white: #f5f5f7;
+  --color-off-black: #121212;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -70,6 +72,13 @@
 
 body {
   margin: 0;
+}
+
+.h1-stretched {
+  line-height: 100%;
+  font-variation-settings: "wdth" 125;
+  font-stretch: 125%;
+  font-weight: 900;
 }
 
 h1,

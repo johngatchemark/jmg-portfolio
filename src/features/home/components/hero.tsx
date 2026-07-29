@@ -33,8 +33,13 @@ function Hero() {
     >
       {/* 3D spinning JM */}
       <div className="w-screen h-full absolute left-0 top-0">
-        <div className="w-full h-full absolute z-10 bg-black/75" />
-        <EffectScene enableZoom={false} className="h-full" />
+        <div className="w-full h-full absolute z-10 bg-off-black/85" />
+        <EffectScene
+          enableZoom={false}
+          className="h-full"
+          tintColor="#ffffff"
+          backgroundColor="#121212"
+        />
       </div>
 
       <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-2">
@@ -42,7 +47,7 @@ function Hero() {
           &gt; sys.whoami()
         </p>
 
-        <h1 id="hero" className="text-white! text-left my-0! leading-none">
+        <h1 className="h1-stretched text-white! text-left my-0! leading-none">
           I'm John Mark
         </h1>
 
