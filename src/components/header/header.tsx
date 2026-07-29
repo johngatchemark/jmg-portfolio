@@ -20,23 +20,23 @@ function Header() {
       <header
         ref={headerRef}
         id="header-main"
-        className="fixed top-0 left-0 z-50 w-full border-b-2 border-gray-900 bg-off-black items-center px-6 flex justify-between jm-mobile:grid jm-mobile:grid-cols-3"
+        className="fixed top-0 left-0 z-50 w-full border-b-2 border-gray-200 dark:border-gray-900 bg-off-white dark:bg-off-black items-center px-6 flex justify-between jm-mobile:grid jm-mobile:grid-cols-3"
       >
         <Link
           to={"/"}
           onClick={() => setOpen(false)}
           className="flex justify-start items-center"
         >
-          <h1 className="text-white! m-0! py-5">JMG</h1>
+          <h1 className="text-black dark:text-white! m-0! py-5">JMG</h1>
         </Link>
 
         <nav className="hidden jm-mobile:flex justify-center p-5">
-          <ul className="flex gap-5 text-white">
+          <ul className="flex text-black dark:text-white">
             {navLinks.map((item) => (
               <li key={item.href}>
                 <Link
                   to={item.href}
-                  className="rounded-full p-3 hover:bg-white hover:text-black transition-all duration-200"
+                  className="rounded-full p-3 hover:bg-off-black dark:hover:bg-off-white hover:text-white dark:hover:text-black transition-all duration-200"
                   activeProps={{
                     className: "text-indigo-500",
                   }}
@@ -49,7 +49,7 @@ function Header() {
         </nav>
 
         <button
-          className="jm-mobile:hidden relative flex h-7 w-7"
+          className="jm-mobile:hidden relative flex h-7 w-7 cursor-pointer"
           aria-label="Toggle menu"
           onClick={() => setOpen(!open)}
         >
@@ -61,7 +61,7 @@ function Header() {
           >
             <span
               className={`
-              block w-7 h-0.5 bg-white transition-transform duration-200
+              block w-7 h-0.5 bg-black dark:bg-white transition-transform duration-200
               ${open ? "-rotate-45 delay-100" : "rotate-0"}
             `}
             />
@@ -75,7 +75,7 @@ function Header() {
           >
             <span
               className={`
-              block w-7 h-0.5 bg-white transition-transform duration-200
+              block w-7 h-0.5 bg-black dark:bg-white transition-transform duration-200
               ${open ? "rotate-45 delay-100" : "rotate-0"}
             `}
             />
@@ -84,7 +84,7 @@ function Header() {
       </header>
       <header
         className={`
-          bg-black fixed flex flex-col jm-mobile:hidden w-screen z-50
+          bg-off-white dark:bg-off-black fixed flex flex-col jm-mobile:hidden w-screen z-50
           transition-[height,opacity,visibility] duration-300 ease-in-out
           ${
             open
@@ -97,13 +97,13 @@ function Header() {
           top: currentHeaderHeight,
         }}
       >
-        <ul className="flex flex-col gap-5 text-white font-bold mt-9">
+        <ul className="flex flex-col gap-5 text-black dark:text-white font-bold mt-9">
           {navLinks.map((item) => (
             <li key={item.href}>
               <Link
                 to={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-full p-3 text-3xl hover:bg-white hover:text-black transition-all duration-200"
+                className="rounded-full p-3 text-3xl hover:bg-off-black dark:hover:bg-off-white hover:text-white dark:hover:text-black transition-all duration-200"
                 activeProps={{
                   className: "text-indigo-500",
                 }}
