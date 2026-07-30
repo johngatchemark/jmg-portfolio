@@ -23,13 +23,20 @@ const socials = [
   },
 ];
 
+const headlineAchievements = [
+  "BS CS Summa Cum Laude",
+  "Hackathon Champion",
+  "IEEE-published Researcher",
+  "DOST-SEI Scholar",
+];
+
 function Hero() {
   const { headerHeight } = useHeader();
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
   const { resolvedTheme } = useTheme();
-  const styles = getComputedStyle(document.documentElement);
-  const offWhite = styles.getPropertyValue("--color-off-white").trim();
-  const offBlack = styles.getPropertyValue("--color-off-black").trim();
+  // const styles = getComputedStyle(document.documentElement);
+  const offWhite = "#f5f5f0";
+  const offBlack = "#0a0a0d";
 
   return (
     <main
@@ -38,7 +45,7 @@ function Hero() {
     >
       {/* 3D spinning JM */}
       <div className="w-screen h-full absolute left-0 top-0">
-        <div className="w-full h-full absolute z-10 bg-off-white/85 dark:bg-off-black/85" />
+        <div className="w-full h-full absolute z-10 bg-jm-bg/85" />
         <EffectScene
           enableZoom={false}
           className="h-full"
@@ -47,42 +54,52 @@ function Hero() {
         />
       </div>
 
-      <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-2">
-        <p className="text-left text-base font-mono text-indigo-800 dark:text-indigo-400 tracking-widest uppercase mb-1">
+      <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-4">
+        <p className="text-left text-base font-mono text-jm-green tracking-widest uppercase mb-1">
           &gt; sys.whoami()
         </p>
 
-        <h1 className="h1-stretched text-black dark:text-white! text-left my-0! leading-none">
-          I'm John Mark Gatche
+        <h1 className="h1-stretched text-fg! text-left my-0! leading-none">
+          Hi, I'm
+          <br />
+          <span className="text-jm-green">John Mark Gatche</span>
         </h1>
 
-        <h2 className="text-black/80! dark:text-white/80! text-left mb-0! mt-1! font-light tracking-wide">
+        <h2 className="text-jm-muted-fg! text-left mb-0! mt-1! font-light tracking-wide">
           Aspiring Software Engineer&nbsp;
-          <span className="text-indigo-800 dark:text-indigo-400 font-mono">
-            &amp;
-          </span>
+          <span className="text-jm-green font-mono">&amp;</span>
           &nbsp;Web Developer
         </h2>
 
-        <p className="text-left text-black/60 dark:text-white/60 text-base max-w-lg mt-2 leading-relaxed font-sans">
+        {/* <p className="text-left text-black/60 dark:text-white/60 text-base max-w-lg mt-2 leading-relaxed font-sans">
           BS CS Summa Cum Laude · Hackathon Champion · IEEE-published Researcher
           · DOST-SEI Scholar
-        </p>
+        </p> */}
+        <div className="flex flex-wrap gap-2 max-w-100 lg:max-w-full">
+          {headlineAchievements.map((achievement, index) => (
+            <span
+              key={index}
+              className="drop-shadow-[2px_2px_0px_var(--color-jm-cyan)] rounded-xs border border-jm-cyan bg-jm-bg dark:bg-jm-bg text-jm-cyan font-mono px-3 py-1 text-[12px] text-sm"
+            >
+              {achievement}
+            </span>
+          ))}
+        </div>
 
-        <div className="w-16 h-px bg-indigo-800 dark:bg-indigo-400 mt-4 mb-5" />
+        {/* <div className="w-16 h-px bg-indigo-800 dark:bg-indigo-400 mt-4 mb-5" /> */}
 
-        <div className="flex flex-row items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-4 flex-wrap">
           <a
             href="/Gatche_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-full text-indigo-800 dark:text-indigo-400 border-2 border-indigo-800 dark:border-indigo-500 w-fit text-sm font-mono py-2 px-5 hover:bg-indigo-800 dark:hover:bg-indigo-500 hover:text-white transition-all duration-200"
+            className="hover:brightness-120 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:drop-shadow-[4px_4px_0px_rgba(0,255,102,0.3)] active:relative active:top-1 active:left-1 active:drop-shadow-none bg-jm-green px-5.5 py-3 text-[12px] text-jm-bg flex items-center gap-2 rounded-sm w-fit text-sm font-mono border border-jm-green"
           >
-            <FileText size={16} />
-            Resume
+            <FileText size={18} />
+            View Resume
           </a>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             {socials.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
@@ -90,8 +107,9 @@ function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-black/60 dark:border-white/20 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:border-indigo-400 hover:bg-indigo-500/50 transition-all duration-200"
+                className="w-fit drop-shadow-[4px_4px_0px_var(--color-jm-fg)] active:relative active:top-1 active:left-1 active:drop-shadow-none bg-jm-bg px-5.5 py-3 text-[12px] flex items-center justify-center gap-2 rounded-sm text-sm font-mono text-jm-fg-muted border border-jm-fg box-border hover:bg-jm-border text-jm-fg"
               >
+                <div className="hidden md:block">{label}</div>
                 <Icon size={18} />
               </a>
             ))}

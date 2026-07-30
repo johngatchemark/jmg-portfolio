@@ -12,7 +12,7 @@ function RootComponent() {
   const paddingTop = headerHeight ? `${headerHeight}px` : "0px";
 
   return (
-    <div className="flex flex-col items-center bg-off-white dark:bg-off-black">
+    <div className="flex flex-col items-center bg-jm-bg">
       <Header />
       <div style={{ paddingTop }}>
         <Outlet />

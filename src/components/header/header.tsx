@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useHeader } from "../../context/header-context";
 import { useState } from "react";
+import { useTheme } from "../../context/theme-context";
 
 function Header() {
   const { headerRef, headerHeight } = useHeader();
   const [open, setOpen] = useState(false);
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
+
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   const navLinks = [
     { href: "/projects", name: "Projects" },
@@ -15,30 +18,34 @@ function Header() {
     { href: "/contact", name: "Contact" },
   ];
 
+  const handleToggleMode = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
   return (
     <>
       <header
         ref={headerRef}
         id="header-main"
-        className="fixed top-0 left-0 z-50 w-full border-b-2 border-gray-200 dark:border-gray-900 bg-off-white dark:bg-off-black items-center px-6 flex justify-between jm-mobile:grid jm-mobile:grid-cols-3"
+        className="fixed top-0 left-0 z-50 w-full border-b border-jm-border bg-jm-bg items-center px-6 flex justify-between jm-mobile:grid jm-mobile:grid-cols-[auto_1fr_auto]"
       >
         <Link
           to={"/"}
           onClick={() => setOpen(false)}
           className="flex justify-start items-center"
         >
-          <h1 className="text-black dark:text-white! m-0! py-5">JMG</h1>
+          <p className="font-mono text-jm-green! m-0! py-4">&gt; jmg()</p>
         </Link>
 
-        <nav className="hidden jm-mobile:flex justify-center p-5">
-          <ul className="flex text-black dark:text-white">
+        <nav className="hidden jm-mobile:flex justify-center">
+          <ul className="flex text-fg">
             {navLinks.map((item) => (
               <li key={item.href}>
                 <Link
                   to={item.href}
-                  className="rounded-full p-3 hover:bg-off-black dark:hover:bg-off-white hover:text-white dark:hover:text-black transition-all duration-200"
+                  className="rounded-full p-3 text-sm text-jm-fg hover:text-jm-green transition-all duration-200"
                   activeProps={{
-                    className: "text-indigo-500",
+                    className: "text-jm-green",
                   }}
                 >
                   {item.name}
@@ -47,6 +54,17 @@ function Header() {
             ))}
           </ul>
         </nav>
+
+        <button
+          onClick={() => {
+            document.documentElement.classList.toggle("dark");
+            console.log(theme, resolvedTheme);
+            handleToggleMode();
+          }}
+          className="px-5 py-3 flex justify-center items-center cursor-pointer border rounded-xl w-fit"
+        >
+          Dark Mode
+        </button>
 
         <button
           className="jm-mobile:hidden relative flex h-7 w-7 cursor-pointer"
@@ -84,7 +102,7 @@ function Header() {
       </header>
       <header
         className={`
-          bg-off-white dark:bg-off-black fixed flex flex-col jm-mobile:hidden w-screen z-50
+          bg-jm-bg fixed flex flex-col jm-mobile:hidden w-screen z-50
           transition-[height,opacity,visibility] duration-300 ease-in-out
           ${
             open
@@ -103,9 +121,9 @@ function Header() {
               <Link
                 to={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-full p-3 text-3xl hover:bg-off-black dark:hover:bg-off-white hover:text-white dark:hover:text-black transition-all duration-200"
+                className="rounded-full p-3 text-3xl text-jm-fg hover:text-jm-green transition-all duration-200"
                 activeProps={{
-                  className: "text-indigo-500",
+                  className: "text-jm-green",
                 }}
               >
                 {item.name}
