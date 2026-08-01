@@ -1,3 +1,8 @@
+/** Looks like a mess right now 
+ *  Will be optimized in the future
+ * I promise!
+*/
+
 @import "tailwindcss";
 
 * {
@@ -17,8 +22,10 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Google Sans Flex", system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: "Google Sans Flex", system-ui, "Segoe UI", Roboto, sans-serif;
+  /* --sans: "Google Sans Flex", system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: "Google Sans Flex", system-ui, "Segoe UI", Roboto, sans-serif; */
+  --sans: "DM Sans", system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: "DM Sans", system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: "Mona Sans Mono VF", ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -47,6 +54,7 @@
   --color-jm-green: #0a6b42;
   --color-jm-amber: #8a5200;
   --color-jm-cyan: #005577;
+  --color-jm-magenta: #7722cc;
   --color-jm-fg: #1a1a24;
   --color-jm-fg-hover: #000000;
   --color-jm-muted-fg: #555568;
@@ -77,6 +85,7 @@
     --color-jm-green: #00ff66;
     --color-jm-amber: #ffb000;
     --color-jm-cyan: #00f0ff;
+    --color-jm-magenta: #cc44ff;
     --color-jm-fg: #e2e2e8;
     --color-jm-fg-hover: #ffffff;
     --color-jm-muted-fg: #7a7a8e;
@@ -91,6 +100,7 @@
     --color-jm-green: #0a6b42;
     --color-jm-amber: #8a5200;
     --color-jm-cyan: #005577;
+    --color-jm-magenta: #7722cc;
     --color-jm-fg: #1a1a24;
     --color-jm-fg-hover: #000000;
     --color-jm-muted-fg: #555568;
@@ -108,6 +118,7 @@ html.dark {
   --color-jm-green: #00ff66;
   --color-jm-amber: #ffb000;
   --color-jm-cyan: #00f0ff;
+  --color-jm-magenta: #cc44ff;
   --color-jm-fg: #e2e2e8;
   --color-jm-fg-hover: #ffffff;
   --color-jm-muted-fg: #7a7a8e;
@@ -161,15 +172,16 @@ h1 {
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: 40px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 25px;
   }
 }
 p {
+  font-size: 16px;
   margin: 0;
 }
 
@@ -187,3 +199,6 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* I don't want to have to repeat myself lol */
+@source inline("{,dark:}{bg,border,text}-jm-{cyan,green,amber,magenta,fg,muted-fg,bg}");

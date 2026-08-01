@@ -4,6 +4,7 @@ import { FileText, ArrowDown } from "lucide-react";
 import "./hero.css";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
 import { useTheme } from "../../../context/theme-context";
+import Badge from "../../../components/badge";
 
 const socials = [
   {
@@ -24,7 +25,7 @@ const socials = [
 ];
 
 const headlineAchievements = [
-  "BS CS Summa Cum Laude",
+  "BSCS Summa Cum Laude",
   "Hackathon Champion",
   "IEEE-published Researcher",
   "DOST-SEI Scholar",
@@ -55,7 +56,7 @@ function Hero() {
       </div>
 
       <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-4">
-        <p className="text-left text-base font-mono text-jm-green tracking-widest uppercase mb-1">
+        <p className="text-left text-sm font-mono text-jm-green tracking-widest mb-1">
           &gt; sys.whoami()
         </p>
 
@@ -65,9 +66,9 @@ function Hero() {
           <span className="text-jm-green">John Mark Gatche</span>
         </h1>
 
-        <h2 className="text-jm-muted-fg! text-left mb-0! mt-1! font-light tracking-wide">
+        <h2 className="text-[22px]! font-medium text-jm-muted-fg! text-left mb-0! mt-1! tracking-wide">
           Aspiring Software Engineer&nbsp;
-          <span className="text-jm-green font-mono">&amp;</span>
+          <span className="text-jm-green">&amp;</span>
           &nbsp;Web Developer
         </h2>
 
@@ -77,12 +78,14 @@ function Hero() {
         </p> */}
         <div className="flex flex-wrap gap-2 max-w-100 lg:max-w-full">
           {headlineAchievements.map((achievement, index) => (
-            <span
+            <Badge
               key={index}
-              className="drop-shadow-[2px_2px_0px_var(--color-jm-cyan)] rounded-xs border border-jm-cyan bg-jm-bg dark:bg-jm-bg text-jm-cyan font-mono px-3 py-1 text-[12px] text-sm"
-            >
-              {achievement}
-            </span>
+              text={achievement}
+              color="bg"
+              borderColor="cyan"
+              textColor="cyan"
+              dropShadowColor="cyan"
+            />
           ))}
         </div>
 
