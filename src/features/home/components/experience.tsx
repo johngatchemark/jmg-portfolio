@@ -10,7 +10,7 @@ const bigPondAchievements = [
 
 function Experience() {
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-4">
       <p className="text-left text-[12px]! font-mono text-jm-cyan tracking-widest">
         &gt; sys.experience()
       </p>

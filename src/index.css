@@ -202,3 +202,8 @@ code {
 
 /* I don't want to have to repeat myself lol */
 @source inline("{,dark:}{bg,border,text}-jm-{cyan,green,amber,magenta,fg,muted-fg,bg}");
+@source inline("{,dark:}{,hover:}bg-[var(--inline-{,dark-}{,hover-}bg)]");
+@source inline("{,dark:}{,hover:}border-[var(--inline-{,dark-}{,hover-}border)]");
+@source inline("{,dark:}{,hover:}text-[var(--inline-{,dark-}{,hover-}text)]");
+@source inline("{,dark:}{,hover:}drop-shadow-[2px_2px_0px_var(--inline-{,dark-}{,hover-}drop-shadow)]");
+@source inline("{,dark:}{,hover:}drop-shadow-[4px_4px_0px_var(--inline-{,dark-}{,hover-}drop-shadow)]");

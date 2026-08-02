@@ -1,5 +1,5 @@
 import Badge from "../../../components/badge";
-import { type PresetColor } from "../../../components/badge";
+import { type PresetColor } from "../../../utilities/colorSystem";
 
 export interface StackCategory {
   category: string;
@@ -51,7 +51,7 @@ export const technicalStack: StackCategory[] = [
 
 function TechnicalStack() {
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-4">
       <p className="text-left text-[12px]! font-mono text-jm-cyan tracking-widest">
         &gt; sys.skills()
       </p>

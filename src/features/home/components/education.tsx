@@ -9,7 +9,7 @@ const highlights = [
 
 function Education() {
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-4">
       <p className="text-left text-[12px]! font-mono text-jm-amber tracking-widest">
         &gt; sys.education()
       </p>
