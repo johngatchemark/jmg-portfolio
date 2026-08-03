@@ -75,9 +75,12 @@ function TechnicalStack() {
                       text={item}
                       color="#e8e8e3"
                       darkColor="bg"
-                      textColor={category.color}
-                      borderColor={category.color}
-                      dropShadowColor={category.color}
+                      textColor="#000000"
+                      darkTextColor={category.color}
+                      borderColor="#000000"
+                      darkBorderColor={category.color}
+                      dropShadowColor="#000000"
+                      darkDropShadowColor={category.color}
                     />
                   ),
                 )}

@@ -61,9 +61,12 @@ function Header() {
             console.log(theme, resolvedTheme);
             handleToggleMode();
           }}
-          className="px-5 py-3 flex justify-center items-center cursor-pointer border rounded-xl w-fit"
+          className="flex justify-center items-center cursor-pointer h-full"
         >
-          Dark Mode
+          <img
+            src={`light-switch-${resolvedTheme === "light" ? "light" : "dark"}.png`}
+            className="h-[80%] [image-rendering:pixelated] bg-transparent"
+          />
         </button>
 
         <button

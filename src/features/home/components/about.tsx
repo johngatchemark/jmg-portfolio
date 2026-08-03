@@ -35,7 +35,7 @@ function About() {
         <div className="flex flex-1 justify-center items-center">
           <img
             src="my-grad-pic.jpg"
-            className="rounded-none xs:rounded-3xl object-cover w-120 h-fit lg:w-auto lg:h-auto"
+            className="rounded-none xs:rounded-3xl object-cover w-120 h-auto lg:w-auto lg:h-auto"
           />
         </div>
       </div>
