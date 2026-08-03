@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useHeader } from "../../../context/header-context";
 import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
 import { FileText, ArrowDown } from "lucide-react";
@@ -32,9 +33,33 @@ const headlineAchievements = [
 ];
 
 function Hero() {
-  const { headerHeight } = useHeader();
+  const { headerHeight, setIsHeroResumeVisible } = useHeader();
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
   const { resolvedTheme } = useTheme();
+  const resumeBtnRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const el = resumeBtnRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroResumeVisible(entry.isIntersecting);
+      },
+      {
+        rootMargin: `-${headerHeight}px 0px 0px 0px`,
+        threshold: 0,
+      }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      setIsHeroResumeVisible(false);
+    };
+  }, [headerHeight, setIsHeroResumeVisible]);
+
   // const styles = getComputedStyle(document.documentElement);
   const offWhite = "#f5f5f0";
   const offBlack = "#0a0a0d";
@@ -93,6 +118,7 @@ function Hero() {
 
         <div className="flex items-center gap-4 flex-wrap">
           <a
+            ref={resumeBtnRef}
             href="/Gatche_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"

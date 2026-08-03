@@ -446,7 +446,7 @@ class AsciiEffectImpl extends Effect {
 
   update(
     renderer: WebGLRenderer,
-    inputBuffer: WebGLRenderTarget,
+    _inputBuffer: WebGLRenderTarget,
     deltaTime?: number,
   ) {
     // Check if context is lost

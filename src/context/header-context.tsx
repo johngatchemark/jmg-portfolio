@@ -4,17 +4,22 @@ interface HeaderContextType {
   headerHeight: number;
   setHeaderRef: (node: HTMLElement | null) => void;
   headerRef: (node: HTMLElement | null) => void;
+  isHeroResumeVisible: boolean;
+  setIsHeroResumeVisible: (visible: boolean) => void;
 }
 
 const HeaderContext = createContext<HeaderContextType>({
   headerHeight: 0,
   setHeaderRef: () => {},
   headerRef: () => {},
+  isHeroResumeVisible: false,
+  setIsHeroResumeVisible: () => {},
 });
 
 export function HeaderProvider({ children }: { children: ReactNode }) {
   const [headerHeight, setHeaderHeight] = useState<number>(0);
   const [headerEl, setHeaderEl] = useState<HTMLElement | null>(null);
+  const [isHeroResumeVisible, setIsHeroResumeVisible] = useState<boolean>(false);
 
   const setHeaderRef = useCallback((node: HTMLElement | null) => {
     setHeaderEl(node);
@@ -44,7 +49,15 @@ export function HeaderProvider({ children }: { children: ReactNode }) {
   }, [headerEl]);
 
   return (
-    <HeaderContext.Provider value={{ headerHeight, setHeaderRef, headerRef: setHeaderRef }}>
+    <HeaderContext.Provider
+      value={{
+        headerHeight,
+        setHeaderRef,
+        headerRef: setHeaderRef,
+        isHeroResumeVisible,
+        setIsHeroResumeVisible,
+      }}
+    >
       {children}
     </HeaderContext.Provider>
   );
