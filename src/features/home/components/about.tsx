@@ -3,13 +3,13 @@ import Container from "../../../components/container";
 function About() {
   return (
     <Container>
-      <div className="flex flex-col align-center max-w-120 lg:flex-row gap-10 md:gap-15 justify-between xs:mx-10 lg:mx-20 lg:max-w-5xl xl:w-auto ">
-        <section className="flex flex-col flex-1 justify-center mx-10 xs:mx-auto gap-4">
+      <div className="flex flex-col lg:flex-row justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
+        <section className="flex flex-col flex-1 justify-center gap-4">
           <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest">
             &gt; sys.about()
           </p>
           <h2 className="text-left text-jm-fg h1-stretched m-0!">
-            Building things that matter.
+            Building things that matter
           </h2>
           {/* <p className="text-left text-jm-fg lg:max-w-90 xl:max-w-105"> */}
 

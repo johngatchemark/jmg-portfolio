@@ -14,7 +14,6 @@ import { Route as AccomplishmentsRouteImport } from './routes/accomplishments'
 import { Route as ArcadeRouteImport } from './routes/arcade'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as PublicationsRouteImport } from './routes/publications'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,11 +40,6 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PublicationsRoute = PublicationsRouteImport.update({
-  id: '/publications',
-  path: '/publications',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,7 +47,6 @@ export interface FileRoutesByFullPath {
   '/arcade': typeof ArcadeRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
-  '/publications': typeof PublicationsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +54,6 @@ export interface FileRoutesByTo {
   '/arcade': typeof ArcadeRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
-  '/publications': typeof PublicationsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,33 +62,14 @@ export interface FileRoutesById {
   '/arcade': typeof ArcadeRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
-  '/publications': typeof PublicationsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/accomplishments'
-    | '/arcade'
-    | '/contact'
-    | '/projects'
-    | '/publications'
+  fullPaths: '/' | '/accomplishments' | '/arcade' | '/contact' | '/projects'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/accomplishments'
-    | '/arcade'
-    | '/contact'
-    | '/projects'
-    | '/publications'
+  to: '/' | '/accomplishments' | '/arcade' | '/contact' | '/projects'
   id:
-    | '__root__'
-    | '/'
-    | '/accomplishments'
-    | '/arcade'
-    | '/contact'
-    | '/projects'
-    | '/publications'
+    '__root__' | '/' | '/accomplishments' | '/arcade' | '/contact' | '/projects'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,7 +78,6 @@ export interface RootRouteChildren {
   ArcadeRoute: typeof ArcadeRoute
   ContactRoute: typeof ContactRoute
   ProjectsRoute: typeof ProjectsRoute
-  PublicationsRoute: typeof PublicationsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -145,13 +117,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/publications': {
-      id: '/publications'
-      path: '/publications'
-      fullPath: '/publications'
-      preLoaderRoute: typeof PublicationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -161,7 +126,6 @@ const rootRouteChildren: RootRouteChildren = {
   ArcadeRoute: ArcadeRoute,
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
-  PublicationsRoute: PublicationsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

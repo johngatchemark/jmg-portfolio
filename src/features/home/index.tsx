@@ -2,6 +2,7 @@ import Hero from "./components/hero";
 import About from "./components/about";
 import MainContent from "./components/main-content";
 import FeaturedProjects from "./components/featured-projects";
+import { ContactSection } from "../contact/components/contact-section";
 
 function MainPage() {
   return (
@@ -18,6 +19,8 @@ function MainPage() {
       <FeaturedProjects />
       <div className="py-5" />
       <div className="mx-auto w-[80%] h-px bg-gray-200 dark:bg-gray-900 mt-4 mb-5" />
+      <div className="py-5" />
+      <ContactSection />
       <div className="py-5" />
     </main>
   );

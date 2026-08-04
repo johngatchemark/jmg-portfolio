@@ -14,7 +14,6 @@ function Header() {
   const navLinks = [
     { href: "/projects", name: "Projects" },
     { href: "/accomplishments", name: "Accomplishments" },
-    { href: "/publications", name: "Publications" },
     { href: "/arcade", name: "Arcade" },
     { href: "/contact", name: "Contact" },
   ];

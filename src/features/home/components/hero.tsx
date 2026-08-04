@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useHeader } from "../../../context/header-context";
 import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
 import { FileText, ArrowDown } from "lucide-react";
-import "./hero.css";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
 import { useTheme } from "../../../context/theme-context";
 import Badge from "../../../components/badge";
@@ -82,7 +81,7 @@ function Hero() {
         />
       </div>
 
-      <div className="relative z-20 flex flex-col justify-center px-8 max-w-6xl w-full gap-4">
+      <div className="relative z-20 flex flex-col justify-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
         <p className="text-left text-sm font-mono text-jm-green tracking-widest mb-1">
           &gt; sys.whoami()
         </p>
@@ -93,7 +92,7 @@ function Hero() {
           <span className="text-jm-green">John Mark Gatche</span>
         </h1>
 
-        <h2 className="text-[22px]! font-medium text-jm-muted-fg! text-left mb-0! mt-1! tracking-wide">
+        <h2 className="text-[22px]! font-medium text-jm-muted-fg! text-left mb-0! tracking-wide">
           Aspiring Software Engineer&nbsp;
           <span className="text-jm-green">&amp;</span>
           &nbsp;Web Developer

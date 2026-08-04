@@ -1,5 +1,6 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import Header from "../components/header/header";
+import Footer from "../components/footer";
 import { useHeader } from "../context/header-context";
 
 export const Route = createRootRoute({
@@ -12,11 +13,12 @@ function RootComponent() {
   const paddingTop = headerHeight ? `${headerHeight}px` : "0px";
 
   return (
-    <div className="flex flex-col items-center bg-jm-bg">
+    <div className="flex flex-col min-h-screen justify-between items-center bg-jm-bg text-jm-fg w-full">
       <Header />
-      <div style={{ paddingTop }}>
+      <div className="flex-1 w-full" style={{ paddingTop }}>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 }

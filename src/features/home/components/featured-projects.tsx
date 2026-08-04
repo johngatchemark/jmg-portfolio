@@ -69,7 +69,7 @@ const featuredProjects: FeaturedProjectItem[] = [
 function FeaturedProjects() {
   return (
     <Container>
-      <div
+      {/* <div
         className="
           flex flex-col
           xl:w-auto
@@ -78,13 +78,15 @@ function FeaturedProjects() {
           gap-4
           align-center
         "
-      >
+      > */}
+
+      <div className="flex flex-col justify-between align-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
         <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest">
           &gt; sys.previewprojects()
         </p>
         <div className="flex justify-between items-center">
           <h2 className="text-left text-jm-fg h1-stretched m-0!">
-            Featured projects.
+            Featured projects
           </h2>
           <RaisedButton
             color="bg"

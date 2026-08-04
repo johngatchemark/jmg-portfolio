@@ -58,7 +58,7 @@ function TechnicalStack({ className = "" }: { className?: string }) {
         &gt; sys.skills()
       </p>
       <h2 className="text-left text-jm-fg h1-stretched m-0!">
-        Technical stack.
+        Technical stack
       </h2>
       <div className="flex flex-col gap-3">
         {(technicalStack as StackCategory[]).map(

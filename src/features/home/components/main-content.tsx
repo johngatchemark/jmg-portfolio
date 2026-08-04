@@ -7,7 +7,7 @@ import Container from "../../../components/container";
 function MainContent() {
   return (
     <Container>
-      <div className="flex flex-col align-center max-w-120 lg:flex-row gap-10 md:gap-15 justify-between mx-10 lg:mx-20 lg:max-w-5xl xl:w-auto">
+      <div className="flex flex-col lg:flex-row justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
         <div className="flex flex-col gap-8 flex-1">
           <Education />
           <Experience />
