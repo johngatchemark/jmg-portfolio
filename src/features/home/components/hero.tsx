@@ -49,7 +49,7 @@ function Hero() {
       {
         rootMargin: `-${headerHeight}px 0px 0px 0px`,
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(el);

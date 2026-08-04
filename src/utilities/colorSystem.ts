@@ -7,7 +7,10 @@ const PRESET_COLORS = [
   "muted-fg",
   "bg",
 ] as const;
-const HEX_PATTERN = /^#(?:[a-fA-F0-9]{6})$/;
+
+// Enables all valid CSS hex code formats, including options for alpha
+const HEX_PATTERN =
+  /^#(?:[A-Fa-f0-9]{1}|[A-Fa-f0-9]{2}|[A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 
 export type PresetColor = (typeof PRESET_COLORS)[number];
 export type ColorInput = PresetColor | (string & {});
