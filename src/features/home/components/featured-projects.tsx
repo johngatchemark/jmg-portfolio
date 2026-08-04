@@ -88,13 +88,18 @@ function FeaturedProjects() {
           </h2>
           <RaisedButton
             color="bg"
-            borderColor="green"
-            dropShadowColor="green"
-            hoverColor="#8bd5a9"
+            borderColor="primary"
+            textColor="primary"
+            darkTextColor="primary"
+            dropShadowColor="primary"
+            hoverColor="#e2f4eb"
+            darkHoverColor="#12251c"
+            hoverTextColor="primary"
+            darkHoverTextColor="primary"
           >
-            <p className="font-mono text-[12px]! text-sm">
-              Explore All Projects
-            </p>
+            <span className="font-mono text-[12px]! text-sm font-medium">
+              Explore All Projects &rarr;
+            </span>
           </RaisedButton>
         </div>
 
@@ -108,15 +113,15 @@ function FeaturedProjects() {
               >
                 <div className="px-6 py-5 flex flex-col gap-2 flex-1">
                   <div className="flex flex-col gap-2">
-                    <div className="flex flex-col sm:flex-row justify-between">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                       <h3 className="text-jm-fg font-mono font-semibold">
                         {project.title}
                       </h3>
                       <Badge
                         text={project.role}
-                        textColor="muted-fg"
-                        color="#ffffff"
-                        borderColor="#c8c8c2"
+                        color="bg"
+                        borderColor="primary"
+                        textColor="primary"
                       />
                     </div>
                     <p className="text-left text-jm-muted-fg text-[12px]! text-xs! italic">
@@ -129,7 +134,14 @@ function FeaturedProjects() {
                   </p>
                   <div className="border-b border-jm-border flex flex-wrap gap-2 py-4">
                     {project.techStack.map((award: string, jindex: number) => (
-                      <Badge key={jindex} text={award} dropShadowColor="fg" />
+                      <Badge
+                        key={jindex}
+                        text={award}
+                        color="bg"
+                        borderColor="ui"
+                        textColor="fg"
+                        dropShadowColor="ui"
+                      />
                     ))}
                   </div>
                   <div className="flex flex-col">
@@ -141,7 +153,7 @@ function FeaturedProjects() {
                         {award}
                       </div>
                     ))}
-                    <span className="text-left font-mono text-[10px]!">
+                    <span className="text-left font-mono text-[10px]! text-jm-muted-fg">
                       {project.additionalInfo}
                     </span>
                   </div>

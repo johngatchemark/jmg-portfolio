@@ -9,7 +9,7 @@ export interface StackCategory {
 
 export const technicalStack: StackCategory[] = [
   {
-    color: "green",
+    color: "primary",
     category: "LANGUAGES",
     items: [
       "Python",
@@ -26,7 +26,7 @@ export const technicalStack: StackCategory[] = [
     ],
   },
   {
-    color: "cyan",
+    color: "primary",
     category: "FRAMEWORKS",
     items: [
       "React.js",
@@ -38,12 +38,12 @@ export const technicalStack: StackCategory[] = [
     ],
   },
   {
-    color: "amber",
+    color: "primary",
     category: "DATA & ML",
     items: ["scikit-learn", "pandas", "NumPy", "Jupyter", "RStudio"],
   },
   {
-    color: "magenta",
+    color: "primary",
     category: "DESIGN & TOOLS",
     items: ["Figma", "Blender", "Git", "GitHub", "Photoshop", "Illustrator"],
   },
@@ -54,7 +54,7 @@ function TechnicalStack({ className = "" }: { className?: string }) {
     <article
       className={`flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start ${className}`}
     >
-      <p className="text-left text-[12px]! font-mono text-jm-cyan tracking-widest">
+      <p className="text-left text-[12px]! font-mono text-jm-primary tracking-widest">
         &gt; sys.skills()
       </p>
       <h2 className="text-left text-jm-fg h1-stretched m-0!">
@@ -65,7 +65,7 @@ function TechnicalStack({ className = "" }: { className?: string }) {
           (category: StackCategory, index: number) => (
             <section key={index} className="flex flex-col gap-2">
               <p
-                className={`text-left text-[11px]! font-mono font-semibold text-jm-${category.color}`}
+                className="text-left text-[11px]! font-mono font-semibold text-jm-primary"
               >
                 {category.category}
               </p>
@@ -75,14 +75,13 @@ function TechnicalStack({ className = "" }: { className?: string }) {
                     <Badge
                       key={jindex}
                       text={item}
-                      color="#e8e8e3"
+                      color="bg"
                       darkColor="bg"
-                      textColor="#000000"
-                      darkTextColor={category.color}
-                      borderColor="#000000"
-                      darkBorderColor={category.color}
-                      dropShadowColor="#000000"
-                      darkDropShadowColor={category.color}
+                      textColor="fg"
+                      darkTextColor="fg"
+                      borderColor="ui"
+                      darkBorderColor="ui"
+                      dropShadowColor="ui"
                     />
                   ),
                 )}

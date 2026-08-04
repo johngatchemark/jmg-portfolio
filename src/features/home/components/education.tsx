@@ -10,7 +10,7 @@ const highlights = [
 function Education() {
   return (
     <article className="flex flex-col gap-4">
-      <p className="text-left text-[12px]! font-mono text-jm-amber tracking-widest">
+      <p className="text-left text-[12px]! font-mono text-jm-accent tracking-widest">
         &gt; sys.education()
       </p>
       <RaisedContainer>
@@ -23,10 +23,10 @@ function Education() {
           </div>
           <Badge
             text="GWA 1.08"
-            color="amber"
-            borderColor="amber"
-            textColor="#ffffff"
-            darkTextColor="#000000"
+            color="accent"
+            borderColor="accent"
+            textColor="light"
+            darkTextColor="dark"
           />
         </div>
 
@@ -35,11 +35,11 @@ function Education() {
             <Badge
               key={index}
               text={achievement}
-              color="#ffffff"
+              color="bg"
               darkColor="bg"
-              borderColor="amber"
-              textColor="amber"
-              dropShadowColor="amber"
+              borderColor="accent"
+              textColor="fg"
+              dropShadowColor="ui"
             />
           ))}
         </div>

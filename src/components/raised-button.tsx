@@ -78,7 +78,7 @@ function RaisedButton({
       style={style}
       className={[
         ...classes,
-        "w-fit rounded-sm font-mono px-5 py-3 text-[12px] flex items-center justify-center gap-2 box-border",
+        "w-fit rounded-sm font-mono px-5 py-3 text-[12px] flex items-center justify-center gap-2 box-border transition-all duration-150",
         "active:relative active:top-1 active:left-1 active:drop-shadow-none cursor-pointer",
         className,
       ]

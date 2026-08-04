@@ -48,18 +48,35 @@
   --breakpoint-jm-mobile: 56rem;
   --breakpoint-xs: 30rem;
 
-  /* colorz */
-  --color-off-white: #f5f5f7;
-  --color-off-black: #121212;
+  /* Material 3 Tonal Palette Roles */
+  /* 1. Primary (Brand primary: Green) */
+  --color-jm-primary: #0a6b42;
   --color-jm-green: #0a6b42;
-  --color-jm-amber: #8a5200;
-  --color-jm-cyan: #005577;
-  --color-jm-magenta: #7722cc;
-  --color-jm-fg: #1a1a24;
-  --color-jm-fg-hover: #000000;
-  --color-jm-muted-fg: #555568;
+
+  /* 2. Secondary (Compliments primary: Slate Teal/Cyan) */
+  --color-jm-secondary: #005d7a;
+  --color-jm-cyan: #005d7a;
+
+  /* 3. Accent / Tertiary (Purple / Violet) */
+  --color-jm-accent: #6b3ba7;
+  --color-jm-purple: #6b3ba7;
+  --color-jm-amber: #6b3ba7;
+  --color-jm-magenta: #6b3ba7;
+
+  /* 4. Light / Surface (Background in light mode / text in dark mode) */
+  --color-jm-light: #f5f5f0;
   --color-jm-bg: #f5f5f0;
+
+  /* 5. Dark / On-Surface (Text in light mode / background in dark mode) */
+  --color-jm-dark: #1a1a24;
+  --color-jm-fg: #1a1a24;
+
+  /* 6. UI (Small contrast with background: borders, dividers, muted text) */
+  --color-jm-ui: #c8c8c2;
   --color-jm-border: #c8c8c2;
+  --color-jm-muted-fg: #555568;
+  --color-jm-fg-hover: #000000;
+  --color-jm-shadow: rgba(0, 0, 0, 0.2);
 
   /* fontz */
   --font-mono: "Mona Sans Mono VF", ui-monospace, Consolas, monospace;
@@ -81,31 +98,47 @@
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
-    /* JM colorz */
-    --color-jm-green: #00ff66;
-    --color-jm-amber: #ffb000;
-    --color-jm-cyan: #00f0ff;
-    --color-jm-magenta: #cc44ff;
+    /* Material 3 Dark Mode Palette (Tone 78-80) */
+    --color-jm-primary: #2ee59d;
+    --color-jm-green: #2ee59d;
+    --color-jm-secondary: #4fd3ee;
+    --color-jm-cyan: #4fd3ee;
+    --color-jm-accent: #c499ff;
+    --color-jm-purple: #c499ff;
+    --color-jm-amber: #c499ff;
+    --color-jm-magenta: #c499ff;
+    --color-jm-light: #e2e2e8;
     --color-jm-fg: #e2e2e8;
+    --color-jm-dark: #0a0a0d;
+    --color-jm-bg: #0a0a0d;
+    --color-jm-ui: #272730;
+    --color-jm-border: #272730;
     --color-jm-fg-hover: #ffffff;
     --color-jm-muted-fg: #7a7a8e;
-    --color-jm-bg: #0a0a0d;
-    --color-jm-border: var(--color-gray-900);
+    --color-jm-shadow: #272834;
   }
 
   html:not(.dark) {
-    /* colorz */
+    /* JM Light Mode Palette */
     --color-off-white: #f5f5f7;
     --color-off-black: #121212;
+    --color-jm-primary: #0a6b42;
     --color-jm-green: #0a6b42;
-    --color-jm-amber: #8a5200;
-    --color-jm-cyan: #005577;
-    --color-jm-magenta: #7722cc;
+    --color-jm-secondary: #005d7a;
+    --color-jm-cyan: #005d7a;
+    --color-jm-accent: #6b3ba7;
+    --color-jm-purple: #6b3ba7;
+    --color-jm-amber: #6b3ba7;
+    --color-jm-magenta: #6b3ba7;
+    --color-jm-light: #f5f5f0;
+    --color-jm-bg: #f5f5f0;
+    --color-jm-dark: #1a1a24;
     --color-jm-fg: #1a1a24;
+    --color-jm-ui: #c8c8c2;
+    --color-jm-border: #c8c8c2;
     --color-jm-fg-hover: #000000;
     --color-jm-muted-fg: #555568;
-    --color-jm-bg: #f5f5f0;
-    --color-jm-border: #c8c8c2;
+    --color-jm-shadow: rgba(0, 0, 0, 0.2);
   }
 
   #social .button-icon {
@@ -114,16 +147,24 @@
 }
 
 html.dark {
-  /* JM colorz */
-  --color-jm-green: #00ff66;
-  --color-jm-amber: #ffb000;
-  --color-jm-cyan: #00f0ff;
-  --color-jm-magenta: #cc44ff;
+  /* Material 3 Dark Mode Palette (Tone 78-80) */
+  --color-jm-primary: #2ee59d;
+  --color-jm-green: #2ee59d;
+  --color-jm-secondary: #4fd3ee;
+  --color-jm-cyan: #4fd3ee;
+  --color-jm-accent: #c499ff;
+  --color-jm-purple: #c499ff;
+  --color-jm-amber: #c499ff;
+  --color-jm-magenta: #c499ff;
+  --color-jm-light: #e2e2e8;
   --color-jm-fg: #e2e2e8;
+  --color-jm-dark: #0a0a0d;
+  --color-jm-bg: #0a0a0d;
+  --color-jm-ui: #272730;
+  --color-jm-border: #272730;
   --color-jm-fg-hover: #ffffff;
   --color-jm-muted-fg: #7a7a8e;
-  --color-jm-bg: #0a0a0d;
-  --color-jm-border: var(--color-gray-900);
+  --color-jm-shadow: #272834;
 }
 
 #root {
@@ -201,7 +242,7 @@ code {
 }
 
 /* I don't want to have to repeat myself lol */
-@source inline("{,dark:}{bg,border,text}-jm-{cyan,green,amber,magenta,fg,muted-fg,bg}");
+@source inline("{,dark:}{bg,border,text}-jm-{primary,secondary,accent,purple,light,dark,ui,cyan,green,amber,magenta,fg,muted-fg,bg,border,shadow}");
 @source inline("{,dark:}{,hover:}bg-[var(--inline-{,dark-}{,hover-}bg)]");
 @source inline("{,dark:}{,hover:}border-[var(--inline-{,dark-}{,hover-}border)]");
 @source inline("{,dark:}{,hover:}text-[var(--inline-{,dark-}{,hover-}text)]");

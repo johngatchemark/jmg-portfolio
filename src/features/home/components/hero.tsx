@@ -7,6 +7,8 @@ import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
 import { useTheme } from "../../../context/theme-context";
 import Badge from "../../../components/badge";
 
+import RaisedButton from "../../../components/raised-button";
+
 const socials = [
   {
     label: "GitHub",
@@ -107,9 +109,9 @@ function Hero() {
               key={index}
               text={achievement}
               color="bg"
-              borderColor="cyan"
-              textColor="cyan"
-              dropShadowColor="cyan"
+              borderColor="ui"
+              textColor="fg"
+              dropShadowColor="ui"
             />
           ))}
         </div>
@@ -122,10 +124,20 @@ function Hero() {
             href="/Gatche_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:brightness-120 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:drop-shadow-[4px_4px_0px_rgba(0,255,102,0.3)] active:relative active:top-1 active:left-1 active:drop-shadow-none bg-jm-green px-5.5 py-3 text-[12px] text-jm-bg flex items-center gap-2 rounded-sm w-fit text-sm font-mono border border-jm-green"
+            className="no-underline inline-block"
           >
-            <FileText size={18} />
-            View Resume
+            <RaisedButton
+              color="primary"
+              borderColor="primary"
+              textColor="bg"
+              darkTextColor="#003820"
+              dropShadowColor="fg"
+              hoverColor="#074e30"
+              darkHoverColor="#3df0a8"
+            >
+              <FileText size={18} />
+              View Resume
+            </RaisedButton>
           </a>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -136,10 +148,21 @@ function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-fit drop-shadow-[4px_4px_0px_var(--color-jm-fg)] active:relative active:top-1 active:left-1 active:drop-shadow-none bg-jm-bg px-5.5 py-3 text-[12px] flex items-center justify-center gap-2 rounded-sm text-sm font-mono text-jm-fg-muted border border-jm-fg box-border hover:bg-jm-border text-jm-fg"
+                className="no-underline inline-block"
               >
-                <div className="hidden md:block">{label}</div>
-                <Icon size={18} />
+                <RaisedButton
+                  color="bg"
+                  borderColor="fg"
+                  darkBorderColor="ui"
+                  textColor="fg"
+                  dropShadowColor="fg"
+                  hoverColor="#e4e4dd"
+                  darkHoverColor="#1e1f29"
+                  className="transition-none!"
+                >
+                  <span className="hidden md:inline">{label}</span>
+                  <Icon size={18} />
+                </RaisedButton>
               </a>
             ))}
           </div>

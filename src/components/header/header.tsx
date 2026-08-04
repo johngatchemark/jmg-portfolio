@@ -62,7 +62,7 @@ function Header() {
               href="/Gatche_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:brightness-120 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.2)] dark:drop-shadow-[2px_2px_0px_rgba(0,255,102,0.3)] active:relative active:top-[1px] active:left-[1px] active:drop-shadow-none bg-jm-green px-3 py-1.5 text-xs text-jm-bg flex items-center gap-1.5 rounded-sm font-mono border border-jm-green transition-all duration-200"
+              className="hover:brightness-120 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.2)] dark:drop-shadow-[2px_2px_0px_rgba(46,229,157,0.3)] active:relative active:top-[1px] active:left-[1px] active:drop-shadow-none bg-jm-green px-3 py-1.5 text-xs text-jm-bg flex items-center gap-1.5 rounded-sm font-mono border border-jm-green transition-all duration-200"
             >
               <FileText size={14} />
               <span className="hidden sm:inline">View Resume</span>

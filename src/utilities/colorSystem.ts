@@ -1,4 +1,12 @@
 const PRESET_COLORS = [
+  "primary",
+  "secondary",
+  "accent",
+  "purple",
+  "light",
+  "dark",
+  "ui",
+  "shadow",
   "cyan",
   "green",
   "amber",
@@ -6,6 +14,7 @@ const PRESET_COLORS = [
   "fg",
   "muted-fg",
   "bg",
+  "border",
 ] as const;
 
 // Enables all valid CSS hex code formats, including options for alpha
@@ -25,7 +34,7 @@ function isHex(clr: string): boolean {
 function validateColor(clr: string): boolean {
   if (isPreset(clr) || isHex(clr)) return true;
   console.error(
-    `"${clr}" is not a valid color. Use a 6-digit hex code (e.g. #FF0145) or one of: cyan, green, amber, magenta, fg, muted-fg, bg.`,
+    `"${clr}" is not a valid color. Use a hex code (e.g. #FF0145) or one of preset roles: primary, secondary, accent, purple, light, dark, ui, green, cyan, amber, fg, bg, border.`,
   );
   return false;
 }
@@ -105,7 +114,8 @@ export function baseColorSlots(p: BaseColorProps): ColorSlot[] {
       shadowOffset: p.dropShadowOffset,
     },
     {
-      value: p.darkDropShadowColor,
+      value:
+        p.darkDropShadowColor || (p.dropShadowColor ? "shadow" : undefined),
       prefix: "drop-shadow",
       selector: "dark:",
       varSuffix: "dark",

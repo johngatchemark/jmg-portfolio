@@ -23,10 +23,10 @@ export const experiencesData: ExperienceItem[] = [
     role: "AI Trainer (Freelance)",
     period: "July 2026 – Present",
     badgeText: "FREELANCE",
-    badgeColor: "#ffffff",
-    badgeBorderColor: "cyan",
-    badgeTextColor: "cyan",
-    badgeDropShadowColor: "cyan",
+    badgeColor: "bg",
+    badgeBorderColor: "secondary",
+    badgeTextColor: "secondary",
+    badgeDropShadowColor: "secondary",
     isCurrent: true,
     achievements: [
       "Evaluated AI models on complex programming and reasoning tasks.",
@@ -39,10 +39,10 @@ export const experiencesData: ExperienceItem[] = [
     role: "Frontend Developer Intern",
     period: "June – Aug 2025",
     badgeText: "INTERNSHIP",
-    badgeColor: "#ffffff",
-    badgeBorderColor: "cyan",
-    badgeTextColor: "cyan",
-    badgeDropShadowColor: "cyan",
+    badgeColor: "bg",
+    badgeBorderColor: "secondary",
+    badgeTextColor: "secondary",
+    badgeDropShadowColor: "secondary",
     isCurrent: false,
     achievements: [
       "Built responsive interfaces for a barangay management system with TypeScript, React.js, and Tailwind CSS.",
@@ -56,7 +56,7 @@ export const experiencesData: ExperienceItem[] = [
 function Experience() {
   return (
     <article className="flex flex-col gap-4">
-      <p className="text-left text-[12px]! font-mono text-jm-cyan tracking-widest">
+      <p className="text-left text-[12px]! font-mono text-jm-secondary tracking-widest">
         &gt; sys.experience()
       </p>
 
@@ -71,14 +71,14 @@ function Experience() {
               {/* Vertical line segment to next item (stops at last item node) */}
               {!isLast && (
                 <div
-                  className="absolute -left-5 top-6 -bottom-14 w-0.5 border-l-2 border-dashed border-jm-cyan/60 dark:border-jm-cyan/80 z-0 pointer-events-none"
+                  className="absolute -left-5 top-6 -bottom-14 w-0.5 border-l-2 border-dashed border-jm-secondary/60 dark:border-jm-secondary/80 z-0 pointer-events-none"
                   aria-hidden="true"
                 />
               )}
 
               {/* Horizontal line connector connecting node to card */}
               <div
-                className="absolute -left-5 top-8.5 w-5 h-0.5 border-t-2 border-dashed border-jm-cyan/60 dark:border-jm-cyan/80 z-0 pointer-events-none"
+                className="absolute -left-5 top-8.5 w-5 h-0.5 border-t-2 border-dashed border-jm-secondary/60 dark:border-jm-secondary/80 z-0 pointer-events-none"
                 aria-hidden="true"
               />
 
@@ -90,14 +90,14 @@ function Experience() {
                 <div
                   className={`w-5 h-5 border-2 ${
                     isLatest
-                      ? "border-jm-cyan bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-cyan)]"
-                      : "border-jm-fg bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-fg)]"
+                      ? "border-jm-secondary bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-secondary)] dark:drop-shadow-[2px_2px_0px_var(--color-jm-shadow)]"
+                      : "border-jm-fg dark:border-jm-ui bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-fg)] dark:drop-shadow-[2px_2px_0px_var(--color-jm-shadow)]"
                   } rounded-none flex items-center justify-center`}
                 >
                   {isLatest ? (
-                    <div className="w-2 h-2 bg-jm-cyan animate-pulse" />
+                    <div className="w-2 h-2 bg-jm-secondary animate-pulse" />
                   ) : (
-                    <div className="w-1.5 h-1.5 bg-jm-cyan/70" />
+                    <div className="w-1.5 h-1.5 bg-jm-secondary/70" />
                   )}
                 </div>
               </div>
@@ -113,11 +113,11 @@ function Experience() {
                   </div>
                   <Badge
                     text={item.badgeText}
-                    color={item.badgeColor || "#ffffff"}
+                    color={item.badgeColor || "bg"}
                     darkColor="bg"
-                    borderColor={item.badgeBorderColor || "cyan"}
-                    textColor={item.badgeTextColor || "cyan"}
-                    dropShadowColor={item.badgeDropShadowColor || "cyan"}
+                    borderColor={item.badgeBorderColor || "secondary"}
+                    textColor={item.badgeTextColor || "secondary"}
+                    dropShadowColor="ui"
                   />
                 </div>
 
