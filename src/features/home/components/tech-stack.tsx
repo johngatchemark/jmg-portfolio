@@ -49,9 +49,11 @@ export const technicalStack: StackCategory[] = [
   },
 ];
 
-function TechnicalStack() {
+function TechnicalStack({ className = "" }: { className?: string }) {
   return (
-    <article className="flex flex-col gap-4">
+    <article
+      className={`flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start ${className}`}
+    >
       <p className="text-left text-[12px]! font-mono text-jm-cyan tracking-widest">
         &gt; sys.skills()
       </p>

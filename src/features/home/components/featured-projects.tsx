@@ -80,7 +80,7 @@ function FeaturedProjects() {
         "
       >
         <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest">
-          &gt; sys.about()
+          &gt; sys.previewprojects()
         </p>
         <div className="flex justify-between items-center">
           <h2 className="text-left text-jm-fg h1-stretched m-0!">
