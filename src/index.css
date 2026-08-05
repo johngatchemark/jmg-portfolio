@@ -78,6 +78,14 @@
   --color-jm-fg-hover: #000000;
   --color-jm-shadow: rgba(0, 0, 0, 0.2);
 
+  /* 7. M3 Surface Variant / Beyond the Code Background Tokens */
+  --color-jm-btc-bg: #ebe6db;
+  --color-jm-btc-border: #d0ccbf;
+  
+  --color-jm-surface-variant: #ebe6db;
+  --color-jm-on-surface-variant: #44464e;
+  --color-jm-outline-variant: #d0ccbf;
+
   /* fontz */
   --font-mono: "Mona Sans Mono VF", ui-monospace, Consolas, monospace;
 }
@@ -116,6 +124,11 @@
     --color-jm-fg-hover: #ffffff;
     --color-jm-muted-fg: #7a7a8e;
     --color-jm-shadow: #272834;
+    --color-jm-btc-bg: #14131a;
+    --color-jm-btc-border: #292832;
+    --color-jm-surface-variant: #14131a;
+    --color-jm-on-surface-variant: #c7c5d0;
+    --color-jm-outline-variant: #292832;
   }
 
   html:not(.dark) {
@@ -139,6 +152,11 @@
     --color-jm-fg-hover: #000000;
     --color-jm-muted-fg: #555568;
     --color-jm-shadow: rgba(0, 0, 0, 0.2);
+    --color-jm-btc-bg: #ebe6db;
+    --color-jm-btc-border: #d0ccbf;
+    --color-jm-surface-variant: #ebe6db;
+    --color-jm-on-surface-variant: #44464e;
+    --color-jm-outline-variant: #d0ccbf;
   }
 
   #social .button-icon {
@@ -165,6 +183,11 @@ html.dark {
   --color-jm-fg-hover: #ffffff;
   --color-jm-muted-fg: #7a7a8e;
   --color-jm-shadow: #272834;
+  --color-jm-btc-bg: #14131a;
+  --color-jm-btc-border: #292832;
+  --color-jm-surface-variant: #14131a;
+  --color-jm-on-surface-variant: #c7c5d0;
+  --color-jm-outline-variant: #292832;
 }
 
 #root {
@@ -241,8 +264,35 @@ code {
   background: var(--code-bg);
 }
 
+/* Vinyl Record Rotation Animation */
+@keyframes spin-vinyl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-vinyl-spin {
+  animation: spin-vinyl 14s linear infinite;
+}
+
+.animate-vinyl-spin-paused {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar for Chrome, Safari, Opera, Firefox, IE/Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* I don't want to have to repeat myself lol */
-@source inline("{,dark:}{bg,border,text}-jm-{primary,secondary,accent,purple,light,dark,ui,cyan,green,amber,magenta,fg,muted-fg,bg,border,shadow}");
+@source inline("{,dark:}{bg,border,text}-jm-{primary,secondary,accent,purple,light,dark,ui,cyan,green,amber,magenta,fg,muted-fg,bg,border,shadow,surface-variant,on-surface-variant,outline-variant}");
 @source inline("{,dark:}{,hover:}bg-[var(--inline-{,dark-}{,hover-}bg)]");
 @source inline("{,dark:}{,hover:}border-[var(--inline-{,dark-}{,hover-}border)]");
 @source inline("{,dark:}{,hover:}text-[var(--inline-{,dark-}{,hover-}text)]");

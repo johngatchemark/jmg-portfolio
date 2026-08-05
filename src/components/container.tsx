@@ -1,6 +1,6 @@
 function Container({ children }: { children: React.ReactNode }) {
   return (
-    <article className="flex flex-col w-screen justify-between items-center">
+    <article className="flex flex-col w-full max-w-full justify-between items-center overflow-x-clip">
       {children}
     </article>
   );
