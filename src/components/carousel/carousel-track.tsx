@@ -1,0 +1,116 @@
+import { useState, useRef, useEffect } from "react";
+import Container from "../container";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import CarouselCard from "./carousel-card";
+import type { CarouselGallery } from "./types";
+
+interface CarouselTrackProps {
+  gallery: CarouselGallery;
+  onImageClick: (gallery: CarouselGallery, imageIndex: number) => void;
+}
+
+function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollBounds = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  };
+
+  useEffect(() => {
+    updateScrollBounds();
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    const el = carouselRef.current;
+    if (el) {
+      const scrollAmount = el.clientWidth * 0.75;
+      el.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+      setTimeout(updateScrollBounds, 350);
+    }
+  };
+
+  return (
+    <div className="w-full flex flex-col gap-4">
+      {/* Gallery Header */}
+      <Container>
+        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 flex flex-col gap-1 text-left">
+          <div className="flex items-center gap-2">
+            {gallery.icon}
+            <h3 className="text-jm-fg font-mono font-bold text-xl md:text-2xl tracking-tight">
+              {gallery.title}
+            </h3>
+          </div>
+          <p className="text-jm-muted-fg font-sans text-xs sm:text-sm max-w-2xl">
+            {gallery.description}
+          </p>
+        </div>
+      </Container>
+
+      {/* Edge-to-Edge Scrollable Track */}
+      <div
+        ref={carouselRef}
+        onScroll={updateScrollBounds}
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-x-auto no-scrollbar py-2 scroll-smooth"
+      >
+        {/* Inner Track Padding-Left matches section header left margin exactly on all screen sizes */}
+        <div className="flex items-stretch gap-6 sm:gap-8 w-max pl-[max(1.5rem,calc((100vw-30rem)/2+1.5rem))] sm:pl-[max(2.5rem,calc((100vw-30rem)/2+2.5rem))] lg:pl-[max(5rem,calc((100vw-72rem)/2+5rem))] pr-12 md:pr-24">
+          {gallery.images.map((img, imgIdx) => (
+            <CarouselCard
+              key={img.id}
+              image={img}
+              index={imgIdx}
+              totalImages={gallery.images.length}
+              onClick={() => onImageClick(gallery, imgIdx)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Controls */}
+      <Container>
+        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 flex items-center justify-between pt-1">
+          <span className="font-mono text-xs text-jm-muted-fg">
+            {gallery.images.length} photos in gallery — Scroll right &rarr;
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              title={`Scroll ${gallery.title} left`}
+              className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui text-jm-fg p-2 rounded-xs shadow-[2px_2px_0px_var(--color-jm-primary)] transition-all ${
+                !canScrollLeft
+                  ? "opacity-30 cursor-not-allowed shadow-none border-jm-ui text-jm-muted-fg"
+                  : "hover:bg-jm-primary hover:text-white dark:hover:text-[#003820] cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+              }`}
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <button
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              title={`Scroll ${gallery.title} right`}
+              className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui text-jm-fg p-2 rounded-xs shadow-[2px_2px_0px_var(--color-jm-primary)] transition-all ${
+                !canScrollRight
+                  ? "opacity-30 cursor-not-allowed shadow-none border-jm-ui text-jm-muted-fg"
+                  : "hover:bg-jm-primary hover:text-white dark:hover:text-[#003820] cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+              }`}
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+export default CarouselTrack;
