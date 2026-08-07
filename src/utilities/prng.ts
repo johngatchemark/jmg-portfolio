@@ -3,7 +3,7 @@
 // Retrieved 2026-08-06, License - CC BY-SA 4.0
 
 // secret sauce because javascript doesn't do seeds
-export function splitmix32(a) {
+export function splitmix32(a: number) {
   return function () {
     a |= 0;
     a = (a + 0x9e3779b9) | 0;
