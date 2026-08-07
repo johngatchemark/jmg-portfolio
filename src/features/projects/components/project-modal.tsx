@@ -210,7 +210,7 @@ export default function ProjectModal({
                   e.stopPropagation();
                   handleStartClose();
                 }}
-                className="bg-[rgb(255,95,87)] w-2.5 h-2.5 rounded-full inline-block cursor-pointer hover:scale-125 transition-transform"
+                className="bg-[rgb(255,95,87)] w-2.5 h-2.5 rounded-full inline-block cursor-pointer hover:brightness-75 transition-all"
                 title="Close (Click red dot)"
               />
               <span className="bg-[rgb(254,188,46)] w-2.5 h-2.5 rounded-full inline-block" />
