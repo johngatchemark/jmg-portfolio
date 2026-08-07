@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import type { ProjectData } from "../data/projects-data";
 import WireframePlaceholder from "./wireframe-placeholder";
 import Badge from "../../../components/badge";
@@ -15,27 +15,102 @@ import { IconGitHub } from "../../home/components/icons";
 
 interface ProjectModalProps {
   project: ProjectData | null;
+  originRect: DOMRect | null;
   onClose: () => void;
 }
 
+type AnimState = "closed" | "initial" | "expanding" | "open" | "closing";
+
 export default function ProjectModal({
   project,
+  originRect,
   onClose,
 }: ProjectModalProps) {
+  const [animState, setAnimState] = useState<AnimState>("closed");
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [targetDimensions, setTargetDimensions] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+    isMobile: false,
+  });
 
-  // Reset slide index when modal project changes
-  useEffect(() => {
-    setActiveSlideIndex(0);
-  }, [project]);
+  // Calculate target modal bounds based on viewport
+  const updateTargetDimensions = () => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const isMobile = vw < 640;
 
-  // Keyboard navigation & ESC handler
+    if (isMobile) {
+      setTargetDimensions({
+        top: 0,
+        left: 0,
+        width: vw,
+        height: vh,
+        isMobile: true,
+      });
+    } else {
+      const width = Math.min(1024, vw * 0.9);
+      const height = Math.min(820, vh * 0.9);
+      const left = (vw - width) / 2;
+      const top = Math.max(16, (vh - height) / 2);
+      setTargetDimensions({
+        top,
+        left,
+        width,
+        height,
+        isMobile: false,
+      });
+    }
+  };
+
+  // Mount & trigger entrance expansion animation
+  useLayoutEffect(() => {
+    if (project && originRect) {
+      updateTargetDimensions();
+      setActiveSlideIndex(0);
+      setAnimState("initial");
+
+      // Lock body scroll
+      document.body.style.overflow = "hidden";
+
+      // Step to expanding frame
+      const rAF = requestAnimationFrame(() => {
+        setAnimState("expanding");
+      });
+
+      // Step to fully open state
+      const timer = setTimeout(() => {
+        setAnimState("open");
+      }, 360);
+
+      return () => {
+        cancelAnimationFrame(rAF);
+        clearTimeout(timer);
+      };
+    } else if (!project && animState !== "closed") {
+      setAnimState("closed");
+      document.body.style.overflow = "";
+    }
+  }, [project, originRect]);
+
+  // Window resize listener
   useEffect(() => {
-    if (!project) return;
+    const handleResize = () => {
+      updateTargetDimensions();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Keyboard navigation & Esc trigger
+  useEffect(() => {
+    if (!project || animState === "closed") return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        handleStartClose();
       } else if (e.key === "ArrowLeft") {
         setActiveSlideIndex((prev) =>
           prev === 0 ? project.gallery.length - 1 : prev - 1,
@@ -49,58 +124,94 @@ export default function ProjectModal({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [project, onClose]);
+  }, [project, animState]);
 
-  if (!project) return null;
+  const handleStartClose = () => {
+    if (animState === "closing" || animState === "closed") return;
+    setAnimState("closing");
+
+    setTimeout(() => {
+      setAnimState("closed");
+      document.body.style.overflow = "";
+      onClose();
+    }, 350);
+  };
+
+  if (!project || !originRect || animState === "closed") return null;
+
+  // Determine current bounds for the morphing container box
+  const isInitialOrClosing = animState === "initial" || animState === "closing";
+  const currentBounds = isInitialOrClosing
+    ? {
+        top: originRect.top,
+        left: originRect.left,
+        width: originRect.width,
+        height: originRect.height,
+        borderRadius: "2px",
+      }
+    : {
+        top: targetDimensions.top,
+        left: targetDimensions.left,
+        width: targetDimensions.width,
+        height: targetDimensions.height,
+        borderRadius: targetDimensions.isMobile ? "0px" : "4px",
+      };
 
   const currentGalleryItem = project.gallery[activeSlideIndex];
 
-  const handlePrevSlide = () => {
-    setActiveSlideIndex((prev) =>
-      prev === 0 ? project.gallery.length - 1 : prev - 1,
-    );
-  };
-
-  const handleNextSlide = () => {
-    setActiveSlideIndex((prev) =>
-      prev === project.gallery.length - 1 ? 0 : prev + 1,
-    );
-  };
-
   return (
-    <div
-      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 md:p-6"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-50 overflow-hidden select-none">
+      {/* Dimmed Backdrop Overlay */}
       <div
-        className="relative bg-jm-bg dark:bg-[#121218] border-0 sm:border-2 border-jm-fg dark:border-jm-ui w-full h-full sm:h-auto sm:max-h-[92vh] sm:max-w-5xl rounded-none sm:rounded-xs overflow-hidden flex flex-col shadow-2xl"
+        className={`absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity duration-300 ${
+          isInitialOrClosing ? "opacity-0" : "opacity-100"
+        }`}
+        onClick={handleStartClose}
+      />
+
+      {/* Morphing Expanding Card Container Box */}
+      <div
+        style={{
+          position: "fixed",
+          top: `${currentBounds.top}px`,
+          left: `${currentBounds.left}px`,
+          width: `${currentBounds.width}px`,
+          height: `${currentBounds.height}px`,
+          borderRadius: currentBounds.borderRadius,
+          transition: "all 360ms cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+        className="bg-jm-bg dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui overflow-hidden flex flex-col shadow-2xl z-50"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Terminal Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b-2 border-jm-fg dark:border-jm-ui bg-[#e8e8e3] dark:bg-[#181920] shrink-0">
+        {/* Terminal Titlebar Header */}
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 bg-[#e8e8e3] dark:bg-[#181920] border-b-2 border-jm-fg dark:border-jm-ui shrink-0">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <span className="bg-[rgb(255,95,87)] w-2.5 h-2.5 rounded-full inline-block" />
               <span className="bg-[rgb(254,188,46)] w-2.5 h-2.5 rounded-full inline-block" />
               <span className="bg-[rgb(40,200,64)] w-2.5 h-2.5 rounded-full inline-block" />
             </div>
-            <span className="font-mono text-xs text-jm-fg dark:text-jm-light font-semibold">
+            <span className="font-mono text-xs text-jm-fg dark:text-jm-light font-semibold truncate">
               {project.fakeFilePath}
             </span>
           </div>
 
           <button
-            onClick={onClose}
-            className="p-1.5 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-colors cursor-pointer border border-jm-fg dark:border-jm-ui flex items-center justify-center"
-            title="Close modal (Esc)"
+            onClick={handleStartClose}
+            className="p-1.5 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-colors cursor-pointer border border-jm-fg dark:border-jm-ui flex items-center justify-center shrink-0"
+            title="Close (Esc)"
           >
             <X size={18} />
           </button>
         </div>
 
-        {/* Scrollable Modal Content Body */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 text-left">
-          {/* Top Section: Key Wireframe & Overview Info */}
+        {/* Detailed Modal Content Body (Smooth Fade-In after expansion) */}
+        <div
+          className={`flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 text-left transition-opacity duration-200 ${
+            animState === "open" ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          {/* Top Section: Key Wireframe & Detailed Specs */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             {/* Left: Key Wireframe Preview */}
             <div className="md:col-span-6 flex flex-col gap-2">
@@ -110,7 +221,7 @@ export default function ProjectModal({
               <WireframePlaceholder type={project.keyWireframeType} />
             </div>
 
-            {/* Right: Project Specifications */}
+            {/* Right: Detailed Specifications */}
             <div className="md:col-span-6 flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -129,7 +240,7 @@ export default function ProjectModal({
                 </p>
               </div>
 
-              {/* Detailed Bullet Points */}
+              {/* Key Highlights */}
               <div className="flex flex-col gap-2">
                 <span className="font-mono text-xs font-bold text-jm-fg uppercase tracking-wider">
                   &gt; Key Architecture &amp; Execution:
@@ -162,7 +273,7 @@ export default function ProjectModal({
                 </div>
               </div>
 
-              {/* Honors / Awards */}
+              {/* Honors / Recognition */}
               {project.awards && project.awards.length > 0 && (
                 <div className="flex flex-col gap-1 bg-jm-primary/10 border border-jm-primary/30 p-3 rounded-xs text-xs font-mono">
                   <div className="flex items-center gap-1.5 text-jm-primary font-bold">
@@ -239,9 +350,8 @@ export default function ProjectModal({
               </div>
             </div>
 
-            {/* Gallery Carousel Viewer */}
+            {/* Gallery Carousel Container */}
             <div className="relative border-2 border-jm-fg dark:border-jm-ui rounded-xs bg-[#f4f4ee] dark:bg-[#16161f] p-4 sm:p-6 flex flex-col gap-4">
-              {/* Wireframe Display */}
               <div className="relative w-full overflow-hidden">
                 {currentGalleryItem && (
                   <WireframePlaceholder
@@ -249,18 +359,25 @@ export default function ProjectModal({
                   />
                 )}
 
-                {/* Left/Right Navigation Overlay Buttons */}
                 {project.gallery.length > 1 && (
                   <>
                     <button
-                      onClick={handlePrevSlide}
+                      onClick={() =>
+                        setActiveSlideIndex((prev) =>
+                          prev === 0 ? project.gallery.length - 1 : prev - 1,
+                        )
+                      }
                       className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
                       title="Previous Wireframe"
                     >
                       <ChevronLeft size={20} />
                     </button>
                     <button
-                      onClick={handleNextSlide}
+                      onClick={() =>
+                        setActiveSlideIndex((prev) =>
+                          prev === project.gallery.length - 1 ? 0 : prev + 1,
+                        )
+                      }
                       className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
                       title="Next Wireframe"
                     >
@@ -270,7 +387,6 @@ export default function ProjectModal({
                 )}
               </div>
 
-              {/* Wireframe Caption & Details */}
               {currentGalleryItem && (
                 <div className="flex flex-col gap-1 text-left bg-jm-bg dark:bg-[#121218] p-3 sm:p-4 rounded-xs border border-jm-fg/20 dark:border-jm-ui/30">
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -287,7 +403,6 @@ export default function ProjectModal({
                 </div>
               )}
 
-              {/* Step Dots Navigation */}
               <div className="flex items-center justify-center gap-2 pt-1">
                 {project.gallery.map((_, idx) => (
                   <button
