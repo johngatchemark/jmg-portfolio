@@ -10,8 +10,10 @@ function Projects() {
     null,
   );
   const [originRect, setOriginRect] = useState<DOMRect | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   const handleOpenModal = (project: ProjectData, rect: DOMRect) => {
+    setIsClosing(false);
     setOriginRect(rect);
     setSelectedProject(project);
   };
@@ -19,6 +21,7 @@ function Projects() {
   const handleCloseModal = () => {
     setSelectedProject(null);
     setOriginRect(null);
+    setIsClosing(false);
   };
 
   return (
@@ -28,13 +31,14 @@ function Projects() {
           {/* Section Header */}
           <ProjectsHeader />
 
-          {/* Compact Responsive Project Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
+          {/* Compact Equal-Width Responsive Project Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
             {projectsData.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 isSelected={selectedProject?.id === project.id}
+                isClosing={selectedProject?.id === project.id && isClosing}
                 onOpenModal={handleOpenModal}
               />
             ))}
@@ -47,6 +51,7 @@ function Projects() {
         project={selectedProject}
         originRect={originRect}
         onClose={handleCloseModal}
+        onClosingStateChange={setIsClosing}
       />
     </main>
   );

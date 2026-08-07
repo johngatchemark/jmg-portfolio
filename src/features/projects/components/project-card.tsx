@@ -10,12 +10,14 @@ import { IconGitHub } from "../../home/components/icons";
 interface ProjectCardProps {
   project: ProjectData;
   isSelected?: boolean;
+  isClosing?: boolean;
   onOpenModal: (project: ProjectData, rect: DOMRect) => void;
 }
 
 export default function ProjectCard({
   project,
   isSelected = false,
+  isClosing = false,
   onOpenModal,
 }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -29,11 +31,19 @@ export default function ProjectCard({
     }
   };
 
+  // Crossfade opacity smoothly: hidden when active modal, starts fading in early when closing begins
+  const showCard = !isSelected || isClosing;
+
   return (
     <div
       ref={cardRef}
-      className={`h-full transition-opacity duration-200 ${
-        isSelected ? "opacity-0 pointer-events-none" : "opacity-100"
+      style={{
+        transition: isClosing
+          ? "opacity 160ms cubic-bezier(0.16, 1, 0.3, 1)"
+          : "opacity 200ms cubic-bezier(0.16, 1, 0.3, 1)",
+      }}
+      className={`flex-1 min-w-0 w-full h-full flex flex-col ${
+        showCard ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <FakeMacWindow
@@ -48,7 +58,7 @@ export default function ProjectCard({
           <div className="w-full relative overflow-hidden rounded-xs transition-transform duration-300 group-hover:scale-[1.01]">
             <WireframePlaceholder type={project.keyWireframeType} />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[2px]">
-              <span className="bg-jm-primary text-white text-xs font-mono font-bold px-3 py-1 rounded-xs flex items-center gap-1.5 shadow-md">
+              <span className="bg-jm-primary text-white dark:text-jm-dark text-xs font-mono font-bold px-3 py-1 rounded-xs flex items-center gap-1.5 shadow-md">
                 <Layers size={13} /> View Details
               </span>
             </div>
@@ -57,7 +67,7 @@ export default function ProjectCard({
           {/* Title, Role & Subtitle */}
           <div className="flex flex-col gap-1">
             <div className="flex flex-wrap items-center justify-between gap-1.5">
-              <h3 className="font-mono text-lg font-bold text-jm-fg group-hover:text-jm-primary transition-colors">
+              <h3 className="font-mono text-base font-bold text-jm-fg group-hover:text-jm-primary transition-colors">
                 {project.title}
               </h3>
               <Badge
@@ -68,13 +78,13 @@ export default function ProjectCard({
                 className="text-[10px]! px-2 py-0.5"
               />
             </div>
-            <p className="font-sans text-[11px] italic text-jm-muted-fg font-medium truncate">
+            <p className="font-sans text-[12px]! text-xs! italic text-jm-muted-fg font-medium truncate">
               {project.subtitle}
             </p>
           </div>
 
-          {/* Truncated Description (2-line clamp) */}
-          <p className="font-sans text-xs text-jm-muted-fg leading-relaxed flex-1 line-clamp-2">
+          {/* Truncated Description (2-line clamp, 14px font size) */}
+          <p className="font-sans text-[14px]! text-sm! text-jm-muted-fg leading-relaxed flex-1 line-clamp-2">
             {project.description}
           </p>
 

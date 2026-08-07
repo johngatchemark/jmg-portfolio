@@ -17,6 +17,7 @@ interface ProjectModalProps {
   project: ProjectData | null;
   originRect: DOMRect | null;
   onClose: () => void;
+  onClosingStateChange?: (isClosing: boolean) => void;
 }
 
 type AnimState = "closed" | "initial" | "expanding" | "open" | "closing";
@@ -25,6 +26,7 @@ export default function ProjectModal({
   project,
   originRect,
   onClose,
+  onClosingStateChange,
 }: ProjectModalProps) {
   const [animState, setAnimState] = useState<AnimState>("closed");
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -71,6 +73,7 @@ export default function ProjectModal({
       updateTargetDimensions();
       setActiveSlideIndex(0);
       setAnimState("initial");
+      if (onClosingStateChange) onClosingStateChange(false);
 
       // Lock body scroll
       document.body.style.overflow = "hidden";
@@ -129,18 +132,22 @@ export default function ProjectModal({
   const handleStartClose = () => {
     if (animState === "closing" || animState === "closed") return;
     setAnimState("closing");
+    if (onClosingStateChange) onClosingStateChange(true);
 
     setTimeout(() => {
       setAnimState("closed");
       document.body.style.overflow = "";
+      if (onClosingStateChange) onClosingStateChange(false);
       onClose();
-    }, 350);
+    }, 360);
   };
 
   if (!project || !originRect || animState === "closed") return null;
 
   // Determine current bounds for the morphing container box
   const isInitialOrClosing = animState === "initial" || animState === "closing";
+  const isClosingState = animState === "closing";
+
   const currentBounds = isInitialOrClosing
     ? {
         top: originRect.top,
@@ -178,37 +185,65 @@ export default function ProjectModal({
           width: `${currentBounds.width}px`,
           height: `${currentBounds.height}px`,
           borderRadius: currentBounds.borderRadius,
-          transition: "all 360ms cubic-bezier(0.16, 1, 0.3, 1)",
+          transition: "top 360ms cubic-bezier(0.16, 1, 0.3, 1), left 360ms cubic-bezier(0.16, 1, 0.3, 1), width 360ms cubic-bezier(0.16, 1, 0.3, 1), height 360ms cubic-bezier(0.16, 1, 0.3, 1), opacity 140ms ease-out 180ms",
+          opacity: isClosingState ? 0 : 1,
         }}
-        className="bg-jm-bg dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui overflow-hidden flex flex-col shadow-2xl z-50"
+        className={`bg-jm-bg dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui overflow-hidden flex flex-col shadow-2xl z-50 ${
+          isInitialOrClosing
+            ? "drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)]"
+            : ""
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Terminal Titlebar Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 bg-[#e8e8e3] dark:bg-[#181920] border-b-2 border-jm-fg dark:border-jm-ui shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <span className="bg-[rgb(255,95,87)] w-2.5 h-2.5 rounded-full inline-block" />
+        {/* Terminal Titlebar Header - Pixel-perfect match to FakeMacWindow header when shrinking/initial */}
+        <div
+          className={`flex gap-4 items-center justify-between bg-[#e8e8e3] dark:bg-[#181920] transition-all duration-300 ${
+            isInitialOrClosing
+              ? "px-4 py-2.5 border-b border-jm-fg dark:border-jm-ui"
+              : "px-4 sm:px-6 py-3 border-b-2 border-jm-fg dark:border-jm-ui"
+          }`}
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStartClose();
+                }}
+                className="bg-[rgb(255,95,87)] w-2.5 h-2.5 rounded-full inline-block cursor-pointer hover:scale-125 transition-transform"
+                title="Close (Click red dot)"
+              />
               <span className="bg-[rgb(254,188,46)] w-2.5 h-2.5 rounded-full inline-block" />
               <span className="bg-[rgb(40,200,64)] w-2.5 h-2.5 rounded-full inline-block" />
             </div>
-            <span className="font-mono text-xs text-jm-fg dark:text-jm-light font-semibold truncate">
+            <span className="font-mono text-[11px] text-jm-fg dark:text-jm-light">
               {project.fakeFilePath}
             </span>
           </div>
 
-          <button
-            onClick={handleStartClose}
-            className="p-1.5 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-colors cursor-pointer border border-jm-fg dark:border-jm-ui flex items-center justify-center shrink-0"
-            title="Close (Esc)"
-          >
-            <X size={18} />
-          </button>
+          {/* Close button X - removed from layout when shrinking so header vertical height aligns 100% with FakeMacWindow */}
+          {!isInitialOrClosing && (
+            <button
+              onClick={handleStartClose}
+              className="p-1.5 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-all duration-200 cursor-pointer border border-jm-fg dark:border-jm-ui flex items-center justify-center shrink-0"
+              title="Close (Esc)"
+            >
+              <X size={18} />
+            </button>
+          )}
         </div>
 
-        {/* Detailed Modal Content Body (Smooth Fade-In after expansion) */}
+        {/* Detailed Modal Content Body (Fades out in 60ms on close, fades in early at 90ms on open) */}
         <div
-          className={`flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 text-left transition-opacity duration-200 ${
-            animState === "open" ? "opacity-100" : "opacity-0 pointer-events-none"
+          style={{
+            transition: isClosingState
+              ? "opacity 60ms ease-out 0ms"
+              : "opacity 240ms cubic-bezier(0.16, 1, 0.3, 1) 90ms",
+          }}
+          className={`flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 text-left ${
+            !isInitialOrClosing && !isClosingState
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none"
           }`}
         >
           {/* Top Section: Key Wireframe & Detailed Specs */}
