@@ -12,6 +12,7 @@ function Header() {
   const { theme, resolvedTheme, setTheme } = useTheme();
 
   const navLinks = [
+    { href: "/", name: "Home" },
     { href: "/projects", name: "Projects" },
     { href: "/accomplishments", name: "Accomplishments" },
     { href: "/arcade", name: "Arcade" },
