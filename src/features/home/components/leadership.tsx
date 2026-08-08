@@ -27,7 +27,7 @@ export const leadershipData: LeadershipItem[] = [
     badgeTextColor: "primary",
     badgeDropShadowColor: "primary",
     achievements: [
-      "Led development of the organization's official website (jpcs-ue.tech).",
+      "Led development of the organization's official website.",
       "Collaborated with student officers to implement website updates supporting organizational initiatives.",
     ],
     techStack: ["TypeScript", "React.js", "Web Development"],

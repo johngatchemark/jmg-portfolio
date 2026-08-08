@@ -7,16 +7,18 @@ export const hobbyGalleries: CarouselGallery[] = [
     title: "Playing Minecraft",
     category: "Gaming & Redstone Logic",
     icon: <Gamepad2 size={18} className="text-jm-primary" />,
-    description:
-      "Building cozy survival bases, intricate Redstone mechanisms, and aesthetic custom worlds. Minecraft bridges my passion for architectural design and logical engineering in an endless sandbox.",
+    description: `There was a time, when I was a very young kid back in 2012, when all I could think about was rollercoasters. 
+      They were all over my Google and YouTube search histories. 
+      I'd been dying to build one, until one day, I stumbled across one random YouTube video of a character riding through the ups and downs of a particularly blocky railway—like a coaster! 
+      This newfound discovery prompted me to download the free trial version of said game, ready to build my first loop-the-loop.
+      Much to my dismay, I was greeted by a horde of zombies and exploding creepers on the first night—and I quickly realized that rails can't be placed upside down.`,
     images: [
       {
         id: "mc-1",
         src: "/assets/hobbies/minecraft.jpg",
         alt: "Cozy Minecraft survival cabin with cherry blossom trees",
         caption: "Cherry Blossom Survival Base",
-        subcaption:
-          "Architectural build featuring warm lantern illumination, terraced crop gardens, and custom timber framing.",
+        subcaption: "daskdjdkas",
       },
       {
         id: "mc-2",
@@ -46,11 +48,12 @@ export const hobbyGalleries: CarouselGallery[] = [
   },
   {
     id: "fiber-arts",
-    title: "Fiber Arts (Knitting & Crocheting)",
+    title: "Fiber Arts (Knit & Crochet)",
     category: "Tactile Crafting & Patterns",
     icon: <Scissors size={18} className="text-jm-purple dark:text-jm-accent" />,
-    description:
-      "Crafting handmade plushies, warm wearable garments, and intricate yarn blankets. Fiber arts are a comforting, tactile form of pattern execution—where every stitch is a loop of deliberate care.",
+    description: `So there was this time I badly wanted a turtleneck sweater, but the ones at the local shop I thought were overpriced. 
+          So I figured, why not knit one myself? Soon enough, I discovered that acquiring—at the very least—decent-quality yarn was more expensive, and spending weeks, if not months, on a largely repetitive project might have been more trouble than it was worth.
+          Fortunately, the idea of endless possibilities and getting to wear my creations already sold me on handknitting.`,
     images: [
       {
         id: "fa-1",
@@ -87,12 +90,15 @@ export const hobbyGalleries: CarouselGallery[] = [
     ],
   },
   {
-    id: "oil-painting",
-    title: "Oil Painting",
+    id: "fine-art",
+    title: "[Fine] Art",
     category: "Fine Arts & Impressionism",
     icon: <Palette size={18} className="text-jm-secondary dark:text-jm-cyan" />,
-    description:
-      "Working with oil paints on canvas, layering rich impasto textures, and capturing scenic landscapes. Painting provides a peaceful outlet to experiment with natural light, color theory, and expression.",
+    description: `I've been drawing (mostly random objects) since I was five, but I stopped doing it at some point because of personal stuff.
+    I've always considered myself an artist, so to abruptly stop making art and observe my skills slowly decline as a result was disconcerting. 
+    It took a while, but I eventually rediscovered my passion.
+    Colored pencils and oil paints are my go-to mediums for making art, usually realistic drawings, but I am also teaching myself animation and drawing cartoons. 
+    I still have a long way to go, but it's been a wonderful journey thus far.`,
     images: [
       {
         id: "op-1",

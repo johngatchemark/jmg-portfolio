@@ -72,7 +72,7 @@ function AccomplishmentsPage() {
           </p>
 
           <h1 className="h1-stretched text-jm-fg text-left my-0!">
-            Achievements log
+            Accomplishments
           </h1>
 
           {/* Retro Table Container */}

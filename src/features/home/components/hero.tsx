@@ -82,7 +82,7 @@ function Hero() {
       </div>
 
       <div className="relative z-20 flex flex-col justify-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
-        <p className="text-left text-sm font-mono text-jm-green tracking-widest mb-1">
+        <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest mb-1">
           &gt; sys.whoami()
         </p>
 

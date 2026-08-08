@@ -36,8 +36,8 @@ export function ContactSection() {
           </h1>
 
           <p className="text-jm-muted-fg text-base max-w-md leading-relaxed font-sans">
-            I'm open to full-time roles, research collaborations, and
-            interesting side projects. Drop me a message or reach out directly.
+            I'm open to full-time software engineering roles. Drop me a message
+            or reach out directly.
           </p>
 
           {/* Email Badge Box */}

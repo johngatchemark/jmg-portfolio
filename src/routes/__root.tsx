@@ -37,12 +37,12 @@ function NotFound() {
           </p>
 
           <h1 className="h1-stretched text-jm-fg text-left my-0!">
-            Mmm... I don't remember creating a page for that 🤔
+            Mmm... I don't remember creating a page for that 😅
           </h1>
 
           <p className="text-jm-muted-fg font-sans text-base leading-relaxed">
             The link you followed might be broken, or the page may have been
-            moved, deleted, or is still under construction.
+            moved or deleted.
           </p>
 
           {/* Action Buttons */}
