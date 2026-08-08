@@ -149,8 +149,8 @@ function PixelGridTransition({
       ctx.clearRect(0, 0, canvas.width, height);
 
       // RTX ON
-      drawGrid();
-      drawOverlay();
+      // drawGrid();
+      // drawOverlay();
 
       drawActivatedCells();
     };
