@@ -58,22 +58,22 @@ function PixelGridTransition({
       };
     };
 
-    const drawGrid = () => {
-      if (!ctx) return;
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = inColor;
-      ctx.beginPath();
-      for (let i: number = 0; i < canvas.width / cellSize; i++) {
-        ctx.moveTo(i * cellSize, 0);
-        ctx.lineTo(i * cellSize, height);
-      }
+    // const drawGrid = () => {
+    //   if (!ctx) return;
+    //   ctx.lineWidth = 1;
+    //   ctx.strokeStyle = inColor;
+    //   ctx.beginPath();
+    //   for (let i: number = 0; i < canvas.width / cellSize; i++) {
+    //     ctx.moveTo(i * cellSize, 0);
+    //     ctx.lineTo(i * cellSize, height);
+    //   }
 
-      for (let i: number = 0; i < pixelVerticalCount; i++) {
-        ctx.moveTo(0, i * cellSize);
-        ctx.lineTo(canvas.width, i * cellSize);
-      }
-      ctx.stroke();
-    };
+    //   for (let i: number = 0; i < pixelVerticalCount; i++) {
+    //     ctx.moveTo(0, i * cellSize);
+    //     ctx.lineTo(canvas.width, i * cellSize);
+    //   }
+    //   ctx.stroke();
+    // };
 
     const initializeCellRandomWeights = () => {
       if (!ctx) return;
@@ -111,15 +111,15 @@ function PixelGridTransition({
 
     // Paints a outColor to transparent overlay over the grid (inColor)
     // so that it blends seemlessly with the outColor background
-    const drawOverlay = () => {
-      if (!ctx) return;
-      const gradient = ctx.createLinearGradient(0, 0, 0, height / 2);
-      gradient.addColorStop(0, outColor + "FF");
-      gradient.addColorStop(1, outColor + "00");
+    // const drawOverlay = () => {
+    //   if (!ctx) return;
+    //   const gradient = ctx.createLinearGradient(0, 0, 0, height / 2);
+    //   gradient.addColorStop(0, outColor + "FF");
+    //   gradient.addColorStop(1, outColor + "00");
 
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, height);
-    };
+    //   ctx.fillStyle = gradient;
+    //   ctx.fillRect(0, 0, canvas.width, height);
+    // };
 
     const drawActivatedCells = () => {
       if (!canvas) return;
