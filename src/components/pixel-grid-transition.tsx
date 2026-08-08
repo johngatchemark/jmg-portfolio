@@ -189,6 +189,8 @@ function PixelGridTransition({
     <canvas
       ref={canvasRef}
       height={height}
+      // Without this, viewport shrinking breaks canvas width calculations in Chrome and Firefox responsive mode
+      className="w-full max-w-full"
       style={{ backgroundColor: outColor }}
     />
   );
