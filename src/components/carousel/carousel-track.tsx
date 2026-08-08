@@ -41,7 +41,7 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
     <div className="w-full flex flex-col gap-4">
       {/* Gallery Header */}
       <Container>
-        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 flex flex-col gap-1 text-left">
+        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20 flex flex-col gap-1 text-left">
           <div className="flex items-center gap-2">
             {gallery.icon}
             <h3 className="text-jm-fg font-mono font-bold text-xl md:text-2xl tracking-tight">
@@ -76,7 +76,7 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
 
       {/* Navigation Controls */}
       <Container>
-        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 flex items-center justify-between pt-1">
+        <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20 flex items-center justify-between pt-1">
           <span className="font-mono text-xs text-jm-muted-fg">
             {gallery.images.length} photos in gallery — Scroll right &rarr;
           </span>

@@ -37,7 +37,7 @@ function BeyondTheCode() {
       <section className="w-full max-w-full bg-[var(--color-jm-btc-bg)] py-16 transition-colors duration-500 overflow-x-hidden">
         {/* Section Title Header */}
         <Container>
-          <div className="flex flex-col justify-between items-stretch gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20">
+          <div className="flex flex-col justify-between items-stretch gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20">
             <div className="flex flex-col gap-3 text-left w-full max-w-3xl">
               <div className="flex items-center gap-2">
                 <p className="text-[12px]! text-sm font-mono text-jm-green tracking-widest">
@@ -74,7 +74,7 @@ function BeyondTheCode() {
 
         {/* Feature-Local Vinyl Player Soundtrack Widget */}
         <Container>
-          <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 mt-12">
+          <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20 mt-12">
             <VinylPlayer />
           </div>
         </Container>

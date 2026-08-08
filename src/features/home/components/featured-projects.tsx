@@ -4,7 +4,10 @@ import Container from "../../../components/container";
 import RaisedButton from "../../../components/raised-button";
 import ProjectCard from "../../projects/components/project-card";
 import ProjectModal from "../../projects/components/project-modal";
-import { projectsData, type ProjectData } from "../../projects/data/projects-data";
+import {
+  projectsData,
+  type ProjectData,
+} from "../../projects/data/projects-data";
 
 function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
@@ -29,7 +32,7 @@ function FeaturedProjects() {
 
   return (
     <Container>
-      <div className="flex flex-col justify-between align-center gap-6 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
+      <div className="flex flex-col justify-between align-center gap-6 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
         <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest">
           &gt; sys.previewprojects()
         </p>

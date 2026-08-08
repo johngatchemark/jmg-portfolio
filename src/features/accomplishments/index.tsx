@@ -63,7 +63,8 @@ const achievementsData: Achievement[] = [
 function AccomplishmentsPage() {
   return (
     <Container>
-      <div className="flex flex-col justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl w-full min-w-0 sm:max-w-[calc(100%-5rem)] lg:w-full mx-10 lg:mx-0 lg:px-20 py-12">
+      {/* <div className="flex flex-col justify-between align-center gap-10 md:gap-15 lg:max-w-6xl w-full max-w-[calc(100%-5rem)] lg:w-full mx-5 lg:mx-0 lg:px-20 py-12"> */}
+      <div className="flex flex-col justify-between align-center gap-10 md:gap-15 w-full max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 px-5 sm:px-10 lg:px-20 py-12">
         {/* Section 1: Achievements Log */}
         <section className="flex flex-col gap-6 text-left w-full min-w-0">
           <p className="text-left text-[12px]! font-mono text-jm-accent tracking-widest">
@@ -163,10 +164,12 @@ function AccomplishmentsPage() {
                   href="https://doi.org/10.1109/AAIML67890.2026.11498122"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-xs text-jm-primary hover:underline flex items-center gap-1 ml-1"
+                  className="font-mono text-[11px]! sm:text-xs text-jm-primary hover:underline flex items-center gap-1 ml-1 min-w-0 max-w-full"
                 >
-                  <span>DOI: 10.1109/AAIML67890.2026.11498122</span>
-                  <ExternalLink size={12} />
+                  <span className="truncate max-w-[180px] xs:max-w-[260px] sm:max-w-none">
+                    DOI: 10.1109/AAIML67890.2026.11498122
+                  </span>
+                  <ExternalLink size={12} className="shrink-0" />
                 </a>
               </div>
             </div>

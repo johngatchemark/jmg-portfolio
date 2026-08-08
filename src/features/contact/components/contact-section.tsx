@@ -22,7 +22,7 @@ export function ContactSection() {
 
   return (
     <Container>
-      <div className="flex flex-col lg:flex-row justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20">
+      <div className="flex flex-col lg:flex-row justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
         {/* Left Column: Intro & Info */}
         <div className="flex flex-col gap-6 flex-1 text-left w-full lg:w-1/2">
           <p className="text-left text-[12px]! font-mono text-jm-primary tracking-widest">

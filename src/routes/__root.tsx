@@ -29,7 +29,7 @@ function RootComponent() {
 function NotFound() {
   return (
     <Container>
-      <div className="flex flex-col lg:flex-row justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20 py-8">
+      <div className="flex flex-col-reverse lg:flex-row justify-between align-center gap-4 md:gap-15 max-w-120 lg:max-w-6xl lg:w-full mx-10 lg:mx-0 lg:px-20 py-12">
         {/* Left Column: Text & Actions */}
         <div className="flex flex-col gap-6 flex-1 text-left w-full lg:w-1/2">
           <p className="text-left text-[12px]! font-mono text-jm-accent tracking-widest">
@@ -84,7 +84,7 @@ function NotFound() {
         {/* Right Column: Static Graphic */}
         <div className="flex flex-1 justify-center items-center w-full lg:w-1/2">
           <img
-            src="/construction.png"
+            src="/wilted-rose.png"
             alt="Page Not Found Pixel Art"
             className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 [image-rendering:pixelated] object-contain select-none"
           />
