@@ -63,9 +63,9 @@ const achievementsData: Achievement[] = [
 function AccomplishmentsPage() {
   return (
     <Container>
-      <div className="flex flex-col justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl w-full min-w-0 max-w-[calc(100%-5rem)] lg:w-full mx-10 lg:mx-0 lg:px-20 py-8">
+      <div className="flex flex-col justify-between align-center gap-10 md:gap-15 max-w-120 lg:max-w-6xl w-full min-w-0 sm:max-w-[calc(100%-5rem)] lg:w-full mx-10 lg:mx-0 lg:px-20 py-12">
         {/* Section 1: Achievements Log */}
-        <section className="flex flex-col gap-4 text-left w-full min-w-0">
+        <section className="flex flex-col gap-6 text-left w-full min-w-0">
           <p className="text-left text-[12px]! font-mono text-jm-accent tracking-widest">
             &gt; sys.accomplishments()
           </p>

@@ -25,9 +25,9 @@ function Projects() {
   };
 
   return (
-    <main className="w-full min-h-screen py-12 relative">
+    <main className="w-full min-h-screen relative">
       <Container>
-        <div className="flex flex-col justify-between items-start gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20">
+        <div className="flex flex-col justify-between items-start gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-6 sm:px-10 lg:px-20 py-12">
           {/* Section Header */}
           <ProjectsHeader />
 
