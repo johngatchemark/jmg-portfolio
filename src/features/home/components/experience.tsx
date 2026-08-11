@@ -30,6 +30,7 @@ export const experiencesData: ExperienceItem[] = [
     isCurrent: true,
     achievements: [
       "Evaluated AI models on complex programming and reasoning tasks.",
+      "Analyzed programming solutions to identify bugs, edge cases, and opportunities for improvement.",
     ],
     techStack: ["Python", "TypeScript", "AI Training", "LLMs"],
   },

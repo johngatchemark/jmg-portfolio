@@ -8,8 +8,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Layers,
   Award,
+  FileText,
+  Download,
 } from "lucide-react";
 import { IconGitHub } from "../../home/components/icons";
 
@@ -167,7 +168,7 @@ export default function ProjectModal({
   const currentGalleryItem = project.gallery[activeSlideIndex];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden select-none">
+    <div className="fixed inset-0 z-50 overflow-hidden select-text">
       {/* Dimmed Backdrop Overlay */}
       <div
         className={`absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity duration-300 ${
@@ -250,10 +251,11 @@ export default function ProjectModal({
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             {/* Left: Key Wireframe Preview */}
             <div className="md:col-span-6 flex flex-col gap-2">
-              <div className="font-mono text-xs text-jm-green font-bold flex items-center gap-1.5">
-                <Layers size={14} /> KEY WIREFRAME SCHEMATIC
-              </div>
-              <WireframePlaceholder type={project.keyWireframeType} />
+              <WireframePlaceholder
+                type={project.keyWireframeType}
+                imageSrc={project.keyImageSrc}
+                title={project.title}
+              />
             </div>
 
             {/* Right: Detailed Specifications */}
@@ -289,10 +291,10 @@ export default function ProjectModal({
                 </ul>
               </div>
 
-              {/* Tech Stack */}
+              {/* Technologies */}
               <div className="flex flex-col gap-1.5">
                 <span className="font-mono text-[11px] font-bold text-jm-fg uppercase">
-                  Tech Stack:
+                  Technologies:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.techStack.map((tech, i) => (
@@ -310,15 +312,23 @@ export default function ProjectModal({
 
               {/* Honors / Recognition */}
               {project.awards && project.awards.length > 0 && (
-                <div className="flex flex-col gap-1 bg-jm-primary/10 border border-jm-primary/30 p-3 rounded-xs text-xs font-mono">
-                  <div className="flex items-center gap-1.5 text-jm-primary font-bold">
+                <div className="flex flex-col gap-2 bg-jm-primary/10 border border-jm-primary/30 p-3.5 rounded-xs text-xs font-mono">
+                  <div className="flex items-center gap-1.5 text-jm-primary font-bold tracking-wider">
                     <Award size={14} /> HONORS &amp; RECOGNITION
                   </div>
-                  {project.awards.map((award, i) => (
-                    <span key={i} className="text-jm-fg text-xs font-medium">
-                      {award}
-                    </span>
-                  ))}
+                  <ul className="flex flex-col gap-1.5 pl-0.5 m-0 list-none">
+                    {project.awards.map((award, i) => (
+                      <li
+                        key={i}
+                        className="text-jm-fg text-xs font-medium flex items-start gap-2 leading-relaxed"
+                      >
+                        <span className="text-jm-primary font-bold text-sm leading-none select-none shrink-0">
+                          •
+                        </span>
+                        <span>{award}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
 
@@ -356,9 +366,52 @@ export default function ProjectModal({
                       textColor="primary"
                       darkTextColor="primary"
                       hoverColor="#e2f4eb"
+                      darkHoverColor="#12251c"
                     >
                       <span className="font-mono text-xs flex items-center gap-1.5">
-                        <ExternalLink size={14} /> Live Demo / Paper
+                        <ExternalLink size={14} /> Live Demo
+                      </span>
+                    </RaisedButton>
+                  </a>
+                )}
+                {project.paperUrl && (
+                  <a
+                    href={project.paperUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="no-underline"
+                  >
+                    <RaisedButton
+                      color="bg"
+                      borderColor="primary"
+                      textColor="primary"
+                      darkTextColor="primary"
+                      hoverColor="#e2f4eb"
+                      darkHoverColor="#12251c"
+                    >
+                      <span className="font-mono text-xs flex items-center gap-1.5">
+                        <FileText size={14} /> View Research Paper
+                      </span>
+                    </RaisedButton>
+                  </a>
+                )}
+                {project.downloadUrl && (
+                  <a
+                    href={project.downloadUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="no-underline"
+                  >
+                    <RaisedButton
+                      color="bg"
+                      borderColor="primary"
+                      textColor="primary"
+                      darkTextColor="primary"
+                      hoverColor="#e2f4eb"
+                      darkHoverColor="#12251c"
+                    >
+                      <span className="font-mono text-xs flex items-center gap-1.5">
+                        <Download size={14} /> Download .blend File
                       </span>
                     </RaisedButton>
                   </a>
@@ -369,15 +422,12 @@ export default function ProjectModal({
 
           <hr className="border-jm-border my-2" />
 
-          {/* Bottom Section: Separate Wireframe Gallery Carousel */}
+          {/* Bottom Section: Separate Gallery Carousel */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="font-mono text-xs text-jm-green font-bold flex items-center gap-1.5">
-                  &gt; WIREFRAME GALLERY CAROUSEL
-                </span>
                 <h3 className="font-mono text-lg font-bold text-jm-fg">
-                  Interactive Screen Blueprints
+                  Gallery
                 </h3>
               </div>
               <div className="font-mono text-xs text-jm-primary font-bold">
@@ -391,6 +441,8 @@ export default function ProjectModal({
                 {currentGalleryItem && (
                   <WireframePlaceholder
                     type={currentGalleryItem.wireframeType}
+                    imageSrc={currentGalleryItem.imageSrc}
+                    title={currentGalleryItem.title}
                   />
                 )}
 
@@ -402,7 +454,7 @@ export default function ProjectModal({
                           prev === 0 ? project.gallery.length - 1 : prev - 1,
                         )
                       }
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white dark:hover:text-jm-dark p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
                       title="Previous Wireframe"
                     >
                       <ChevronLeft size={20} />
@@ -413,7 +465,7 @@ export default function ProjectModal({
                           prev === project.gallery.length - 1 ? 0 : prev + 1,
                         )
                       }
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white dark:hover:text-jm-dark p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
                       title="Next Wireframe"
                     >
                       <ChevronRight size={20} />

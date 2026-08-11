@@ -1,6 +1,6 @@
 # JOHN MARK GATCHE
 
-[johngatchemark@gmail.com](mailto:johngatchemark@gmail.com) | +63 952 482 2251 | Malabon City, Metro Manila | [linkedin.com/in/johnmarkgatche](https://linkedin.com/in/johnmarkgatche)
+[jmgatche@gmail.com](mailto:jmgatche@gmail.com) | +63 952 482 2251 | Malabon City, Metro Manila | [linkedin.com/in/johnmarkgatche](https://linkedin.com/in/johnmarkgatche)
 
 ---
 
@@ -76,11 +76,21 @@ _August 2023 – June 2024_
 
 ---
 
-## ADDITIONAL CERTIFICATIONS & AWARDS
+## CERTIFICATIONS
 
 - **IT Specialist Certification (Python)** – Certiport, 2024
-- **1st Runner-Up** – Java Programming, University of Makati 12th IT Skills Olympics, 2023
-- **1st Runner-Up** – IT Quiz Bee, University of Makati 13th IT Skills Olympics, 2024
-- **Top 10 Finalist** – Byte Forward Hackathon, 2025
-- **Champion** – Public Administration Category, HABI Innovation Workshop, 2025
-- **Champion** – IT Quiz Bee, University of Makati 14th IT Skills Olympics, 2025
+
+---
+
+## HONORS & AWARDS
+
+- **Champion (1st Place)** – Blue Hacks 2026 Hackathon, Ateneo de Manila University (Mar 2026)
+- **Outstanding Oral Presentation Award** – 2026 International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML 2026), Chuo University (Mar 2026)
+- **Champion** – 14th IT Skills Olympics (IT Quiz Bee), University of Makati (Nov 2025)
+- **Top 10 Finalist** – Byte Forward Hackathon, Converge ICT Solutions Inc. (Aug 2025)
+- **Sponsor (ZenithPads) Award** – Create & Conquer 2025 Hackathon, FEU Institute of Technology (Jul 2025)
+- **Top 90 Qualifier (out of 178 teams)** – AppCon 2024, OTis Philippines Inc. (May 2025)
+- **Champion** – Filipinnovation HABI (Huddle, Analyze, Build, Innovate) Workshop, National Innovation Council (NIC) (Apr 2025)
+- **Top 22 (out of 112 teams)** – SAS Curiosity Cup 2025, Statistical Analysis System (SAS) (Feb 2025)
+- **1st Runner-Up** – 13th IT Skills Olympics (IT Quiz Bee), University of Makati (Nov 2024)
+- **1st Runner-Up** – 12th IT Skills Olympics (Java Programming), University of Makati (Nov 2023)

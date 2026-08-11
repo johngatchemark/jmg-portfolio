@@ -57,16 +57,12 @@ function TechnicalStack({ className = "" }: { className?: string }) {
       <p className="text-left text-[12px]! font-mono text-jm-primary tracking-widest">
         &gt; sys.skills()
       </p>
-      <h2 className="text-left text-jm-fg h1-stretched m-0!">
-        Technical stack
-      </h2>
+      <h2 className="text-left text-jm-fg h1-stretched m-0!">Skills</h2>
       <div className="flex flex-col gap-3">
         {(technicalStack as StackCategory[]).map(
           (category: StackCategory, index: number) => (
             <section key={index} className="flex flex-col gap-2">
-              <p
-                className="text-left text-[11px]! font-mono font-semibold text-jm-primary"
-              >
+              <p className="text-left text-[11px]! font-mono font-semibold text-jm-primary">
                 {category.category}
               </p>
               <div className="flex flex-wrap gap-2">

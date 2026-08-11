@@ -48,7 +48,7 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
               {gallery.title}
             </h3>
           </div>
-          <p className="text-jm-muted-fg font-sans text-xs sm:text-sm max-w-2xl">
+          <p className="text-jm-muted-fg font-sans text-xs sm:text-sm">
             {gallery.description}
           </p>
         </div>

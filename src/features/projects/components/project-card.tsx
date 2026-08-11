@@ -4,7 +4,7 @@ import FakeMacWindow from "../../../components/fake-mac-window";
 import Badge from "../../../components/badge";
 import RaisedButton from "../../../components/raised-button";
 import WireframePlaceholder from "./wireframe-placeholder";
-import { ExternalLink, Layers } from "lucide-react";
+import { ExternalLink, Layers, FileText, Download } from "lucide-react";
 import { IconGitHub } from "../../home/components/icons";
 
 interface ProjectCardProps {
@@ -21,8 +21,6 @@ export default function ProjectCard({
   onOpenModal,
 }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const topTechStack = project.techStack.slice(0, 3);
-  const remainingTechCount = project.techStack.length - 3;
 
   const handleClick = () => {
     if (cardRef.current) {
@@ -56,7 +54,11 @@ export default function ProjectCard({
         >
           {/* Top Wireframe Thumbnail Preview */}
           <div className="w-full relative overflow-hidden rounded-xs transition-transform duration-300 group-hover:scale-[1.01]">
-            <WireframePlaceholder type={project.keyWireframeType} />
+            <WireframePlaceholder
+              type={project.keyWireframeType}
+              imageSrc={project.keyImageSrc}
+              title={project.title}
+            />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[2px]">
               <span className="bg-jm-primary text-white dark:text-jm-dark text-xs font-mono font-bold px-3 py-1 rounded-xs flex items-center gap-1.5 shadow-md">
                 <Layers size={13} /> View Details
@@ -90,7 +92,7 @@ export default function ProjectCard({
 
           {/* Compact Tech Stack Pills */}
           <div className="flex flex-wrap gap-1 py-1.5 border-t border-b border-jm-border items-center">
-            {topTechStack.map((tech, idx) => (
+            {project.techStack.slice(0, 3).map((tech, idx) => (
               <Badge
                 key={idx}
                 text={tech}
@@ -101,9 +103,9 @@ export default function ProjectCard({
                 className="text-[10px]! px-2 py-0.5"
               />
             ))}
-            {remainingTechCount > 0 && (
+            {project.techStack.length > 3 && (
               <span className="font-mono text-[10px] text-jm-muted-fg px-1 font-semibold">
-                +{remainingTechCount} more
+                +{project.techStack.length - 3} more
               </span>
             )}
           </div>
@@ -135,6 +137,32 @@ export default function ProjectCard({
                 >
                   <ExternalLink size={14} />
                   <span>Live</span>
+                </a>
+              )}
+              {project.paperUrl && (
+                <a
+                  href={project.paperUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-jm-muted-fg hover:text-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  title="View Research Paper"
+                >
+                  <FileText size={14} />
+                  <span>Paper</span>
+                </a>
+              )}
+              {project.downloadUrl && (
+                <a
+                  href={project.downloadUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-jm-muted-fg hover:text-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  title="Download File"
+                >
+                  <Download size={14} />
+                  <span>File</span>
                 </a>
               )}
             </div>

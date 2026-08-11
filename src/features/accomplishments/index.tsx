@@ -3,67 +3,93 @@ import Badge from "../../components/badge";
 import { ExternalLink } from "lucide-react";
 
 interface Achievement {
-  year: string;
+  date: string;
   title: string;
   event: string;
-  org: string;
+  host: string;
+}
+
+interface Certification {
+  date: string;
+  title: string;
+  issuer: string;
 }
 
 const achievementsData: Achievement[] = [
   {
-    year: "2026",
+    date: "Mar 2026",
     title: "Champion (1st Place)",
     event: "Blue Hacks 2026 Hackathon",
-    org: "Ateneo de Manila University",
+    host: "Ateneo de Manila University",
   },
   {
-    year: "2026",
+    date: "Mar 2026",
     title: "Outstanding Oral Presentation Award",
-    event: "AAIML 2026 Conference",
-    org: "AAIML 2026 Conference",
+    event:
+      "2026 International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML 2026)",
+    host: "Chuo University",
   },
   {
-    year: "2025",
+    date: "Nov 2025",
     title: "Champion",
     event: "14th IT Skills Olympics (IT Quiz Bee)",
-    org: "University of Makati",
+    host: "University of Makati",
   },
   {
-    year: "2025",
-    title: "Champion",
-    event: "HABI Innovation Workshop",
-    org: "Public Administration Category",
-  },
-  {
-    year: "2025",
+    date: "Aug 2025",
     title: "Top 10 Finalist",
     event: "Byte Forward Hackathon",
-    org: "Byte Forward",
+    host: "Converge ICT Solutions Inc.",
   },
   {
-    year: "2024",
+    date: "Jul 2025",
+    title: "Sponsor (ZenithPads) Award",
+    event: "Create & Conquer 2025 Hackathon",
+    host: "FEU Institute of Technology",
+  },
+  {
+    date: "May 2025",
+    title: "Top 90 Qualifier (out of 178 teams)",
+    event: "AppCon 2024",
+    host: "OTis Philippines Inc.",
+  },
+  {
+    date: "Apr 2025",
+    title: "Champion",
+    event: "Filipinnovation HABI (Huddle, Analyze, Build, Innovate) Workshop",
+    host: "National Innovation Council (NIC)",
+  },
+  {
+    date: "Feb 2025",
+    title: "Top 22 (out of 112 teams)",
+    event: "SAS Curiosity Cup 2025",
+    host: "Statistical Analysis System (SAS)",
+  },
+  {
+    date: "Nov 2024",
     title: "1st Runner-Up",
     event: "13th IT Skills Olympics (IT Quiz Bee)",
-    org: "University of Makati",
+    host: "University of Makati",
   },
   {
-    year: "2024",
-    title: "IT Specialist Certification (Python)",
-    event: "Certiport Certification",
-    org: "Certiport",
-  },
-  {
-    year: "2023",
+    date: "Nov 2023",
     title: "1st Runner-Up",
     event: "12th IT Skills Olympics (Java Programming)",
-    org: "University of Makati",
+    host: "University of Makati",
+  },
+];
+
+const certificationsData: Certification[] = [
+  {
+    date: "2024",
+    title: "IT Specialist Certification (Python)",
+    issuer: "Certiport",
   },
 ];
 
 function AccomplishmentsPage() {
   return (
     <Container>
-      {/* <div className="flex flex-col justify-between align-center gap-10 md:gap-15 lg:max-w-6xl w-full max-w-[calc(100%-5rem)] lg:w-full mx-5 lg:mx-0 lg:px-20 py-12"> */}
       <div className="flex flex-col justify-between align-center gap-10 md:gap-15 w-full max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 px-5 sm:px-10 lg:px-20 py-12">
         {/* Section 1: Achievements Log */}
         <section className="flex flex-col gap-6 text-left w-full min-w-0">
@@ -72,19 +98,19 @@ function AccomplishmentsPage() {
           </p>
 
           <h1 className="h1-stretched text-jm-fg text-left my-0!">
-            Achievements log
+            Accomplishments
           </h1>
 
           {/* Retro Table Container */}
           <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
             <div className="w-full overflow-x-auto">
-              <table className="w-full min-w-[580px] text-left border-collapse font-sans text-sm">
+              <table className="w-full min-w-[640px] text-left border-collapse font-sans text-sm">
                 <thead>
                   <tr className="bg-[#e8e8e3] dark:bg-[#181920] border-b border-jm-fg dark:border-jm-ui font-mono text-[11px] uppercase tracking-wider text-jm-muted-fg">
-                    <th className="py-3 px-5 w-20">YEAR</th>
-                    <th className="py-3 px-5">TITLE</th>
+                    <th className="py-3 px-5 w-28 whitespace-nowrap">DATE</th>
+                    <th className="py-3 px-5">ACCOMPLISHMENT</th>
                     <th className="py-3 px-5">EVENT</th>
-                    <th className="py-3 px-5">ORG</th>
+                    <th className="py-3 px-5">HOST / ORGANIZER</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -98,7 +124,7 @@ function AccomplishmentsPage() {
                       }`}
                     >
                       <td className="py-3.5 px-5 font-mono text-jm-accent font-semibold text-xs whitespace-nowrap">
-                        {item.year}
+                        {item.date}
                       </td>
                       <td className="py-3.5 px-5 font-semibold text-jm-fg">
                         {item.title}
@@ -107,7 +133,7 @@ function AccomplishmentsPage() {
                         {item.event}
                       </td>
                       <td className="py-3.5 px-5 text-jm-muted-fg">
-                        {item.org}
+                        {item.host}
                       </td>
                     </tr>
                   ))}
@@ -117,7 +143,55 @@ function AccomplishmentsPage() {
           </div>
         </section>
 
-        {/* Section 2: Research Publications (Merged) */}
+        {/* Section 2: Certifications */}
+        <section className="flex flex-col gap-6 text-left w-full min-w-0">
+          <p className="text-left text-[12px]! font-mono text-jm-green tracking-widest">
+            &gt; sys.certifications()
+          </p>
+
+          <h2 className="h1-stretched text-jm-fg text-left my-0!">
+            Certifications
+          </h2>
+
+          {/* Retro Table Container */}
+          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full min-w-[480px] text-left border-collapse font-sans text-sm">
+                <thead>
+                  <tr className="bg-[#e8e8e3] dark:bg-[#181920] border-b border-jm-fg dark:border-jm-ui font-mono text-[11px] uppercase tracking-wider text-jm-muted-fg">
+                    <th className="py-3 px-5 w-24 whitespace-nowrap">DATE</th>
+                    <th className="py-3 px-5">CERTIFICATION</th>
+                    <th className="py-3 px-5">ISSUER / ORGANIZATION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {certificationsData.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={`border-b border-jm-fg/20 dark:border-jm-ui/40 transition-colors ${
+                        index % 2 === 0
+                          ? "bg-white dark:bg-[#121218]"
+                          : "bg-[#f5f5f0]/70 dark:bg-[#181924]"
+                      }`}
+                    >
+                      <td className="py-3.5 px-5 font-mono text-jm-green font-semibold text-xs whitespace-nowrap">
+                        {item.date}
+                      </td>
+                      <td className="py-3.5 px-5 font-semibold text-jm-fg">
+                        {item.title}
+                      </td>
+                      <td className="py-3.5 px-5 text-jm-muted-fg">
+                        {item.issuer}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Research Publications */}
         <section className="flex flex-col gap-4 text-left pt-6">
           <p className="text-left text-[12px]! font-mono text-jm-primary tracking-widest">
             &gt; sys.publications()

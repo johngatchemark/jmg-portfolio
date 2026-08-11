@@ -7,7 +7,6 @@ import {
   type CarouselGallery,
   type CarouselModalState,
 } from "../../../components/carousel";
-import VinylPlayer from "./beyond-the-code/vinyl-player";
 import { hobbyGalleries } from "./beyond-the-code/data";
 import PixelGridTransition from "../../../components/pixel-grid-transition";
 import { useTheme } from "../../../context/theme-context";
@@ -38,7 +37,7 @@ function BeyondTheCode() {
         {/* Section Title Header */}
         <Container>
           <div className="flex flex-col justify-between items-stretch gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20">
-            <div className="flex flex-col gap-3 text-left w-full max-w-3xl">
+            <div className="flex flex-col gap-3 text-left w-full">
               <div className="flex items-center gap-2">
                 <p className="text-[12px]! text-sm font-mono text-jm-green tracking-widest">
                   &gt; sys.beyondthecode()
@@ -51,11 +50,11 @@ function BeyondTheCode() {
               </h2>
 
               <p className="text-jm-muted-fg text-left text-base leading-relaxed font-sans">
-                When I step away from the IDE and terminal, I recharge through
-                creative crafts, world-building, and hands-on art. Whether
-                constructing Redstone architecture in Minecraft, weaving yarn
-                loop-by-loop, or laying impasto oil paint on canvas, these
-                passions keep my mind curious, grounded, and inspired.
+                Creativity doesn't stop when I step away from the terminal. I am
+                endlessly fascinated by the idea of scale—like how a simple
+                interlocking pattern of loops can turn into a beautiful garment,
+                or how a set of primitive tools can be used to build complex,
+                elaborate interconnected structures in a game.
               </p>
             </div>
           </div>
@@ -73,11 +72,11 @@ function BeyondTheCode() {
         </div>
 
         {/* Feature-Local Vinyl Player Soundtrack Widget */}
-        <Container>
+        {/* <Container>
           <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20 mt-12">
             <VinylPlayer />
           </div>
-        </Container>
+        </Container> */}
 
         {/* Global Expanded Lightbox Carousel Modal */}
         <CarouselModal

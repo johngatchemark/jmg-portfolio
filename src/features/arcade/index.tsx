@@ -13,9 +13,7 @@ function Arcade() {
             &gt; sys.arcade()
           </p>
 
-          <h1 className="h1-stretched text-jm-fg text-left my-0!">
-            Arcade Playground
-          </h1>
+          <h1 className="h1-stretched text-jm-fg text-left my-0!">Arcade</h1>
 
           <p className="text-jm-muted-fg font-sans text-base leading-relaxed">
             This room is currently under construction. Pixel builders are
