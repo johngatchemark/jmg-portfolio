@@ -86,7 +86,7 @@ export default function ProjectCard({
           </div>
 
           {/* Truncated Description (2-line clamp, 14px font size) */}
-          <p className="font-sans text-[14px]! text-sm! text-jm-muted-fg leading-relaxed flex-1 line-clamp-2">
+          <p className="font-sans text-[14px]! text-sm! text-jm-muted-fg leading-relaxed line-clamp-2 overflow-hidden">
             {project.description}
           </p>
 

@@ -249,8 +249,8 @@ export default function ProjectModal({
         >
           {/* Top Section: Key Wireframe & Detailed Specs */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            {/* Left: Key Wireframe Preview */}
-            <div className="md:col-span-6 flex flex-col gap-2">
+            {/* Left: Key Wireframe Preview (Sticky on desktop until Gallery) */}
+            <div className="md:col-span-6 flex flex-col gap-2 md:sticky md:top-0 z-10">
               <WireframePlaceholder
                 type={project.keyWireframeType}
                 imageSrc={project.keyImageSrc}
@@ -276,6 +276,11 @@ export default function ProjectModal({
                   {project.subtitle}
                 </p>
               </div>
+
+              {/* Full Un-truncated Description */}
+              <p className="font-sans text-xs sm:text-sm text-jm-fg/90 dark:text-jm-light/90 leading-relaxed font-normal">
+                {project.description}
+              </p>
 
               {/* Key Highlights */}
               <div className="flex flex-col gap-2">
