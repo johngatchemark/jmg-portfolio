@@ -1,6 +1,6 @@
 # JOHN MARK GATCHE
 
-[johngatchemark@gmail.com](mailto:johngatchemark@gmail.com) | +63 952 482 2251 | Malabon City, Metro Manila | [linkedin.com/in/johnmarkgatche](https://linkedin.com/in/johnmarkgatche)
+[jmgatche@gmail.com](mailto:jmgatche@gmail.com) | +63 952 482 2251 | Malabon City, Metro Manila | [linkedin.com/in/johnmarkgatche](https://linkedin.com/in/johnmarkgatche)
 
 ---
 
