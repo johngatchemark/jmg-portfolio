@@ -8,31 +8,44 @@ interface WireframePlaceholderProps {
     | "scaffled-analytics"
     | "studdy-feed"
     | "studdy-schedule"
-    | "studdy-uikit";
+    | "studdy-uikit"
+    | "pasada-dashboard"
+    | "pasada-voice"
+    | "pasada-passenger"
+    | "b3d-dining-render";
+  imageSrc?: string;
+  title?: string;
   className?: string;
 }
 
 export default function WireframePlaceholder({
   type,
+  imageSrc,
+  title,
   className = "",
 }: WireframePlaceholderProps) {
+  // If real screenshot image asset is provided, render image container inside clean frame
+  if (imageSrc) {
+    return (
+      <div
+        className={`w-full aspect-16/10 rounded-xs border border-jm-fg/30 dark:border-jm-ui/40 bg-[#f9f9f5] dark:bg-[#121218] flex flex-col overflow-hidden relative font-mono text-xs select-none ${className}`}
+      >
+        <div className="w-full h-full relative overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center">
+          <img
+            src={imageSrc}
+            alt={title || type}
+            className="w-full h-full object-cover object-center transition-transform duration-300"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback SVG Wireframe Schematics
   return (
     <div
       className={`w-full aspect-16/10 rounded-xs border border-jm-fg/30 dark:border-jm-ui/40 bg-[#f9f9f5] dark:bg-[#121218] flex flex-col overflow-hidden relative font-mono text-xs select-none ${className}`}
     >
-      {/* Schematic Header Bar */}
-      <div className="h-7 px-3 bg-[#eaeae3] dark:bg-[#1a1b24] border-b border-jm-fg/30 dark:border-jm-ui/40 flex items-center justify-between text-[11px]">
-        <div className="flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-jm-primary/80" />
-          <span className="text-jm-fg dark:text-jm-light font-semibold tracking-wider">
-            WIREFRAME :: {type.toUpperCase()}
-          </span>
-        </div>
-        <span className="text-jm-muted-fg text-[10px] hidden sm:inline">
-          [SCHEMATIC MOCKUP]
-        </span>
-      </div>
-
       {/* Wireframe Canvas Viewports */}
       <div className="flex-1 p-3 flex flex-col gap-2 relative overflow-hidden">
         {type === "lakadph-map" && (
@@ -76,7 +89,7 @@ export default function WireframePlaceholder({
         {type === "lakadph-lights" && (
           <div className="w-full h-full flex flex-col gap-2">
             <div className="flex justify-between items-center bg-black/80 text-white p-2 rounded-xs text-[11px]">
-              <span className="text-jm-green font-bold">&gt; NIGHT MODE ACTIVE</span>
+              <span className="text-jm-green font-bold">NIGHT MODE ACTIVE</span>
               <span>OVERPASS LIGHTING INDEX: HIGH</span>
             </div>
             <div className="flex-1 border border-jm-fg/30 dark:border-jm-ui/40 rounded-xs bg-[#0b0c10] p-3 relative flex flex-col justify-around">
@@ -155,7 +168,7 @@ export default function WireframePlaceholder({
         {type === "scaffled-ai" && (
           <div className="w-full h-full flex flex-col gap-2 justify-between">
             <div className="border border-jm-accent bg-jm-accent/10 p-2 rounded-xs flex flex-col gap-1">
-              <span className="font-bold text-jm-accent text-[11px]">&gt; SOCRATIC GUIDANCE BOT</span>
+              <span className="font-bold text-jm-accent text-[11px]">SOCRATIC GUIDANCE BOT</span>
               <p className="text-[10px] text-jm-fg leading-relaxed">
                 "It looks like you're looking at line 3 for a while. What happens when a number is divided by zero in Java?"
               </p>

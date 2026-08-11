@@ -7,7 +7,6 @@ import {
   type CarouselGallery,
   type CarouselModalState,
 } from "../../../components/carousel";
-import VinylPlayer from "./beyond-the-code/vinyl-player";
 import { hobbyGalleries } from "./beyond-the-code/data";
 import PixelGridTransition from "../../../components/pixel-grid-transition";
 import { useTheme } from "../../../context/theme-context";
