@@ -45,11 +45,11 @@ export default async function handler(req: any, res: any) {
     const apiKey = process.env.RESEND_API_KEY;
     const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL;
 
-    if (!apiKey) {
-      console.error("Missing RESEND_API_KEY environment variable.");
+    if (!apiKey || !receiverEmail) {
+      console.error("Missing RESEND_API_KEY or CONTACT_RECEIVER_EMAIL environment variable.");
       return res.status(500).json({
         error:
-          "Server configuration error: RESEND_API_KEY is missing from environment variables.",
+          "Server configuration error: Required environment variables are missing.",
       });
     }
 
