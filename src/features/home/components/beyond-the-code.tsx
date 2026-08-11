@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Container from "../../../components/container";
-import { Sparkles } from "lucide-react";
 import {
   CarouselTrack,
   CarouselModal,
@@ -42,7 +41,6 @@ function BeyondTheCode() {
                 <p className="text-[12px]! text-sm font-mono text-jm-green tracking-widest">
                   &gt; sys.beyondthecode()
                 </p>
-                <Sparkles size={14} className="text-jm-primary animate-pulse" />
               </div>
 
               <h2 className="text-jm-fg h1-stretched m-0! text-left">

@@ -48,10 +48,11 @@ export default async function handler(req: any, res: any) {
     if (!apiKey || !receiverEmail) {
       console.error("Missing RESEND_API_KEY or CONTACT_RECEIVER_EMAIL environment variable.");
       return res.status(500).json({
-        error:
-          "Server configuration error: Required environment variables are missing.",
+        error: "Server configuration error: Required environment variables are missing.",
       });
     }
+
+    const targetEmail: string = receiverEmail;
 
     const resend = new Resend(apiKey);
 
@@ -70,7 +71,7 @@ export default async function handler(req: any, res: any) {
 
     const data = await resend.emails.send({
       from: "John Mark's Portfolio <onboarding@resend.dev>",
-      to: [receiverEmail],
+      to: [targetEmail],
       replyTo: email,
       subject: `New message from ${name} via your portfolio!`,
       text: `> sys.incoming_transmission()\n\nFrom: ${name} (${email})\nTime: ${formattedDate}\n\nMessage:\n${message}`,
