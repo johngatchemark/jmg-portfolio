@@ -1,4 +1,9 @@
-import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
+import {
+  Outlet,
+  createRootRoute,
+  Link,
+  HeadContent,
+} from "@tanstack/react-router";
 import Header from "../components/header/header";
 import Footer from "../components/footer";
 import Container from "../components/container";
@@ -16,13 +21,16 @@ function RootComponent() {
   const paddingTop = headerHeight ? `${headerHeight}px` : "0px";
 
   return (
-    <div className="flex flex-col min-h-screen justify-between items-center bg-jm-bg text-jm-fg w-full">
-      <Header />
-      <div className="flex-1 w-full" style={{ paddingTop }}>
-        <Outlet />
+    <>
+      <HeadContent />
+      <div className="flex flex-col min-h-screen justify-between items-center bg-jm-bg text-jm-fg w-full">
+        <Header />
+        <div className="flex-1 w-full" style={{ paddingTop }}>
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 

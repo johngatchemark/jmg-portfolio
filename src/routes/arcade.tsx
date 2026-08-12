@@ -1,6 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import Arcade from '../features/arcade'
+import { createFileRoute } from "@tanstack/react-router";
+import Arcade from "../features/arcade";
 
-export const Route = createFileRoute('/arcade')({
+export const Route = createFileRoute("/arcade")({
+  head: () => ({
+    meta: [
+      {
+        title: "Arcade",
+      },
+    ],
+  }),
   component: Arcade,
-})
+});
