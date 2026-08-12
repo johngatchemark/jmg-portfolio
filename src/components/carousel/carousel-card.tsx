@@ -1,5 +1,6 @@
 import { Maximize2 } from "lucide-react";
 import type { CarouselImage } from "./types";
+import { parseSubcaptionLinks } from "./utils";
 
 interface CarouselCardProps {
   image: CarouselImage;
@@ -47,7 +48,7 @@ function CarouselCard({
         <p className="font-sans text-xs text-jm-fg leading-relaxed line-clamp-2">
           <span className="font-mono font-bold text-jm-fg">{image.caption}. </span>
           {image.subcaption && (
-            <span className="text-jm-muted-fg">{image.subcaption}</span>
+            <span className="text-jm-muted-fg">{parseSubcaptionLinks(image.subcaption)}</span>
           )}
         </p>
       </div>

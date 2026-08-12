@@ -1,5 +1,6 @@
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { CarouselModalState } from "./types";
+import { parseSubcaptionLinks } from "./utils";
 
 interface CarouselModalProps {
   modalState: CarouselModalState | null;
@@ -93,7 +94,7 @@ function CarouselModal({
         <div className="p-4 sm:p-6 bg-white dark:bg-[#1a1924] border-t-2 border-jm-fg dark:border-jm-ui text-left">
           <p className="text-jm-fg font-sans text-xs sm:text-sm leading-relaxed">
             <span className="font-mono font-bold">{currentImage.caption}. </span>
-            {currentImage.subcaption || gallery.description}
+            {parseSubcaptionLinks(currentImage.subcaption || gallery.description)}
           </p>
         </div>
       </div>
