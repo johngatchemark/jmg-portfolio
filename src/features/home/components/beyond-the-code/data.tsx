@@ -1,4 +1,4 @@
-import { Gamepad2, Scissors, Palette } from "lucide-react";
+import { Scissors, Palette } from "lucide-react";
 import type { CarouselGallery } from "../../../../components/carousel";
 
 export const hobbyGalleries: CarouselGallery[] = [
