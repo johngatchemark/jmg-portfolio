@@ -36,6 +36,12 @@ const achievementsData: Achievement[] = [
     host: "University of Makati",
   },
   {
+    date: "Nov 2025",
+    title: "3rd Place",
+    event: "CodeChum National Programming Challenge, Season 2",
+    host: "CodeChum",
+  },
+  {
     date: "Aug 2025",
     title: "Top 10 Finalist",
     event: "Byte Forward Hackathon",

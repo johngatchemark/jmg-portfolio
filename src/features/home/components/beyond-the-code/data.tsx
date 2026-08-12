@@ -3,50 +3,6 @@ import type { CarouselGallery } from "../../../../components/carousel";
 
 export const hobbyGalleries: CarouselGallery[] = [
   {
-    id: "minecraft",
-    title: "Playing Minecraft",
-    category: "Gaming & Redstone Logic",
-    icon: <Gamepad2 size={18} className="text-jm-primary" />,
-    description: `There was a time, when I was a very young kid back in 2012, when all I could think about was rollercoasters. 
-      They were all over my Google and YouTube search histories. 
-      I'd been dying to build one, until one day, I stumbled across one random YouTube video of a character riding through the ups and downs of a particularly blocky railway—like a coaster! 
-      This newfound discovery prompted me to download the free trial version of said game, ready to build my first loop-the-loop.
-      Much to my dismay, I was greeted by a horde of zombies and exploding creepers on the first night—and I quickly realized that rails can't be placed upside down.`,
-    images: [
-      {
-        id: "mc-1",
-        src: "/assets/hobbies/minecraft.jpg",
-        alt: "Cozy Minecraft survival cabin with cherry blossom trees",
-        caption: "Cherry Blossom Survival Base",
-        subcaption: "daskdjdkas",
-      },
-      {
-        id: "mc-2",
-        src: "/assets/hobbies/minecraft-2.jpg",
-        alt: "Underground Redstone engineering laboratory",
-        caption: "Redstone Automation & Logic Hub",
-        subcaption:
-          "Underground Redstone clockwork mechanism powering item sorters and automated farm yields.",
-      },
-      {
-        id: "mc-3",
-        src: "/assets/hobbies/minecraft.jpg",
-        alt: "Detail shot of Minecraft custom build",
-        caption: "Cozy Interior & Exterior Crafting Yard",
-        subcaption:
-          "Detailed view of the handcrafted balcony, storage chests, and natural landscape integration.",
-      },
-      {
-        id: "mc-4",
-        src: "/assets/hobbies/minecraft-2.jpg",
-        alt: "Redstone wiring overview",
-        caption: "Redstone Circuit & Repeater Array",
-        subcaption:
-          "High-density pulse generator and observer clock for automated villager trading halls.",
-      },
-    ],
-  },
-  {
     id: "fiber-arts",
     title: "Fiber Arts (Knit & Crochet)",
     category: "Tactile Crafting & Patterns",
@@ -131,6 +87,50 @@ export const hobbyGalleries: CarouselGallery[] = [
         caption: "Vibrant Color Mixing & Canvas Texture",
         subcaption:
           "Detailed texture close-up showcasing expressive palette knife application and oil glaze.",
+      },
+    ],
+  },
+  {
+    id: "minecraft",
+    title: "Minecraft Redstone",
+    category: "Gaming & Redstone Logic",
+    icon: <Gamepad2 size={18} className="text-jm-primary" />,
+    description: `There was a time, when I was a very young kid back in 2012, when all I could think about was rollercoasters. 
+      They were all over my Google and YouTube search histories. 
+      I'd been dying to build one, until one day, I stumbled across one random YouTube video of a character riding through the ups and downs of a particularly blocky railway—like a coaster! 
+      This newfound discovery prompted me to download the free trial version of said game, ready to build my first loop-the-loop.
+      Much to my dismay, I was greeted by a horde of zombies and exploding creepers on the first night—and I quickly realized that rails can't be placed upside down.`,
+    images: [
+      {
+        id: "mc-1",
+        src: "/assets/hobbies/minecraft.jpg",
+        alt: "Cozy Minecraft survival cabin with cherry blossom trees",
+        caption: "Cherry Blossom Survival Base",
+        subcaption: "daskdjdkas",
+      },
+      {
+        id: "mc-2",
+        src: "/assets/hobbies/minecraft-2.jpg",
+        alt: "Underground Redstone engineering laboratory",
+        caption: "Redstone Automation & Logic Hub",
+        subcaption:
+          "Underground Redstone clockwork mechanism powering item sorters and automated farm yields.",
+      },
+      {
+        id: "mc-3",
+        src: "/assets/hobbies/minecraft.jpg",
+        alt: "Detail shot of Minecraft custom build",
+        caption: "Cozy Interior & Exterior Crafting Yard",
+        subcaption:
+          "Detailed view of the handcrafted balcony, storage chests, and natural landscape integration.",
+      },
+      {
+        id: "mc-4",
+        src: "/assets/hobbies/minecraft-2.jpg",
+        alt: "Redstone wiring overview",
+        caption: "Redstone Circuit & Repeater Array",
+        subcaption:
+          "High-density pulse generator and observer clock for automated villager trading halls.",
       },
     ],
   },
