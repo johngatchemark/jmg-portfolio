@@ -44,7 +44,7 @@ function Header() {
               <li key={item.href}>
                 <Link
                   to={item.href}
-                  className="rounded-full p-3 text-sm text-jm-fg hover:text-jm-green transition-all duration-200"
+                  className="rounded-full p-3 text-sm text-jm-fg hover:text-jm-green transition-all duration-200 hover:underline"
                   activeProps={{
                     className: "text-jm-green",
                   }}
