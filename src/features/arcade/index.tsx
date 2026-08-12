@@ -16,9 +16,7 @@ function Arcade() {
           <h1 className="h1-stretched text-jm-fg text-left my-0!">Arcade</h1>
 
           <p className="text-jm-muted-fg font-sans text-base leading-relaxed">
-            This room is currently under construction. Pixel builders are
-            assembling interactive 8-bit canvas games, WebGL visualizers, and AI
-            playgrounds behind the scenes.
+            Coming soon ;)
           </p>
 
           {/* Action Buttons */}
