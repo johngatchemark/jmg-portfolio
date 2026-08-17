@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useHeader } from "../../../context/header-context";
-import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
+// import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
 import { FileText, ArrowDown } from "lucide-react";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
-import { useTheme } from "../../../context/theme-context";
+// import { useTheme } from "../../../context/theme-context";
 import Badge from "../../../components/badge";
 
 import RaisedButton from "../../../components/raised-button";
@@ -36,7 +36,7 @@ const headlineAchievements = [
 function Hero() {
   const { headerHeight, setIsHeroResumeVisible } = useHeader();
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
-  const { resolvedTheme } = useTheme();
+  // const { resolvedTheme } = useTheme();
   const resumeBtnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ function Hero() {
   }, [headerHeight, setIsHeroResumeVisible]);
 
   // const styles = getComputedStyle(document.documentElement);
-  const offWhite = "#f5f5f0";
-  const offBlack = "#0a0a0d";
+  // const offWhite = "#f5f5f0";
+  // const offBlack = "#0a0a0d";
 
   return (
     <main
@@ -73,12 +73,12 @@ function Hero() {
       {/* 3D spinning JM */}
       <div className="w-screen h-full absolute left-0 top-0">
         <div className="w-full h-full absolute z-10 bg-jm-bg/85" />
-        <EffectScene
+        {/* <EffectScene
           enableZoom={false}
           className="h-full"
           tintColor={resolvedTheme === "light" ? "#000000" : "#ffffff"}
           backgroundColor={resolvedTheme === "light" ? offWhite : offBlack}
-        />
+        /> */}
       </div>
 
       <div className="relative z-20 flex flex-col justify-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
