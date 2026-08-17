@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useHeader } from "../../../context/header-context";
-import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
+// import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
 import { FileText, ArrowDown } from "lucide-react";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
-import { useTheme } from "../../../context/theme-context";
+// import { useTheme } from "../../../context/theme-context";
 import Badge from "../../../components/badge";
 
 import RaisedButton from "../../../components/raised-button";
@@ -36,7 +36,7 @@ const headlineAchievements = [
 function Hero() {
   const { headerHeight, setIsHeroResumeVisible } = useHeader();
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
-  const { resolvedTheme } = useTheme();
+  // const { resolvedTheme } = useTheme();
   const resumeBtnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ function Hero() {
   }, [headerHeight, setIsHeroResumeVisible]);
 
   // const styles = getComputedStyle(document.documentElement);
-  const offWhite = "#f5f5f0";
-  const offBlack = "#0a0a0d";
+  // const offWhite = "#f5f5f0";
+  // const offBlack = "#0a0a0d";
 
   return (
     <main
