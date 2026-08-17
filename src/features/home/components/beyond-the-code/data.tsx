@@ -138,13 +138,20 @@ export const hobbyGalleries: CarouselGallery[] = [
       },
       {
         id: "op-9",
+        src: "/assets/hobbies/fine-arts/kim-novak-2021.webp",
+        alt: "Realistic colored pencil drawing of Kim Novak in black fur coat at a flower shop",
+        caption: "Kim Novak (2021)",
+        subcaption: "Colored pencils.",
+      },
+      {
+        id: "op-10",
         src: "/assets/hobbies/fine-arts/donut-2021.webp",
         alt: "Acrylic on wood painting of donut in front of a magenta-blue background",
         caption: "Donut (2021)",
         subcaption: "Acrylic on wood.",
       },
       {
-        id: "op-10",
+        id: "op-11",
         src: "/assets/hobbies/fine-arts/me-2016.webp",
         alt: "Colored pencil drawing of myself",
         caption: "Me (2016)",
