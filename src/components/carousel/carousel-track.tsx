@@ -26,15 +26,49 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
   }, []);
 
   const scroll = (direction: "left" | "right") => {
-    const el = carouselRef.current;
-    if (el) {
-      const scrollAmount = el.clientWidth * 0.75;
-      el.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-      setTimeout(updateScrollBounds, 350);
+    const container = carouselRef.current;
+    if (!container) return;
+
+    const track = container.firstElementChild as HTMLElement | null;
+    if (!track) return;
+
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const containerWidth = container.clientWidth;
+    const currentScroll = container.scrollLeft;
+
+    // Calculate the centered scroll target for each card
+    const targets = cards.map((card, idx) => {
+      if (idx === 0) return 0;
+      if (idx === cards.length - 1) return maxScroll;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const target = cardCenter - containerWidth / 2;
+      return Math.max(0, Math.min(maxScroll, target));
+    });
+
+    let targetScroll: number;
+
+    if (direction === "right") {
+      // Find the first target positioned meaningfully to the right of current scroll
+      const nextTarget = targets.find((t) => t > currentScroll + 20);
+      targetScroll = nextTarget !== undefined ? nextTarget : maxScroll;
+    } else {
+      // Find the last target positioned meaningfully to the left of current scroll
+      const prevTargets = targets.filter((t) => t < currentScroll - 20);
+      targetScroll =
+        prevTargets.length > 0 ? prevTargets[prevTargets.length - 1] : 0;
     }
+
+    container.scrollTo({
+      left: targetScroll,
+      behavior: "smooth",
+    });
+
+    setTimeout(updateScrollBounds, 400);
   };
 
   return (
