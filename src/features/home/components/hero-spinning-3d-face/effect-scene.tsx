@@ -7,6 +7,7 @@ import { EffectComposer } from "@react-three/postprocessing";
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 import { Group, Mesh, MeshStandardMaterial, Vector2 } from "three";
 import { AsciiEffect } from "./ascii-effect";
+import ErrorBoundary from "../../../../components/error-boundary";
 
 function UserModel(props: ComponentPropsWithoutRef<"group">) {
   const { scene } = useGLTF("/models/user-model.glb");
@@ -31,7 +32,7 @@ function UserModel(props: ComponentPropsWithoutRef<"group">) {
         if (originalMat && originalMat.dispose && originalMat !== basicMat) {
           try {
             originalMat.dispose();
-          } catch (e) {
+          } catch {
             // Ignore disposal errors (context might be lost)
           }
         }
@@ -46,7 +47,7 @@ function UserModel(props: ComponentPropsWithoutRef<"group">) {
         if (basicMat && typeof basicMat.dispose === "function") {
           basicMat.dispose();
         }
-      } catch (e) {
+      } catch {
         // Ignore disposal errors (context might be lost or already disposed)
       }
     };
@@ -176,7 +177,7 @@ function SceneWithDelayedComposer({
           ) {
             setComposerReady(true);
           }
-        } catch (e) {
+        } catch {
           // Ignore errors
         }
       }, 100);
@@ -186,7 +187,9 @@ function SceneWithDelayedComposer({
   return (
     <>
       <color attach="background" args={[backgroundColor || "#000000"]} />
-      <Environment preset="studio" background={false} />
+      <Suspense fallback={null}>
+        <Environment preset="studio" background={false} />
+      </Suspense>
       <ambientLight intensity={0.08} />
       <directionalLight position={[2, 3.5, 6]} intensity={6} />
       <directionalLight position={[-2, 1.5, 4]} intensity={0.35} />
@@ -274,64 +277,68 @@ export function EffectScene({
   }, [mousePos, resolution]);
 
   return (
-    <div
-      ref={containerRef}
-      data-model-canvas-container
-      className={className}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        width: "100%",
-        height: className ? "100%" : "100vh",
-        minHeight: className ? 300 : undefined,
-      }}
-    >
-      <Canvas
-        dpr={Math.min(
-          typeof window !== "undefined" ? window.devicePixelRatio : 1,
-          1.5,
-        )}
-        camera={{ position: [0, 0, CAMERA_BASE_Z], fov: 50 }}
-        style={{ background: backgroundColor }}
-        onCreated={({ gl }) => {
-          gl.toneMappingExposure = 0.6;
+    <ErrorBoundary fallback={null}>
+      <div
+        ref={containerRef}
+        data-model-canvas-container
+        className={className}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          width: "100%",
+          height: className ? "100%" : "100vh",
+          minHeight: className ? 300 : undefined,
+        }}
+      >
+        <Canvas
+          dpr={Math.min(
+            typeof window !== "undefined" ? window.devicePixelRatio : 1,
+            1.5,
+          )}
+          camera={{ position: [0, 0, CAMERA_BASE_Z], fov: 50 }}
+          style={{ background: backgroundColor }}
+          onCreated={({ gl }) => {
+            gl.toneMappingExposure = 0.6;
 
-          const handleContextLost = (event: Event) => {
-            event.preventDefault();
-            console.warn("WebGL context lost. Attempting to restore...");
-          };
+            const handleContextLost = (event: Event) => {
+              event.preventDefault();
+              console.warn("WebGL context lost. Attempting to restore...");
+            };
 
-          const handleContextRestored = () => {
-            console.log("WebGL context restored");
-          };
+            const handleContextRestored = () => {
+              console.log("WebGL context restored");
+            };
 
-          gl.domElement.addEventListener("webglcontextlost", handleContextLost);
-          gl.domElement.addEventListener(
-            "webglcontextrestored",
-            handleContextRestored,
-          );
-
-          return () => {
-            gl.domElement.removeEventListener(
-              "webglcontextlost",
-              handleContextLost,
-            );
-            gl.domElement.removeEventListener(
+            gl.domElement.addEventListener("webglcontextlost", handleContextLost);
+            gl.domElement.addEventListener(
               "webglcontextrestored",
               handleContextRestored,
             );
-          };
-        }}
-      >
-        <SceneWithDelayedComposer
-          resolution={resolution}
-          mousePos={mousePos}
-          enableZoom={enableZoom}
-          isHovered={isHovered}
-          tintColor={tintColor}
-          backgroundColor={backgroundColor}
-        />
-      </Canvas>
-    </div>
+
+            return () => {
+              gl.domElement.removeEventListener(
+                "webglcontextlost",
+                handleContextLost,
+              );
+              gl.domElement.removeEventListener(
+                "webglcontextrestored",
+                handleContextRestored,
+              );
+            };
+          }}
+        >
+          <Suspense fallback={null}>
+            <SceneWithDelayedComposer
+              resolution={resolution}
+              mousePos={mousePos}
+              enableZoom={enableZoom}
+              isHovered={isHovered}
+              tintColor={tintColor}
+              backgroundColor={backgroundColor}
+            />
+          </Suspense>
+        </Canvas>
+      </div>
+    </ErrorBoundary>
   );
 }
