@@ -97,8 +97,6 @@ function Hero() {
 
         <h2 className="text-[22px]! font-medium text-jm-muted-fg! text-left mb-0! tracking-wide">
           Aspiring Software Engineer&nbsp;
-          <span className="text-jm-green">&amp;</span>
-          &nbsp;Web Developer
         </h2>
 
         {/* <p className="text-left text-black/60 dark:text-white/60 text-base max-w-lg mt-2 leading-relaxed font-sans">
@@ -123,7 +121,7 @@ function Hero() {
         <div className="flex items-center gap-4 flex-wrap">
           <a
             ref={resumeBtnRef}
-            href="/Gatche_Resume.pdf"
+            href="/Gatche_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="no-underline inline-block"
@@ -138,7 +136,7 @@ function Hero() {
               darkHoverColor="#3df0a8"
             >
               <FileText size={18} />
-              View Resume
+              View CV
             </RaisedButton>
           </a>
 
