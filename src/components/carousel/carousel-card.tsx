@@ -33,7 +33,7 @@ function CarouselCard({
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/wideCard:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
           <span className="text-white font-mono text-xs sm:text-sm font-semibold flex items-center gap-2 bg-black/90 dark:bg-[#16151e] px-4 py-2 rounded-xs border border-white/40 dark:border-jm-primary shadow-lg">
-            <Maximize2 size={15} /> Click to enlarge
+            <Maximize2 size={15} /> View Details
           </span>
         </div>
 
@@ -46,9 +46,13 @@ function CarouselCard({
       {/* Caption & Subcaption (Line-clamp-2 truncation) */}
       <div className="p-4 sm:p-5 text-left bg-white dark:bg-[#1a1924] flex-1 justify-start">
         <p className="font-sans text-xs text-jm-fg leading-relaxed line-clamp-2">
-          <span className="font-mono font-bold text-jm-fg">{image.caption}. </span>
+          <span className="font-mono font-bold text-jm-fg">
+            {image.caption}.{" "}
+          </span>
           {image.subcaption && (
-            <span className="text-jm-muted-fg">{parseSubcaptionLinks(image.subcaption)}</span>
+            <span className="text-jm-muted-fg">
+              {parseSubcaptionLinks(image.subcaption)}
+            </span>
           )}
         </p>
       </div>

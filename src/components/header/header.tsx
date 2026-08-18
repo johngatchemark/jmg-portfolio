@@ -3,6 +3,7 @@ import { useHeader } from "../../context/header-context";
 import { useState } from "react";
 import { useTheme } from "../../context/theme-context";
 import { FileText } from "lucide-react";
+import RaisedButton from "../raised-button";
 
 function Header() {
   const { headerRef, headerHeight, isHeroResumeVisible } = useHeader();
@@ -62,11 +63,23 @@ function Header() {
               href="/Gatche_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:brightness-120 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.2)] dark:drop-shadow-[2px_2px_0px_rgba(46,229,157,0.3)] active:relative active:top-[1px] active:left-[1px] active:drop-shadow-none bg-jm-green px-3 py-1.5 text-xs text-jm-bg flex items-center gap-1.5 rounded-sm font-mono border border-jm-green transition-all duration-200"
+              className="no-underline inline-block"
             >
-              <FileText size={14} />
-              <span className="hidden sm:inline">View CV</span>
-              <span className="sm:hidden">CV</span>
+              <RaisedButton
+                color="primary"
+                borderColor="fg"
+                darkBorderColor="ui"
+                textColor="bg"
+                darkTextColor="#003820"
+                dropShadowColor="fg"
+                hoverColor="#074e30"
+                darkHoverColor="#3df0a8"
+                className="text-[11px]! px-2.5! py-1!"
+              >
+                <FileText size={14} />
+                <span className="hidden sm:inline">View CV</span>
+                <span className="sm:hidden">CV</span>
+              </RaisedButton>
             </a>
           )}
 

@@ -66,7 +66,13 @@ const TILT_LEFT = -0.08;
 const CAMERA_BASE_Z = 4.5;
 const CAMERA_ZOOMED_Z = CAMERA_BASE_Z / 1.1;
 
-function DraggableUserModel({ isHovered = false }: { isHovered?: boolean }) {
+function DraggableUserModel({
+  isHovered = false,
+  isPaused = false,
+}: {
+  isHovered?: boolean;
+  isPaused?: boolean;
+}) {
   const groupRef = useRef<Group>(null);
   const [rotation, setRotation] = useState({ x: -0.7, y: 0 });
   const isDragging = useRef(false);
@@ -79,7 +85,7 @@ function DraggableUserModel({ isHovered = false }: { isHovered?: boolean }) {
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    if (!isDragging.current) {
+    if (!isDragging.current && !isPaused) {
       autoY.current += delta * spinSpeed;
     }
     groupRef.current.rotation.x = rotation.x + TILT_FORWARD;
@@ -149,6 +155,7 @@ function SceneWithDelayedComposer({
   mousePos,
   enableZoom = true,
   isHovered = false,
+  isPaused = false,
   tintColor,
   backgroundColor,
 }: {
@@ -156,6 +163,7 @@ function SceneWithDelayedComposer({
   mousePos: Vector2;
   enableZoom?: boolean;
   isHovered?: boolean;
+  isPaused?: boolean;
   tintColor?: string;
   backgroundColor?: string;
 }) {
@@ -195,7 +203,7 @@ function SceneWithDelayedComposer({
       <directionalLight position={[-2, 1.5, 4]} intensity={0.35} />
       <CameraHoverZoom isHovered={isHovered} />
       <Suspense fallback={null}>
-        <DraggableUserModel isHovered={isHovered} />
+        <DraggableUserModel isHovered={isHovered} isPaused={isPaused} />
       </Suspense>
       <OrbitControls
         enableRotate={false}
@@ -234,6 +242,8 @@ interface EffectSceneProps {
   tintColor?: string;
   /** Optional background color for empty pixels (e.g. "#f5f5f7" or "#121212") */
   backgroundColor?: string;
+  /** Whether model auto-spin rotation is paused */
+  isPaused?: boolean;
 }
 
 export function EffectScene({
@@ -241,6 +251,7 @@ export function EffectScene({
   enableZoom = true,
   tintColor = "#917AFF",
   backgroundColor = "#000000",
+  isPaused = false,
 }: EffectSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -333,6 +344,7 @@ export function EffectScene({
               mousePos={mousePos}
               enableZoom={enableZoom}
               isHovered={isHovered}
+              isPaused={isPaused}
               tintColor={tintColor}
               backgroundColor={backgroundColor}
             />

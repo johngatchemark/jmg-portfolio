@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHeader } from "../../../context/header-context";
 import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
-import { FileText, ArrowDown } from "lucide-react";
+import { FileText, ArrowDown, Play, Pause } from "lucide-react";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
 import { useTheme } from "../../../context/theme-context";
 import Badge from "../../../components/badge";
@@ -39,6 +39,7 @@ function Hero() {
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
   const { resolvedTheme } = useTheme();
   const resumeBtnRef = useRef<HTMLAnchorElement>(null);
+  const [isModelPaused, setIsModelPaused] = useState(false);
 
   useEffect(() => {
     const el = resumeBtnRef.current;
@@ -78,17 +79,40 @@ function Hero() {
           <EffectScene
             enableZoom={false}
             className="h-full"
+            isPaused={isModelPaused}
             tintColor={resolvedTheme === "light" ? "#000000" : "#ffffff"}
             backgroundColor={resolvedTheme === "light" ? offWhite : offBlack}
           />
         </ErrorBoundary>
       </div>
 
-      <div className="relative z-20 flex flex-col justify-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
-        <p className="text-left text-[12px]! text-sm font-mono text-jm-green tracking-widest mb-1">
-          &gt; sys.whoami()
-        </p>
+      {/* 3D Animation Pause / Play Toggle (Bottom Right) */}
+      <div className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 z-30 flex items-center">
+        <RaisedButton
+          color="bg"
+          borderColor="fg"
+          darkBorderColor="ui"
+          darkHoverBorderColor="primary"
+          textColor="fg"
+          dropShadowColor="fg"
+          hoverColor="#e4e4dd"
+          darkHoverColor="#1e1f29"
+          onClick={() => setIsModelPaused((prev) => !prev)}
+          aria-label={
+            isModelPaused ? "Resume 3D Model Spin" : "Pause 3D Model Spin"
+          }
+          title={isModelPaused ? "Resume 3D Model Spin" : "Pause 3D Model Spin"}
+          className="p-2! min-w-0"
+        >
+          {isModelPaused ? (
+            <Play size={16} className="text-jm-green fill-current" />
+          ) : (
+            <Pause size={16} className="text-jm-green fill-current" />
+          )}
+        </RaisedButton>
+      </div>
 
+      <div className="relative z-20 flex flex-col justify-center gap-4 max-w-120 lg:max-w-6xl lg:w-full mx-5 lg:mx-0 lg:px-20">
         <h1 className="h1-stretched text-fg! text-left my-0! leading-none">
           Hi, I'm
           <br />
@@ -128,7 +152,8 @@ function Hero() {
           >
             <RaisedButton
               color="primary"
-              borderColor="primary"
+              borderColor="fg"
+              darkBorderColor="ui"
               textColor="bg"
               darkTextColor="#003820"
               dropShadowColor="fg"
@@ -154,11 +179,11 @@ function Hero() {
                   color="bg"
                   borderColor="fg"
                   darkBorderColor="ui"
+                  darkHoverBorderColor="primary"
                   textColor="fg"
                   dropShadowColor="fg"
                   hoverColor="#e4e4dd"
                   darkHoverColor="#1e1f29"
-                  className="transition-none!"
                 >
                   <span className="hidden md:inline">{label}</span>
                   <Icon size={18} />

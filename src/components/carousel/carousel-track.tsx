@@ -3,6 +3,7 @@ import Container from "../container";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CarouselCard from "./carousel-card";
 import type { CarouselGallery } from "./types";
+import RaisedButton from "../raised-button";
 
 interface CarouselTrackProps {
   gallery: CarouselGallery;
@@ -115,31 +116,43 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
             {gallery.images.length} photos in gallery — Scroll right &rarr;
           </span>
           <div className="flex items-center gap-2">
-            <button
+            <RaisedButton
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
               title={`Scroll ${gallery.title} left`}
-              className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui text-jm-fg p-2 rounded-xs shadow-[2px_2px_0px_var(--color-jm-primary)] transition-all ${
-                !canScrollLeft
-                  ? "opacity-30 cursor-not-allowed shadow-none border-jm-ui text-jm-muted-fg"
-                  : "hover:bg-jm-primary hover:text-white dark:hover:text-[#003820] cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
-              }`}
+              color="bg"
+              darkColor="#1a1924"
+              borderColor="fg"
+              darkBorderColor="ui"
+              darkHoverBorderColor="primary"
+              textColor="fg"
+              dropShadowColor="primary"
+              darkDropShadowColor="primary"
+              hoverColor="#e4e4dd"
+              darkHoverColor="#1e1f29"
+              className={`p-2! min-w-0 ${!canScrollLeft ? "opacity-30 cursor-not-allowed drop-shadow-none!" : ""}`}
             >
               <ChevronLeft size={18} />
-            </button>
+            </RaisedButton>
 
-            <button
+            <RaisedButton
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
               title={`Scroll ${gallery.title} right`}
-              className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui text-jm-fg p-2 rounded-xs shadow-[2px_2px_0px_var(--color-jm-primary)] transition-all ${
-                !canScrollRight
-                  ? "opacity-30 cursor-not-allowed shadow-none border-jm-ui text-jm-muted-fg"
-                  : "hover:bg-jm-primary hover:text-white dark:hover:text-[#003820] cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
-              }`}
+              color="bg"
+              darkColor="#1a1924"
+              borderColor="fg"
+              darkBorderColor="ui"
+              darkHoverBorderColor="primary"
+              textColor="fg"
+              dropShadowColor="primary"
+              darkDropShadowColor="primary"
+              hoverColor="#e4e4dd"
+              darkHoverColor="#1e1f29"
+              className={`p-2! min-w-0 ${!canScrollRight ? "opacity-30 cursor-not-allowed drop-shadow-none!" : ""}`}
             >
               <ChevronRight size={18} />
-            </button>
+            </RaisedButton>
           </div>
         </div>
       </Container>

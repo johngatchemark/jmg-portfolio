@@ -43,6 +43,7 @@ function Arcade() {
                 color="bg"
                 borderColor="fg"
                 darkBorderColor="ui"
+                darkHoverBorderColor="primary"
                 textColor="fg"
                 dropShadowColor="fg"
                 hoverColor="#e4e4dd"

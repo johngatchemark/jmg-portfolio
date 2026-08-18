@@ -224,13 +224,20 @@ export default function ProjectModal({
 
           {/* Close button X - removed from layout when shrinking so header vertical height aligns 100% with FakeMacWindow */}
           {!isInitialOrClosing && (
-            <button
+            <RaisedButton
               onClick={handleStartClose}
-              className="p-1.5 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-all duration-200 cursor-pointer border border-jm-fg dark:border-jm-ui flex items-center justify-center shrink-0"
+              color="bg"
+              borderColor="fg"
+              darkBorderColor="ui"
+              darkHoverBorderColor="primary"
+              textColor="fg"
+              hoverColor="#e2e2e8"
+              darkHoverColor="#1e1f29"
               title="Close (Esc)"
+              className="p-1.5! shrink-0 min-w-0"
             >
-              <X size={18} />
-            </button>
+              <X size={16} />
+            </RaisedButton>
           )}
         </div>
 
@@ -349,8 +356,11 @@ export default function ProjectModal({
                     <RaisedButton
                       color="bg"
                       borderColor="fg"
+                      darkBorderColor="ui"
+                      darkHoverBorderColor="primary"
                       textColor="fg"
                       hoverColor="#e2e2e8"
+                      darkHoverColor="#1e1f29"
                     >
                       <span className="font-mono text-xs flex items-center gap-1.5">
                         <IconGitHub size={14} /> View Repository
@@ -453,28 +463,51 @@ export default function ProjectModal({
 
                 {project.gallery.length > 1 && (
                   <>
-                    <button
-                      onClick={() =>
-                        setActiveSlideIndex((prev) =>
-                          prev === 0 ? project.gallery.length - 1 : prev - 1,
-                        )
-                      }
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white dark:hover:text-jm-dark p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
-                      title="Previous Wireframe"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <button
-                      onClick={() =>
-                        setActiveSlideIndex((prev) =>
-                          prev === project.gallery.length - 1 ? 0 : prev + 1,
-                        )
-                      }
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white dark:hover:text-jm-dark p-2.5 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg z-10"
-                      title="Next Wireframe"
-                    >
-                      <ChevronRight size={20} />
-                    </button>
+                    <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+                      <RaisedButton
+                        onClick={() =>
+                          setActiveSlideIndex((prev) =>
+                            prev === 0 ? project.gallery.length - 1 : prev - 1,
+                          )
+                        }
+                        color="bg"
+                        darkColor="#121218"
+                        borderColor="fg"
+                        darkBorderColor="ui"
+                        darkHoverBorderColor="primary"
+                        textColor="fg"
+                        dropShadowColor="fg"
+                        hoverColor="#e2e2e8"
+                        darkHoverColor="#1e1f29"
+                        title="Previous Wireframe"
+                        className="p-2! min-w-0"
+                      >
+                        <ChevronLeft size={18} />
+                      </RaisedButton>
+                    </div>
+
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
+                      <RaisedButton
+                        onClick={() =>
+                          setActiveSlideIndex((prev) =>
+                            prev === project.gallery.length - 1 ? 0 : prev + 1,
+                          )
+                        }
+                        color="bg"
+                        darkColor="#121218"
+                        borderColor="fg"
+                        darkBorderColor="ui"
+                        darkHoverBorderColor="primary"
+                        textColor="fg"
+                        dropShadowColor="fg"
+                        hoverColor="#e2e2e8"
+                        darkHoverColor="#1e1f29"
+                        title="Next Wireframe"
+                        className="p-2! min-w-0"
+                      >
+                        <ChevronRight size={18} />
+                      </RaisedButton>
+                    </div>
                   </>
                 )}
               </div>

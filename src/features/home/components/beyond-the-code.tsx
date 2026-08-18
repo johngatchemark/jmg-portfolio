@@ -37,7 +37,7 @@ function BeyondTheCode() {
   return (
     <>
       <PixelGridTransition inColor={inColor} outColor={outColor} />
-      <section className="w-full max-w-full bg-[var(--color-jm-btc-bg)] py-16 transition-colors duration-500 overflow-x-hidden">
+      <section className="w-full max-w-full bg-[var(--color-jm-btc-bg)] py-16 overflow-x-hidden">
         {/* Section Title Header */}
         <Container>
           <div className="flex flex-col justify-between items-stretch gap-10 max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20">

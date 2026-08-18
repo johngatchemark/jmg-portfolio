@@ -6,7 +6,10 @@ import {
   type ColorInput,
 } from "../utilities/colorSystem";
 
-interface ButtonProps extends BaseColorProps {
+interface ButtonProps
+  extends
+    BaseColorProps,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
   children: React.ReactNode;
   hoverColor?: ColorInput;
   darkHoverColor?: ColorInput;
@@ -15,7 +18,6 @@ interface ButtonProps extends BaseColorProps {
   hoverBorderColor?: ColorInput;
   darkHoverBorderColor?: ColorInput;
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function RaisedButton({
@@ -78,8 +80,8 @@ function RaisedButton({
       style={style}
       className={[
         ...classes,
-        "w-fit rounded-sm font-mono px-5 py-3 text-[12px] flex items-center justify-center gap-2 box-border transition-all duration-150",
-        "active:relative active:top-1 active:left-1 active:drop-shadow-none cursor-pointer",
+        "w-fit rounded-sm font-mono px-3.5 py-1.5 text-[12px] flex items-center justify-center gap-2 box-border border-2",
+        "active:relative active:top-1 active:drop-shadow-none cursor-pointer",
         className,
       ]
         .filter(Boolean)

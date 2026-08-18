@@ -24,69 +24,60 @@ function CarouselModal({
   const onNavigateRef = useRef(onNavigate);
   onNavigateRef.current = onNavigate;
 
-  const isOpen = modalState !== null;
-
   useEffect(() => {
-    if (!isOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
-      const state = modalStateRef.current;
-      if (!state || state.gallery.images.length === 0) return;
+      if (!modalStateRef.current) return;
 
       if (e.key === "Escape") {
-        e.preventDefault();
         onCloseRef.current();
       } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        const total = state.gallery.images.length;
-        const newIndex = (state.imageIndex - 1 + total) % total;
-        onNavigateRef.current(newIndex);
+        const { gallery, imageIndex } = modalStateRef.current;
+        const prevIndex =
+          (imageIndex - 1 + gallery.images.length) % gallery.images.length;
+        onNavigateRef.current(prevIndex);
       } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        const total = state.gallery.images.length;
-        const newIndex = (state.imageIndex + 1) % total;
-        onNavigateRef.current(newIndex);
+        const { gallery, imageIndex } = modalStateRef.current;
+        const nextIndex = (imageIndex + 1) % gallery.images.length;
+        onNavigateRef.current(nextIndex);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, []);
 
-  // Early return AFTER all hooks have executed
   if (!modalState) return null;
 
   const { gallery, imageIndex } = modalState;
   const totalImages = gallery.images.length;
   if (totalImages === 0) return null;
 
-  // Defensive bounds check to prevent undefined image access
-  const safeIndex = Math.max(0, Math.min(imageIndex, totalImages - 1));
+  const safeIndex = ((imageIndex % totalImages) + totalImages) % totalImages;
   const currentImage = gallery.images[safeIndex];
-  if (!currentImage) return null;
 
-  const handlePrev = () => {
-    const newIndex = (safeIndex - 1 + totalImages) % totalImages;
-    onNavigate(newIndex);
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onNavigate((safeIndex - 1 + totalImages) % totalImages);
   };
 
-  const handleNext = () => {
-    const newIndex = (safeIndex + 1) % totalImages;
-    onNavigate(newIndex);
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onNavigate((safeIndex + 1) % totalImages);
   };
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-0 sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-xs"
       onClick={onClose}
     >
+      {/* Modal Dialog Window */}
       <div
-        className="relative bg-white dark:bg-[#1a1924] border-0 sm:border-2 border-jm-fg dark:border-jm-ui w-full h-full sm:h-[85vh] sm:max-h-[850px] sm:max-w-5xl rounded-none sm:rounded-xs overflow-hidden flex flex-col shadow-2xl"
+        className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-xs overflow-hidden flex flex-col z-10 select-none"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header */}
+        {/* Modal Window Header */}
         <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b-2 border-jm-fg dark:border-jm-ui bg-white/50 dark:bg-black/40">
-          <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-2.5 min-w-0">
             <div className="shrink-0">{gallery.icon}</div>
             <div className="flex flex-col text-left truncate">
               <h3 className="font-mono font-bold text-base sm:text-lg text-jm-fg truncate">
@@ -100,7 +91,7 @@ function CarouselModal({
 
           <button
             onClick={onClose}
-            className="shrink-0 ml-3 p-2 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white transition-colors cursor-pointer border border-jm-fg dark:border-jm-ui"
+            className="shrink-0 ml-3 p-2 rounded-xs bg-black/10 dark:bg-white/10 text-jm-fg hover:bg-jm-primary hover:text-white cursor-pointer border border-jm-fg dark:border-jm-ui"
             aria-label="Close modal"
           >
             <X size={20} />
@@ -113,7 +104,7 @@ function CarouselModal({
             key={currentImage.id}
             src={currentImage.src}
             alt={currentImage.alt}
-            className="max-w-full max-h-full w-auto h-auto object-contain select-none transition-all duration-200"
+            className="max-w-full max-h-full w-auto h-auto object-contain select-none"
           />
 
           {/* Modal Arrow Navigation - Stably vertically centered */}
@@ -122,7 +113,7 @@ function CarouselModal({
               <button
                 onClick={handlePrev}
                 aria-label="Previous image"
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-3 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg"
+                className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-3 rounded-xs border border-white/40 cursor-pointer shadow-lg active:scale-95 z-20"
               >
                 <ChevronLeft size={24} />
               </button>
@@ -130,7 +121,7 @@ function CarouselModal({
               <button
                 onClick={handleNext}
                 aria-label="Next image"
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-3 rounded-xs border border-white/40 transition-transform hover:scale-110 cursor-pointer shadow-lg"
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-jm-primary text-white p-3 rounded-xs border border-white/40 cursor-pointer shadow-lg active:scale-95 z-20"
               >
                 <ChevronRight size={24} />
               </button>

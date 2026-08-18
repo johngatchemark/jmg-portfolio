@@ -119,7 +119,7 @@ export default function ProjectCard({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-jm-muted-fg hover:text-jm-fg transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  className="text-jm-muted-fg hover:text-jm-fg hover:underline decoration-jm-fg transition-colors flex items-center gap-1 font-mono text-[11px]"
                   title="View GitHub Repository"
                 >
                   <IconGitHub size={14} />
@@ -132,7 +132,7 @@ export default function ProjectCard({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-jm-muted-fg hover:text-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  className="text-jm-muted-fg hover:text-jm-primary hover:underline decoration-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
                   title="View Live / Paper"
                 >
                   <ExternalLink size={14} />
@@ -145,7 +145,7 @@ export default function ProjectCard({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-jm-muted-fg hover:text-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  className="text-jm-muted-fg hover:text-jm-primary hover:underline decoration-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
                   title="View Research Paper"
                 >
                   <FileText size={14} />
@@ -158,7 +158,7 @@ export default function ProjectCard({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-jm-muted-fg hover:text-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  className="text-jm-muted-fg hover:text-jm-primary hover:underline decoration-jm-primary transition-colors flex items-center gap-1 font-mono text-[11px]"
                   title="Download File"
                 >
                   <Download size={14} />

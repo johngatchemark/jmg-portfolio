@@ -56,7 +56,7 @@ function VinylPlayer({
           <button
             onClick={() => setIsPlayingVinyl(!isPlayingVinyl)}
             title={isPlayingVinyl ? "Pause Vinyl Rotation" : "Spin Vinyl"}
-            className="absolute -bottom-2 -right-2 bg-jm-primary text-white dark:text-[#003820] p-2.5 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-transform cursor-pointer border border-white dark:border-jm-primary"
+            className="absolute -bottom-2 -right-2 bg-jm-primary text-white dark:text-[#003820] p-2.5 rounded-full shadow-lg active:top-[-6px] active:right-[-6px] cursor-pointer border border-white dark:border-jm-primary"
           >
             {isPlayingVinyl ? (
               <Pause size={16} />

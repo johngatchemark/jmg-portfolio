@@ -125,10 +125,20 @@ export function ContactSection() {
           </p>
 
           {/* Email Badge Box */}
-          <div
+          <RaisedButton
             onClick={handleCopyEmail}
             title="Click to copy email address"
-            className="w-full sm:w-fit bg-white dark:bg-[#121218] border-2 border-jm-primary px-4 py-3 rounded-sm flex flex-wrap items-center justify-between gap-2 drop-shadow-[4px_4px_0px_var(--color-jm-primary)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] active:relative active:top-1 active:left-1 active:drop-shadow-none cursor-pointer transition-all group"
+            color="bg"
+            darkColor="#121218"
+            borderColor="primary"
+            darkBorderColor="primary"
+            textColor="primary"
+            darkTextColor="primary"
+            dropShadowColor="primary"
+            darkDropShadowColor="primary"
+            hoverColor="#e2f4eb"
+            darkHoverColor="#12251c"
+            className="w-full sm:w-fit px-3.5! py-2! flex justify-between gap-3 text-left"
           >
             <div className="flex items-center gap-2.5">
               <Mail size={16} className="text-jm-primary" />
@@ -141,11 +151,11 @@ export function ContactSection() {
                 <Check size={12} /> Copied!
               </span>
             ) : (
-              <span className="font-mono text-[10px] text-jm-muted-fg group-hover:text-jm-primary transition-colors">
+              <span className="font-mono text-[10px] text-jm-muted-fg group-hover:text-jm-primary">
                 (Click to copy)
               </span>
             )}
-          </div>
+          </RaisedButton>
 
           {/* Social Links Row */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -159,11 +169,11 @@ export function ContactSection() {
                 color="bg"
                 borderColor="fg"
                 darkBorderColor="ui"
+                darkHoverBorderColor="primary"
                 textColor="fg"
                 dropShadowColor="fg"
                 hoverColor="#e4e4dd"
                 darkHoverColor="#1e1f29"
-                className="transition-none!"
               >
                 <span>LinkedIn</span>
                 <ExternalLink size={14} />
@@ -180,11 +190,11 @@ export function ContactSection() {
                 color="bg"
                 borderColor="fg"
                 darkBorderColor="ui"
+                darkHoverBorderColor="primary"
                 textColor="fg"
                 dropShadowColor="fg"
                 hoverColor="#e4e4dd"
                 darkHoverColor="#1e1f29"
-                className="transition-none!"
               >
                 <span>GitHub</span>
                 <ExternalLink size={14} />
@@ -213,7 +223,7 @@ export function ContactSection() {
                     if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
                   }}
                   placeholder="Your name"
-                  className={`bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none transition-colors ${
+                  className={`bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg placeholder:text-jm-muted-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none ${
                     errors.name
                       ? "border-red-500 dark:border-red-500 focus:border-red-500 bg-red-500/5"
                       : "border-jm-fg/80 dark:border-jm-ui focus:border-jm-primary"
@@ -240,7 +250,7 @@ export function ContactSection() {
                     if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
                   }}
                   placeholder="your@email.com"
-                  className={`bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none transition-colors ${
+                  className={`bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg placeholder:text-jm-muted-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none ${
                     errors.email
                       ? "border-red-500 dark:border-red-500 focus:border-red-500 bg-red-500/5"
                       : "border-jm-fg/80 dark:border-jm-ui focus:border-jm-primary"
@@ -267,7 +277,7 @@ export function ContactSection() {
                     if (errors.message) setErrors((prev) => ({ ...prev, message: undefined }));
                   }}
                   placeholder="What are you building?"
-                  className={`resize-y bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none transition-colors ${
+                  className={`resize-y bg-[#f5f5f0] dark:bg-[#181920] border text-jm-fg placeholder:text-jm-muted-fg px-4 py-2.5 rounded-xs font-sans text-sm outline-none ${
                     errors.message
                       ? "border-red-500 dark:border-red-500 focus:border-red-500 bg-red-500/5"
                       : "border-jm-fg/80 dark:border-jm-ui focus:border-jm-primary"
@@ -305,7 +315,7 @@ export function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#1a1a24] dark:bg-jm-primary text-white dark:text-[#003820] font-mono py-3 rounded-xs hover:brightness-125 border border-jm-fg dark:border-jm-primary cursor-pointer active:relative active:top-0.5 active:left-0.5 transition-all text-xs font-semibold mt-2 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full bg-[#1a1a24] dark:bg-jm-primary text-white dark:text-[#003820] font-mono py-2 rounded-xs hover:brightness-125 border border-jm-fg dark:border-jm-primary cursor-pointer active:relative active:top-0.5 active:left-0.5 text-xs font-semibold mt-2 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>

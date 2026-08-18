@@ -32,7 +32,7 @@ function Badge({
       style={style}
       className={[
         ...classes,
-        "rounded-xs font-mono px-3 py-1 text-[11px] leading-[1.428571]",
+        "rounded-xs font-mono px-3 py-1 text-[11px] leading-[1.428571] border",
         className,
       ]
         .filter(Boolean)
