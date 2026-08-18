@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { CarouselModalState } from "./types";
 import { parseSubcaptionLinks } from "./utils";
@@ -14,37 +14,66 @@ function CarouselModal({
   onClose,
   onNavigate,
 }: CarouselModalProps) {
-  if (!modalState) return null;
+  // Always call refs and hooks unconditionally at the top level (Rules of Hooks)
+  const modalStateRef = useRef(modalState);
+  modalStateRef.current = modalState;
 
-  const { gallery, imageIndex } = modalState;
-  const currentImage = gallery.images[imageIndex];
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
-  const handlePrev = () => {
-    const newIndex =
-      imageIndex === 0 ? gallery.images.length - 1 : imageIndex - 1;
-    onNavigate(newIndex);
-  };
+  const onNavigateRef = useRef(onNavigate);
+  onNavigateRef.current = onNavigate;
 
-  const handleNext = () => {
-    const newIndex =
-      imageIndex === gallery.images.length - 1 ? 0 : imageIndex + 1;
-    onNavigate(newIndex);
-  };
+  const isOpen = modalState !== null;
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
+      const state = modalStateRef.current;
+      if (!state || state.gallery.images.length === 0) return;
+
       if (e.key === "Escape") {
-        onClose();
+        e.preventDefault();
+        onCloseRef.current();
       } else if (e.key === "ArrowLeft") {
-        handlePrev();
+        e.preventDefault();
+        const total = state.gallery.images.length;
+        const newIndex = (state.imageIndex - 1 + total) % total;
+        onNavigateRef.current(newIndex);
       } else if (e.key === "ArrowRight") {
-        handleNext();
+        e.preventDefault();
+        const total = state.gallery.images.length;
+        const newIndex = (state.imageIndex + 1) % total;
+        onNavigateRef.current(newIndex);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [imageIndex, gallery.images.length]);
+  }, [isOpen]);
+
+  // Early return AFTER all hooks have executed
+  if (!modalState) return null;
+
+  const { gallery, imageIndex } = modalState;
+  const totalImages = gallery.images.length;
+  if (totalImages === 0) return null;
+
+  // Defensive bounds check to prevent undefined image access
+  const safeIndex = Math.max(0, Math.min(imageIndex, totalImages - 1));
+  const currentImage = gallery.images[safeIndex];
+  if (!currentImage) return null;
+
+  const handlePrev = () => {
+    const newIndex = (safeIndex - 1 + totalImages) % totalImages;
+    onNavigate(newIndex);
+  };
+
+  const handleNext = () => {
+    const newIndex = (safeIndex + 1) % totalImages;
+    onNavigate(newIndex);
+  };
 
   return (
     <div
@@ -64,8 +93,7 @@ function CarouselModal({
                 {gallery.title}
               </h3>
               <span className="font-mono text-xs text-jm-primary font-semibold truncate">
-                Image {imageIndex + 1} of {gallery.images.length} —{" "}
-                {currentImage.caption}
+                Image {safeIndex + 1} of {totalImages} — {currentImage.caption}
               </span>
             </div>
           </div>
@@ -88,8 +116,8 @@ function CarouselModal({
             className="max-w-full max-h-full w-auto h-auto object-contain select-none transition-all duration-200"
           />
 
-          {/* Modal Arrow Navigation - Stably vertically centered regardless of caption length */}
-          {gallery.images.length > 1 && (
+          {/* Modal Arrow Navigation - Stably vertically centered */}
+          {totalImages > 1 && (
             <>
               <button
                 onClick={handlePrev}

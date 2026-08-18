@@ -25,13 +25,18 @@ function BeyondTheCode() {
   };
 
   const handleNavigateModal = (imageIndex: number) => {
-    setModalState((prev) => (prev ? { ...prev, imageIndex } : null));
+    setModalState((prev) => {
+      if (!prev) return null;
+      const total = prev.gallery.images.length;
+      if (total === 0) return prev;
+      const safeIndex = ((imageIndex % total) + total) % total;
+      return { ...prev, imageIndex: safeIndex };
+    });
   };
 
   return (
     <>
       <PixelGridTransition inColor={inColor} outColor={outColor} />
-      {/* <section className="w-full max-w-full bg-[var(--color-jm-btc-bg)] border-y border-[var(--color-jm-btc-border)] py-16 transition-colors duration-500 overflow-x-hidden"> */}
       <section className="w-full max-w-full bg-[var(--color-jm-btc-bg)] py-16 transition-colors duration-500 overflow-x-hidden">
         {/* Section Title Header */}
         <Container>
@@ -68,13 +73,6 @@ function BeyondTheCode() {
             />
           ))}
         </div>
-
-        {/* Feature-Local Vinyl Player Soundtrack Widget */}
-        {/* <Container>
-          <div className="max-w-120 lg:max-w-6xl w-full mx-auto px-5 sm:px-10 lg:px-20 mt-12">
-            <VinylPlayer />
-          </div>
-        </Container> */}
 
         {/* Global Expanded Lightbox Carousel Modal */}
         <CarouselModal
