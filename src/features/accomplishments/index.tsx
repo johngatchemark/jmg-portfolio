@@ -31,15 +31,21 @@ const achievementsData: Achievement[] = [
   },
   {
     date: "Nov 2025",
-    title: "Champion",
+    title: "Champion (1st Place)",
     event: "14th IT Skills Olympics (IT Quiz Bee)",
     host: "University of Makati",
   },
   {
     date: "Nov 2025",
-    title: "3rd Place",
+    title: "3rd Place (Finals)",
     event: "CodeChum National Programming Challenge, Season 2",
     host: "CodeChum",
+  },
+  {
+    date: "Oct 2025",
+    title: "Top 20% Globally",
+    event: "QS Reimagine Education Awards 2025",
+    host: "QS Quacquarelli Symonds",
   },
   {
     date: "Aug 2025",
@@ -55,6 +61,12 @@ const achievementsData: Achievement[] = [
   },
   {
     date: "May 2025",
+    title: "Top 22 (out of 112 teams)",
+    event: "SAS Curiosity Cup 2025",
+    host: "Statistical Analysis System (SAS)",
+  },
+  {
+    date: "May 2025",
     title: "Top 90 Qualifier (out of 178 teams)",
     event: "AppCon 2024",
     host: "OTis Philippines Inc.",
@@ -62,26 +74,50 @@ const achievementsData: Achievement[] = [
   {
     date: "Apr 2025",
     title: "Champion",
-    event: "Filipinnovation HABI (Huddle, Analyze, Build, Innovate) Workshop",
+    event: "2025 National Innovation Day",
     host: "National Innovation Council (NIC)",
   },
   {
-    date: "Feb 2025",
-    title: "Top 22 (out of 112 teams)",
-    event: "SAS Curiosity Cup 2025",
-    host: "Statistical Analysis System (SAS)",
+    date: "Dec 2024",
+    title: "4th Place",
+    event: "CodeChum National Programming Challenge 2024",
+    host: "CodeChum",
   },
   {
     date: "Nov 2024",
-    title: "1st Runner-Up",
+    title: "2nd Place",
     event: "13th IT Skills Olympics (IT Quiz Bee)",
     host: "University of Makati",
   },
   {
+    date: "Oct 2024",
+    title: "4th Place",
+    event: "Tagisan ng Talino 2024 (Quiz Bee)",
+    host: "University of the East",
+  },
+  {
+    date: "Oct 2024",
+    title: "Participant",
+    event: "StartUpQC",
+    host: "Quezon City Government",
+  },
+  {
+    date: "Oct 2024",
+    title: "3rd Place, Best Startup Logo, Best Pitch Presentation",
+    event: "Philippine Startup Challenge 9",
+    host: "Department of Information and Communications Technology (DICT)",
+  },
+  {
     date: "Nov 2023",
-    title: "1st Runner-Up",
+    title: "2nd Place",
     event: "12th IT Skills Olympics (Java Programming)",
     host: "University of Makati",
+  },
+  {
+    date: "Oct 2023",
+    title: "Top 27 NCR Finalists",
+    event: "Philippine Startup Challenge 8",
+    host: "Department of Information and Communications Technology (DICT)",
   },
 ];
 
