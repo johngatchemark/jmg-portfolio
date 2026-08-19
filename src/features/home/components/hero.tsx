@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useHeader } from "../../../context/header-context";
 import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
 import {
-  CameraControlsHud,
+  // FOR DEBUGGING PURPOSES ONLY
+  // CameraControlsHud,
   type CameraConfig,
 } from "./hero-spinning-3d-face/camera-controls-hud";
 import { FileText, ArrowDown, Play, Pause } from "lucide-react";
