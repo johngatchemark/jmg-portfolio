@@ -40,10 +40,10 @@ const headlineAchievements = [
 ];
 
 const DEFAULT_CAMERA_CONFIG: CameraConfig = {
-  x: -9.2,
+  x: 0.2,
   y: 0,
   z: 59.5,
-  zoom: 2.15,
+  zoom: 4.05,
 };
 
 function Hero() {
