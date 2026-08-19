@@ -81,7 +81,7 @@ function RaisedButton({
       className={[
         ...classes,
         "w-fit rounded-sm font-mono px-3.5 py-1.5 text-[12px] flex items-center justify-center gap-2 box-border border-2",
-        "active:relative active:top-1 active:drop-shadow-none cursor-pointer",
+        "active:relative active:top-1 active:shadow-none active:drop-shadow-none cursor-pointer",
         className,
       ]
         .filter(Boolean)

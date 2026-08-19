@@ -298,3 +298,4 @@ code {
 @source inline("{,dark:}{,hover:}text-[var(--inline-{,dark-}{,hover-}text)]");
 @source inline("{,dark:}{,hover:}drop-shadow-[2px_2px_0px_var(--inline-{,dark-}{,hover-}drop-shadow)]");
 @source inline("{,dark:}{,hover:}drop-shadow-[0px_4px_0px_var(--inline-{,dark-}{,hover-}drop-shadow)]");
+@source inline("{,dark:}{,hover:}shadow-[0px_4px_0px_var(--inline-{,dark-}{,hover-}drop-shadow)]");

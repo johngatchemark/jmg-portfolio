@@ -67,12 +67,12 @@ function CarouselModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-xs"
+      className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
-      {/* Modal Dialog Window */}
+      {/* Modal Dialog Window - Fullscreen on mobile, stable 85vh height on tablet/desktop */}
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-xs overflow-hidden flex flex-col z-10 select-none"
+        className="relative w-full h-full sm:h-[85vh] sm:max-h-[850px] sm:max-w-5xl bg-white dark:bg-[#1a1924] border-0 sm:border-2 border-jm-fg dark:border-jm-ui rounded-none sm:rounded-xs overflow-hidden flex flex-col shadow-2xl z-10 select-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Window Header */}
@@ -98,8 +98,8 @@ function CarouselModal({
           </button>
         </div>
 
-        {/* Modal Image Viewer Body - Fixed flex-1 container preventing vertical cropping */}
-        <div className="relative flex-1 min-h-0 w-full bg-black/95 flex items-center justify-center overflow-hidden p-3 sm:p-6">
+        {/* Modal Image Viewer Body - Flex-1 fills the 85vh container stably regardless of image load status */}
+        <div className="relative flex-1 min-h-0 w-full bg-black/95 flex items-center justify-center overflow-hidden p-2 sm:p-4">
           <img
             key={currentImage.id}
             src={currentImage.src}
@@ -129,8 +129,8 @@ function CarouselModal({
           )}
         </div>
 
-        {/* Modal Subcaption Footer - Constant height to ensure image viewer and nav buttons stay stable */}
-        <div className="shrink-0 h-20 sm:h-24 bg-white dark:bg-[#1a1924] border-t-2 border-jm-fg dark:border-jm-ui px-4 sm:px-6 py-3 text-left overflow-y-auto flex items-center">
+        {/* Modal Subcaption Footer - Taller container with top-aligned natural scrolling */}
+        <div className="shrink-0 h-32 sm:h-32 bg-white dark:bg-[#1a1924] border-t-2 border-jm-fg dark:border-jm-ui px-4 sm:px-6 py-3.5 sm:py-4 text-left overflow-y-auto">
           <p className="text-jm-fg font-sans text-xs sm:text-sm leading-relaxed w-full">
             <span className="font-mono font-bold">{currentImage.caption}. </span>
             {parseSubcaptionLinks(
