@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useHeader } from "../../../context/header-context";
 import { EffectScene } from "./hero-spinning-3d-face/effect-scene";
+import {
+  CameraControlsHud,
+  type CameraConfig,
+} from "./hero-spinning-3d-face/camera-controls-hud";
 import { FileText, ArrowDown, Play, Pause } from "lucide-react";
 import { IconFacebook, IconGitHub, IconLinkedIn } from "./icons";
 import { useTheme } from "../../../context/theme-context";
@@ -34,12 +38,26 @@ const headlineAchievements = [
   "DOST-SEI Scholar",
 ];
 
+const DEFAULT_CAMERA_CONFIG: CameraConfig = {
+  x: -9.2,
+  y: 0,
+  z: 59.5,
+  zoom: 2.15,
+};
+
 function Hero() {
   const { headerHeight, setIsHeroResumeVisible } = useHeader();
   const currentHeaderHeight = headerHeight ? `${headerHeight}px` : "0px";
   const { resolvedTheme } = useTheme();
   const resumeBtnRef = useRef<HTMLAnchorElement>(null);
   const [isModelPaused, setIsModelPaused] = useState(false);
+
+  // FOR DEBUGGING PURPOSES ONLY
+  // const [cameraConfig, setCameraConfig] = useState<CameraConfig>(
+  //   DEFAULT_CAMERA_CONFIG,
+  // );
+
+  const cameraConfig = DEFAULT_CAMERA_CONFIG;
 
   useEffect(() => {
     const el = resumeBtnRef.current;
@@ -63,7 +81,6 @@ function Hero() {
     };
   }, [headerHeight, setIsHeroResumeVisible]);
 
-  // const styles = getComputedStyle(document.documentElement);
   const offWhite = "#f5f5f0";
   const offBlack = "#0a0a0d";
 
@@ -77,14 +94,23 @@ function Hero() {
         <div className="w-full h-full absolute z-10 bg-jm-bg/85" />
         <ErrorBoundary fallback={null}>
           <EffectScene
-            enableZoom={false}
             className="h-full"
             isPaused={isModelPaused}
+            cameraPosition={[cameraConfig.x, cameraConfig.y, cameraConfig.z]}
+            cameraZoom={cameraConfig.zoom}
             tintColor={resolvedTheme === "light" ? "#000000" : "#ffffff"}
             backgroundColor={resolvedTheme === "light" ? offWhite : offBlack}
           />
         </ErrorBoundary>
       </div>
+
+      {/* Temporary Camera Controls HUD */}
+      {/* FOR DEBUGGING PURPOSES ONLY */}
+      {/* <CameraControlsHud
+        config={cameraConfig}
+        onChange={setCameraConfig}
+        defaultConfig={DEFAULT_CAMERA_CONFIG}
+      /> */}
 
       {/* 3D Animation Pause / Play Toggle (Bottom Right) */}
       <div className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 z-30 flex items-center">
@@ -123,10 +149,6 @@ function Hero() {
           Aspiring Software Engineer&nbsp;
         </h2>
 
-        {/* <p className="text-left text-black/60 dark:text-white/60 text-base max-w-lg mt-2 leading-relaxed font-sans">
-          BS CS Summa Cum Laude · Hackathon Champion · IEEE-published Researcher
-          · DOST-SEI Scholar
-        </p> */}
         <div className="flex flex-wrap gap-2 max-w-100 lg:max-w-full">
           {headlineAchievements.map((achievement, index) => (
             <Badge
@@ -139,8 +161,6 @@ function Hero() {
             />
           ))}
         </div>
-
-        {/* <div className="w-16 h-px bg-indigo-800 dark:bg-indigo-400 mt-4 mb-5" /> */}
 
         <div className="flex items-center gap-4 flex-wrap">
           <a
