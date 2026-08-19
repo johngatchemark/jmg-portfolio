@@ -91,8 +91,8 @@ function Experience() {
                 <div
                   className={`w-5 h-5 border-2 ${
                     isLatest
-                      ? "border-jm-secondary bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-secondary)] dark:drop-shadow-[2px_2px_0px_var(--color-jm-shadow)]"
-                      : "border-jm-fg dark:border-jm-ui bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-fg)] dark:drop-shadow-[2px_2px_0px_var(--color-jm-shadow)]"
+                      ? "border-jm-secondary bg-white dark:bg-jm-bg shadow-[2px_2px_0px_var(--color-jm-secondary)] dark:shadow-[2px_2px_0px_var(--color-jm-shadow)]"
+                      : "border-jm-fg dark:border-jm-ui bg-white dark:bg-jm-bg shadow-[2px_2px_0px_var(--color-jm-fg)] dark:shadow-[2px_2px_0px_var(--color-jm-shadow)]"
                   } rounded-none flex items-center justify-center`}
                 >
                   {isLatest ? (

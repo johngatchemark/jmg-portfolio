@@ -19,7 +19,7 @@ function CarouselCard({
 }: CarouselCardProps) {
   return (
     <div
-      className={`w-[82vw] max-w-[320px] sm:w-[460px] md:w-[580px] sm:max-w-[580px] flex-shrink-0 bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui rounded-xs drop-shadow-[4px_4px_0px_var(--color-jm-primary)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] overflow-hidden flex flex-col justify-between group/wideCard cursor-pointer transition-all ${className}`}
+      className={`w-[82vw] max-w-[320px] sm:w-[460px] md:w-[580px] sm:max-w-[580px] flex-shrink-0 bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui rounded-xs shadow-[4px_4px_0px_var(--color-jm-primary)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] overflow-hidden flex flex-col justify-between group/wideCard cursor-pointer transition-all ${className}`}
       onClick={onClick}
     >
       {/* Image Header with 16/10 Aspect Ratio */}

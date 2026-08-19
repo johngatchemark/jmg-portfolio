@@ -78,7 +78,7 @@ export function buildColorStyles(slots: ColorSlot[]): {
 
     const base =
       slot.prefix === "drop-shadow" && slot.shadowOffset === "near"
-        ? `drop-shadow-[2px_2px_0px_var(${varName})]`
+        ? `shadow-[2px_2px_0px_var(${varName})]`
         : slot.prefix === "drop-shadow" && slot.shadowOffset === "far"
           ? `shadow-[0px_4px_0px_var(${varName})]`
           : slot.prefix === "border"

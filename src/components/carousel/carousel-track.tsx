@@ -130,7 +130,7 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
               darkDropShadowColor="primary"
               hoverColor="#e4e4dd"
               darkHoverColor="#1e1f29"
-              className={`p-2! min-w-0 ${!canScrollLeft ? "opacity-30 cursor-not-allowed drop-shadow-none!" : ""}`}
+              className={`p-2! min-w-0 ${!canScrollLeft ? "opacity-30 cursor-not-allowed shadow-none!" : ""}`}
             >
               <ChevronLeft size={18} />
             </RaisedButton>
@@ -149,7 +149,7 @@ function CarouselTrack({ gallery, onImageClick }: CarouselTrackProps) {
               darkDropShadowColor="primary"
               hoverColor="#e4e4dd"
               darkHoverColor="#1e1f29"
-              className={`p-2! min-w-0 ${!canScrollRight ? "opacity-30 cursor-not-allowed drop-shadow-none!" : ""}`}
+              className={`p-2! min-w-0 ${!canScrollRight ? "opacity-30 cursor-not-allowed shadow-none!" : ""}`}
             >
               <ChevronRight size={18} />
             </RaisedButton>

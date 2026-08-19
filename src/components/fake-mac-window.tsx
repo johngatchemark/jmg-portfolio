@@ -12,7 +12,7 @@ function FakeMacWindow({
 }: FakeMacTerminalWindow) {
   return (
     <section
-      className={`flex flex-col border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] ${className}`}
+      className={`flex flex-col border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] shadow-[4px_4px_0px_var(--color-jm-fg)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] ${className}`}
     >
       <div className="flex gap-4 px-4 py-2.5 bg-[#e8e8e3] dark:bg-[#181920] border-b border-jm-fg dark:border-jm-ui">
         <div className="flex items-center gap-2">

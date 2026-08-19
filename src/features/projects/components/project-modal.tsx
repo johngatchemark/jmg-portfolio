@@ -191,7 +191,7 @@ export default function ProjectModal({
         }}
         className={`bg-jm-bg dark:bg-[#121218] border-2 border-jm-fg dark:border-jm-ui overflow-hidden flex flex-col shadow-2xl z-50 ${
           isInitialOrClosing
-            ? "drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)]"
+            ? "shadow-[4px_4px_0px_var(--color-jm-fg)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)]"
             : ""
         }`}
         onClick={(e) => e.stopPropagation()}

@@ -20,7 +20,7 @@ function VinylPlayer({
 
   return (
     <div
-      className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui/80 rounded-xs p-6 lg:p-8 drop-shadow-[4px_4px_0px_var(--color-jm-primary)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] flex flex-col xl:flex-row w-full items-center justify-between gap-8 transition-all ${className}`}
+      className={`bg-white dark:bg-[#1a1924] border-2 border-jm-fg dark:border-jm-ui/80 rounded-xs p-6 lg:p-8 shadow-[4px_4px_0px_var(--color-jm-primary)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] flex flex-col xl:flex-row w-full items-center justify-between gap-8 transition-all ${className}`}
     >
       {/* Vinyl Record Visual */}
       <div className="flex flex-col lg:flex-row items-center gap-6">

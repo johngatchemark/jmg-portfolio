@@ -144,7 +144,7 @@ function AccomplishmentsPage() {
           </h1>
 
           {/* Retro Table Container */}
-          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
+          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] shadow-[4px_4px_0px_var(--color-jm-fg)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
             <div className="w-full overflow-x-auto">
               <table className="w-full min-w-[640px] text-left border-collapse font-sans text-sm">
                 <thead>
@@ -196,7 +196,7 @@ function AccomplishmentsPage() {
           </h2>
 
           {/* Retro Table Container */}
-          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
+          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] shadow-[4px_4px_0px_var(--color-jm-fg)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md overflow-hidden">
             <div className="w-full overflow-x-auto">
               <table className="w-full min-w-[480px] text-left border-collapse font-sans text-sm">
                 <thead>
@@ -244,7 +244,7 @@ function AccomplishmentsPage() {
           </h2>
 
           {/* Research Publication Card */}
-          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] drop-shadow-[4px_4px_0px_var(--color-jm-fg)] dark:drop-shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md p-6 flex flex-col sm:flex-row items-start gap-5">
+          <div className="w-full border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-[#121218] shadow-[4px_4px_0px_var(--color-jm-fg)] dark:shadow-[4px_4px_0px_var(--color-jm-shadow)] rounded-md p-6 flex flex-col sm:flex-row items-start gap-5">
             <div className="bg-jm-accent text-white dark:text-[#3b0073] font-mono text-xs font-bold px-3 py-1.5 rounded-xs">
               2026
             </div>

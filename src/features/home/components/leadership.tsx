@@ -83,7 +83,7 @@ function Leadership() {
                 className="absolute -left-7.5 top-6 w-5 h-5 z-20 flex items-center justify-center pointer-events-none"
                 aria-hidden="true"
               >
-                <div className="w-5 h-5 border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-jm-bg drop-shadow-[2px_2px_0px_var(--color-jm-fg)] dark:drop-shadow-[2px_2px_0px_var(--color-jm-shadow)] rounded-none flex items-center justify-center">
+                <div className="w-5 h-5 border-2 border-jm-fg dark:border-jm-ui bg-white dark:bg-jm-bg shadow-[2px_2px_0px_var(--color-jm-fg)] dark:shadow-[2px_2px_0px_var(--color-jm-shadow)] rounded-none flex items-center justify-center">
                   <div className="w-1.5 h-1.5 bg-jm-primary" />
                 </div>
               </div>
