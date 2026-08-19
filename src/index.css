@@ -87,6 +87,8 @@
   --color-jm-outline-variant: #d0ccbf;
 
   /* fontz */
+  --font-sans: var(--sans);
+  --font-heading: var(--heading);
   --font-mono: "Mona Sans Mono VF", ui-monospace, Consolas, monospace;
 }
 
@@ -214,9 +216,9 @@ body {
   line-height: 100%;
   font-variation-settings:
     "ROND" 25,
-    "wdth" 125;
+    "wdth" 120;
   /* font-stretch: 125%; */
-  font-weight: 900;
+  font-weight: 800;
 }
 
 h1,
