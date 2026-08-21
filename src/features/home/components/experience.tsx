@@ -19,7 +19,7 @@ export interface ExperienceItem {
 export const experiencesData: ExperienceItem[] = [
   {
     id: "data-annotation",
-    company: "Data Annotation",
+    company: "DataAnnotation",
     role: "AI Trainer (Freelance)",
     period: "July 2026 – Present",
     badgeText: "FREELANCE",
