@@ -29,8 +29,9 @@ export const experiencesData: ExperienceItem[] = [
     badgeDropShadowColor: "secondary",
     isCurrent: true,
     achievements: [
-      "Evaluated AI models on complex programming and reasoning tasks.",
-      "Analyzed programming solutions to identify bugs, edge cases, and opportunities for improvement.",
+      "Evaluate AI models on complex programming and reasoning tasks.",
+      "Analyze programming solutions to identify bugs, edge cases, and opportunities for improvement.",
+      "	Produce clear, evidence-based technical evaluations while independently managing projects and consistently meeting quality standards.",
     ],
     techStack: ["Python", "TypeScript", "AI Training", "LLMs"],
   },

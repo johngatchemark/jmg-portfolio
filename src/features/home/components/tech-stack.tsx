@@ -40,13 +40,7 @@ export const technicalStack: StackCategory[] = [
   {
     color: "primary",
     category: "DATA SCIENCE & ML",
-    items: [
-      "Jupyter Notebook",
-      "RStudio",
-      "scikit-learn",
-      "pandas",
-      "NumPy",
-    ],
+    items: ["Jupyter Notebook", "RStudio", "scikit-learn", "pandas", "NumPy"],
   },
   {
     color: "primary",
@@ -65,10 +59,12 @@ export const technicalStack: StackCategory[] = [
     items: [
       "Git",
       "GitHub",
+      "Supabase",
       "IntelliJ IDEA",
       "PyCharm",
       "WebStorm",
       "Visual Studio Code",
+      "Node.js",
     ],
   },
 ];
