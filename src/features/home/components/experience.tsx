@@ -48,7 +48,7 @@ export const experiencesData: ExperienceItem[] = [
     isCurrent: false,
     achievements: [
       "Built responsive interfaces for a barangay management system with TypeScript, React.js, and Tailwind CSS.",
-      "Presented prototype to four barangay offices in Quezon City, generating administrator interest.",
+      "Presented prototype to various LGUs, generating administrator interest.",
       "Post-internship: migrated database from SQLite to PostgreSQL.",
     ],
     techStack: ["TypeScript", "React.js", "Tailwind CSS", "PostgreSQL"],
