@@ -31,7 +31,7 @@ export const experiencesData: ExperienceItem[] = [
     achievements: [
       "Evaluate AI models on complex programming and reasoning tasks.",
       "Analyze programming solutions to identify bugs, edge cases, and opportunities for improvement.",
-      "	Produce clear, evidence-based technical evaluations while independently managing projects and consistently meeting quality standards.",
+      "Produce clear, evidence-based technical evaluations while independently managing projects and consistently meeting quality standards.",
     ],
     techStack: ["Python", "TypeScript", "AI Training", "LLMs"],
   },
