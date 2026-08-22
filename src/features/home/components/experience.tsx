@@ -20,7 +20,7 @@ export const experiencesData: ExperienceItem[] = [
   {
     id: "data-annotation",
     company: "DataAnnotation",
-    role: "AI Trainer (Freelance)",
+    role: "Freelance AI Trainer",
     period: "July 2026 – Present",
     badgeText: "FREELANCE",
     badgeColor: "bg",
